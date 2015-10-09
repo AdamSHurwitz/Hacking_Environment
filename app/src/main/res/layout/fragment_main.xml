@@ -1,24 +1,79 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivityFragment">
 
-    <EditText
-        android:id="@+id/edit_message"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:hint="@string/edit_message" />
-
-    <Button
+    <!-- New Activity Test-->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="sendMessage"
-        android:text="@string/button_send" />
+        android:orientation="horizontal">
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_activity_text" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="sendMessage"
+            android:text="@string/button_test" />
+    </LinearLayout>
+
+    <!--SharedPref Test-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/shared_pref_text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edit_message_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_message" />
+
+            <Button
+                android:id="@+id/writeToSharedPref"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_test" />
+
+            <Button
+                android:id="@+id/getFromSharePref"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GET PREF" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/shared_pref_output"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SHARED PREF OUTPUT GOES HERE" />
+    </LinearLayout>
+
+
+</LinearLayout>
