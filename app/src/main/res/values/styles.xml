@@ -1,0 +1,46 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat">
+
+        <!-- Customize your theme here. -->
+
+        <!-- action bar style | overflow menu | navigation bar -->
+
+        <!-- color of action bar (use 500 color) -->
+        <item name="colorPrimary">#2196F3</item>
+        <!-- color of statusbar (use 700 color) -->
+        <item name="colorPrimaryDark">#1976D2</item>
+        <!-- status bar to transparent -->
+        <!--<item name="@android:statusBarColor">#1976D2</item>-->
+        <!-- color of action bar text-->
+        <item name="android:textColor">#B2DFDB</item>
+        <!-- color of action bar menu text-->
+        <item name="android:actionMenuTextColor">#FFA000</item>
+        <!-- color of popup menu-->
+        <item name="actionOverflowMenuStyle">@style/CMOptionsMenu</item>
+        <!-- color of navigation bar-->
+        <item name="@android:navigationBarColor">#2196F3</item>
+
+        <!-- enable overlay mode -->
+        <!--<item name="android:actionBarStyle">@style/AppActionBarTheme</item>-->
+        <!--<item name="actionBarStyle">@style/AppActionBarTheme</item>-->
+        <item name="android:windowActionBarOverlay">true</item>
+
+        <!-- activity elements -->
+        <!-- window background -->
+        <item name="@android:windowBackground">@color/window_background</item>
+        <!-- text color -->
+        <item name="android:textColorPrimary">#B2DFDB</item>
+        <!-- accent coloring for views (ie: Checkboxes, EditText) -->
+        <item name="colorAccent">#B2DFDB</item>
+        <!--background color of buttons-->
+        <item name="colorButtonNormal">#2196F3</item>
+
+    </style>
+
+    <!-- color of popup menu-->
+    <style name="CMOptionsMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:popupBackground">#2196F3</item>
+    </style>
+
+</resources>
