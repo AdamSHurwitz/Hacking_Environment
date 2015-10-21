@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-// SharedPref - In MainActivity vs. in MainActivityFragment.java
+// SharedPref - In MainActivity vs. being inside MainActivityFragment.java
 
    /* public void sendToSharedPreferences(View view) {
         EditText editTextField1 = (EditText) this.findViewById(R.id.edit_message_one);

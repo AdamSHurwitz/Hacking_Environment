@@ -62,18 +62,36 @@
                 android:text="@string/button_test" />
 
             <Button
-                android:id="@+id/getFromSharePref"
+                android:id="@+id/getFromSharedPref"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="GET PREF" />
+                android:text="@string/button_get_pref" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/shared_pref_output"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SHARED PREF OUTPUT GOES HERE" />
+            android:text="(SHARED PREF OUTPUT GOES HERE)" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sql_test"/>
+        <Button
+            android:id="@+id/putInfoIntoDatabase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_test"/>
+    </LinearLayout>
+    <View
+        android:id="@+id/SQLite_output"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 
 </LinearLayout>
