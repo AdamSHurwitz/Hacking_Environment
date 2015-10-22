@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivityFragment">
 
-    <!-- New Activity Test-->
+    <!-- New Activity Test -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             android:text="@string/button_test" />
     </LinearLayout>
 
-    <!--SharedPref Test-->
+    <!-- SharedPref Test -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,6 +74,8 @@
             android:layout_height="wrap_content"
             android:text="(SHARED PREF OUTPUT GOES HERE)" />
     </LinearLayout>
+
+    <!-- SQL Test -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -87,11 +89,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_test"/>
+        <Button
+            android:id="@+id/getInfoFromDatabase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sql_get_data"/>
     </LinearLayout>
-    <View
-        android:id="@+id/SQLite_output"
+    <TextView
+        android:id="@+id/SQLite_ID_Output"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/SQLite_Concept_Output"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/SQLite_TabNum_Output"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-
+    <!-- Next Test -->
 </LinearLayout>

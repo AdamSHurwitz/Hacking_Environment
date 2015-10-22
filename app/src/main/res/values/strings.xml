@@ -21,4 +21,5 @@
 
     <!-- Database Test-->
     <string name="sql_test">SQLite Test: </string>
+    <string name="sql_get_data">Get Data</string>
 </resources>

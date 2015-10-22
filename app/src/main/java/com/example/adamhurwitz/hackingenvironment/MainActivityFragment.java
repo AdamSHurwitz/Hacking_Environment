@@ -3,6 +3,7 @@ package com.example.adamhurwitz.hackingenvironment;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,6 +23,7 @@ import com.example.adamhurwitz.hackingenvironment.data.SQLDbHelper;
  */
 public class MainActivityFragment extends Fragment {
     private final String LOG_TAG = MainActivityFragment.class.getSimpleName();
+
     public MainActivityFragment() {
     }
 
@@ -30,7 +32,7 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View inflatedView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        // SharedPref test
+        // SharedPref Test
         Button writeToSharedPref = (Button) inflatedView.findViewById(R.id.writeToSharedPref);
         writeToSharedPref.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +49,10 @@ public class MainActivityFragment extends Fragment {
             }
         });
 
-        // Database test
+
+        // Database Test
+
+        // call method to put info into database
         Button putInfoIntoDatabase = (Button) inflatedView.findViewById(R.id.putInfoIntoDatabase);
         putInfoIntoDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,8 +61,20 @@ public class MainActivityFragment extends Fragment {
             }
         });
 
+        // call method to read info from database
+        Button getInfoFromDatabase = (Button) inflatedView.findViewById(R.id.getInfoFromDatabase);
+        getInfoFromDatabase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getInfoFromDatabase(v);
+            }
+        });
+
         return inflatedView;
     }
+
+    //----------------------------------------------------------------------------------------------
+    // Shared Preferences Test
 
     // Write to Shared Preferences
     public void sendToSharedPreferences(View view) {
@@ -79,11 +96,13 @@ public class MainActivityFragment extends Fragment {
         TextView sharedPrefOutput = (TextView) getActivity().findViewById(R.id.shared_pref_output);
         sharedPrefOutput.setText(preference);
     }
-//------------------------------------------------------------------------------------------------//
-// Database Test
+    //----------------------------------------------------------------------------------------------
+
+    // Database Test
 
     public void putInfoIntoDatabase(View view) {
         Log.v("putInfoIntoDatabase", "called here");
+
         // Access database
         SQLDbHelper mDbHelper = new SQLDbHelper(getContext());
 
@@ -104,4 +123,75 @@ public class MainActivityFragment extends Fragment {
                 null,
                 values);
     }
+
+    public void getInfoFromDatabase(View view) {
+        Log.v("getInfoFromDatabase", "called here");
+
+        // Access database
+        SQLDbHelper mDbHelper = new SQLDbHelper(getContext());
+
+        // Gets the data repository in read mode
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                Contract.Tests._ID,
+                Contract.Tests.COLUMN_NAME_CONCEPT,
+                Contract.Tests.COLUMN_NAME_TAB_NUMBER
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                Contract.Tests._ID + " DESC";
+
+        Cursor c = db.query(
+                Contract.Tests.TABLE_NAME,  // The table to query
+                projection,                               // The columns to return
+                null,                                // The columns for the WHERE clause
+                null,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+
+
+        // Get Entries From Query
+
+        // Get itemId entry
+        c.moveToFirst();
+        long itemId = c.getLong(
+                c.getColumnIndexOrThrow(Contract.Tests._ID));
+        Log.v("getInfoFromdatabase", "OMEGA: " + String.valueOf(itemId));
+
+        // Get columnNameConcept entry
+        c.moveToFirst();
+        String columnNameConcept = c.getString(
+                c.getColumnIndexOrThrow(Contract.Tests.COLUMN_NAME_CONCEPT));
+        Log.v("getInfoFromdatabase", "OMEGA2: " + columnNameConcept);
+
+        // Get columnTabNum entry
+        c.moveToFirst();
+        long columnTabNum = c.getLong(
+                c.getColumnIndexOrThrow(Contract.Tests.COLUMN_NAME_TAB_NUMBER));
+        Log.v("getInfoFromdatabase", "OMEGA3: " + String.valueOf(columnTabNum));
+
+
+        // Place Entries Into TextViews
+
+        // Place itemId into TextView
+        TextView SQLiteIdOutput = (TextView) getActivity().findViewById(R.id.SQLite_ID_Output);
+        SQLiteIdOutput.setText(String.valueOf(itemId));
+
+        // Place columnNameConcept into TextView
+        TextView SQLiteConceptOutput = (TextView) getActivity()
+                .findViewById(R.id.SQLite_Concept_Output);
+        SQLiteConceptOutput.setText(columnNameConcept);
+
+        // Place columnTabNum into TextView
+        TextView SQLiteTabNumOutput = (TextView) getActivity()
+                .findViewById(R.id.SQLite_TabNum_Output);
+        SQLiteTabNumOutput.setText(String.valueOf(columnTabNum));
+    }
+
 }
