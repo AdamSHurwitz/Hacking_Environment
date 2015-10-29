@@ -1,7 +1,20 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- Standard layout without NavTab navigation -->
+
+<!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment"
-    android:name="com.example.adamhurwitz.hackingenvironment.MainActivityFragment"
+    android:name="com.example.adamhurwitz.hackingenvironment.NewActivityTestFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout="@layout/fragment_main" />
+    tools:layout="@layout/new_activity_test" />-->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<!-- NavTab Layout: inflates view_pager -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_pager" />
+</LinearLayout>

@@ -22,4 +22,11 @@
     <!-- Database Test-->
     <string name="sql_test">SQLite Test: </string>
     <string name="sql_get_data">Get Data</string>
+    <string name="delete_data_btn">Delete Data</string>
+    <string name="entry_id_title">Entry ID</string>
+    <string name="concept_name_title">Concept Name</string>
+    <string name="tab_number_title">Tab #</string>
+
+    <!-- New Test -->
+    <string name="new_test"> Nuevo Testo </string>
 </resources>
