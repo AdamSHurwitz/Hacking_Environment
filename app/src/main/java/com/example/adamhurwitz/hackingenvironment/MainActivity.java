@@ -3,41 +3,58 @@ package com.example.adamhurwitz.hackingenvironment;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = "com.example.adamhurwitz.hackingenv";
 
-    // Inflate new Activity onClick in Activity
+    // DrawerView: Create Strings Array and ListView
 
-    /**
-     * Called when the user clicks the Send button
-     */
-    /*public void sendMessage(View view) {
-        // Do something in response to button
-        Intent intent = new Intent(this,
-                com.example.adamhurwitz.hackingenvironment.DisplayMessageActivity.class);
-        *//*EditText editText = (EditText) findViewById(R.id.edit_message);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);*//*
-        startActivity(intent);
-    }*/
+    // Create Array of Strings for DrawerView menu
+    private String[] drawerItems;
+    private DrawerLayout mDrawerLayout;
+    // Create ListView to use to show DrawerView menu items
+    private ListView mDrawerList;
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // This loads viewPager for multiple tab views
+        // NavTabs: This loads viewPager for multiple tab views
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         if (viewPager != null) {
             setupViewPager(viewPager);
             TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
             tabLayout.setupWithViewPager(viewPager);
         }
+        // ----------------------------------------------------------------------------------------
+
+        // DrawerView
+
+        // get Array[] of items
+        drawerItems = getResources().getStringArray(R.array.sample_array  );
+        // get View of drawer_layout
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        // get View of ListView id
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+        // Set the adapter for the list view
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.drawer_item_view, drawerItems));
+        // Set the list's click listener
+//        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        // ----------------------------------------------------------------------------------------
+
     }
+
 
     // Add Fragments to the TabsAdapter, TabsAdapter recycles views
     private void setupViewPager(ViewPager viewPager) {
@@ -72,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+
 
 
 

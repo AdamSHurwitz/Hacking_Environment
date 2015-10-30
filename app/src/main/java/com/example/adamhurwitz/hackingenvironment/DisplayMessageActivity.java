@@ -17,7 +17,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             String message = intent.getStringExtra(
-                    com.example.adamhurwitz.hackingenvironment.MainActivity.EXTRA_MESSAGE);
+                    com.example.adamhurwitz.hackingenvironment.NewActivityTestFragment.EXTRA_MESSAGE);
             // display the message
             TextView textView = new TextView(this);
             textView.setTextSize(40);
