@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_item_view, drawerItems));
         // Set the list's click listener
-//        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        // mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // ----------------------------------------------------------------------------------------
 

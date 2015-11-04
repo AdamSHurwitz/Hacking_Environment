@@ -178,7 +178,7 @@ public class SharedPrefTestFragment extends Fragment {
         // Place Entries Into TextViews
 
         // Place itemId into TextView
-        TextView SQLiteIdOutput = (TextView) getActivity().findViewById(R.id.SQLite_ID_Output);
+      /*  TextView SQLiteIdOutput = (TextView) getActivity().findViewById(R.id.SQLite_ID_Output);
         SQLiteIdOutput.setText(String.valueOf(itemId));
 
         TextView SQLiteIdOutput2 = (TextView) getActivity().findViewById(R.id.SQLite_ID_Output2);
@@ -200,7 +200,7 @@ public class SharedPrefTestFragment extends Fragment {
 
         TextView SQLiteTabNumOutput2 = (TextView) getActivity()
                 .findViewById(R.id.SQLite_TabNum_Output2);
-        SQLiteTabNumOutput2.setText(String.valueOf(columnTabNum2));
+        SQLiteTabNumOutput2.setText(String.valueOf(columnTabNum2));*/
     }
 
     // Delete entries from database

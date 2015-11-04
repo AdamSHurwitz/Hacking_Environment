@@ -25,8 +25,8 @@ public class SQLDbHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_TESTSTABLE = "CREATE TABLE " + Tests.TABLE_NAME + "(" +
                 // AutoIncrement
                 Tests._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                Tests.COLUMN_NAME_CONCEPT + " TEXT UNIQUE NOT NULL, " +
-                Tests.COLUMN_NAME_TAB_NUMBER + " INTEGER UNIQUE NOT NULL" +
+                Tests.COLUMN_NAME_CONCEPT + " TEXT NOT NULL, " +
+                Tests.COLUMN_NAME_TAB_NUMBER + " INTEGER NOT NULL" +
                 " );";
 
         final String SQL_CREATE_CONCEPTSTABLE = "CREATE TABLE " + Concepts.TABLE_NAME + "(" +
