@@ -234,8 +234,6 @@ public class SQLiteTestFragment extends Fragment {
         // Gets the data repository in write mode
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
-        // Get last entry
-
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
                 Contract.Tests._ID + " DESC";
@@ -251,6 +249,7 @@ public class SQLiteTestFragment extends Fragment {
                 sortOrder                                 // The sort order
         );
 
+        // Get last entry
         if (c.moveToLast()) {
             long itemId = c.getLong(
                     c.getColumnIndexOrThrow(Contract.Tests._ID));
@@ -274,8 +273,6 @@ public class SQLiteTestFragment extends Fragment {
         // Gets the data repository in read mode
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
-        // Get first entry
-
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
                 Contract.Tests._ID + " DESC";
@@ -291,6 +288,7 @@ public class SQLiteTestFragment extends Fragment {
                 sortOrder                                 // The sort order
         );
 
+        // Get first entry
         if (c.moveToFirst()) {
             String collumnNameConcept = c.getString(
                     c.getColumnIndexOrThrow(Contract.Tests.COLUMN_NAME_CONCEPT));
