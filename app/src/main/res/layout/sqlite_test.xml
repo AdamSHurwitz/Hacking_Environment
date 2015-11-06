@@ -13,59 +13,85 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sql_test"/>
-        <Button
-            android:id="@+id/putInfoIntoDatabase"
+            android:text="@string/sql_test" />
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_test"/>
-        <Button
-            android:id="@+id/getInfoFromDatabase"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sql_get_data"/>
-        <Button
-            android:id="@+id/deleteInfoFromDatabase"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/delete_data_btn"/>
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/putInfoIntoDatabase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/insert_btn" />
+
+            <Button
+                android:id="@+id/getInfoFromDatabase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/putInfoIntoDatabase"
+                android:text="@string/sql_get_data" />
+
+            <Button
+                android:id="@+id/deleteInfoFromDatabase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/getInfoFromDatabase"
+                android:text="@string/delete_data_btn" />
+
+            <Button
+                android:id="@+id/updateInfoFromDatabase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/deleteInfoFromDatabase"
+                android:layout_below="@id/getInfoFromDatabase"
+                android:text="@string/update_data_btn" />
+        </RelativeLayout>
     </LinearLayout>
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-    <TextView
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/database_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/database_size"
-        android:padding="8dp"/>
-</LinearLayout>
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/entry_id_title"
-        android:padding="8dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/concept_name_title"
-        android:padding="8dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tab_number_title"
-        android:padding="8dp"/>
-</LinearLayout>
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/entry_id_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/concept_name_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/tab_number_title" />
+    </LinearLayout>
+
     <ListView
+        android:id="@+id/sql_query_results"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/sql_query_results">
-    </ListView>
+        android:layout_height="wrap_content"></ListView>
 </LinearLayout>

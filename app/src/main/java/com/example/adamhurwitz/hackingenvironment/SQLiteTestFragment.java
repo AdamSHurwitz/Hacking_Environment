@@ -27,7 +27,6 @@ import java.util.ArrayList;
 public class SQLiteTestFragment extends Fragment {
     private final String LOG_TAG = SQLiteTestFragment.class.getSimpleName();
 
-
     // Custom Adapter-------------------------------------------------------------------------------
 
     // Create ArrayList of RowObjects and Initiate ArrayLIst
@@ -60,6 +59,22 @@ public class SQLiteTestFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getInfoFromDatabase();
+            }
+        });
+
+        Button deleteInfoFromDatabase = (Button) inflatedView.findViewById(R.id.deleteInfoFromDatabase);
+        deleteInfoFromDatabase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteInfoFromDatabase();
+            }
+        });
+
+        Button updateInfoButton = (Button) inflatedView.findViewById(R.id.updateInfoFromDatabase);
+        updateInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateInfoButton();
             }
         });
 
@@ -213,7 +228,92 @@ public class SQLiteTestFragment extends Fragment {
     // Delete Info From Database
     public void deleteInfoFromDatabase() {
 
+        // Access database
+        SQLDbHelper mDbHelper = new SQLDbHelper(getContext());
+
+        // Gets the data repository in write mode
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        // Get last entry
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                Contract.Tests._ID + " DESC";
+
+        // If you are querying entire table, can leave everything as Null
+        Cursor c = db.query(
+                Contract.Tests.TABLE_NAME,  // The table to query
+                null,                               // The columns to return
+                null,                                // The columns for the WHERE clause
+                null,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+
+        if (c.moveToLast()) {
+            long itemId = c.getLong(
+                    c.getColumnIndexOrThrow(Contract.Tests._ID));
+            // Define 'where' part of query.
+            String selection = Contract.Tests._ID + " LIKE ?";
+            // Specify arguments in placeholder order.
+            Log.v("deleteInfoIntoDatabase", String.valueOf(itemId));
+            String[] selectionArgs = {String.valueOf(itemId)};
+            // Issue SQL statement.
+            db.delete(Contract.Tests.TABLE_NAME, selection, selectionArgs);
+        }
+
+        c.close();
+
     }
+
+    public void updateInfoButton() {
+        // Access database
+        SQLDbHelper mDbHelper = new SQLDbHelper(getContext());
+
+        // Gets the data repository in read mode
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        // Get first entry
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                Contract.Tests._ID + " DESC";
+
+        // If you are querying entire table, can leave everything as Null
+        Cursor c = db.query(
+                Contract.Tests.TABLE_NAME,  // The table to query
+                null,                               // The columns to return
+                null,                                // The columns for the WHERE clause
+                null,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+
+        if (c.moveToFirst()) {
+            String collumnNameConcept = c.getString(
+                    c.getColumnIndexOrThrow(Contract.Tests.COLUMN_NAME_CONCEPT));
+            // New value for one column
+            ContentValues values = new ContentValues();
+            values.put(Contract.Tests.COLUMN_NAME_CONCEPT, "updated activity");
+
+            // Which row to update, based on the ID
+            String selection = Contract.Tests.COLUMN_NAME_CONCEPT + " LIKE ?";
+            String[] selectionArgs = {String.valueOf(collumnNameConcept)};
+            Log.v("updateInfoFromDatabase", String.valueOf(collumnNameConcept));
+
+            int count = db.update(
+                    Contract.Tests.TABLE_NAME,
+                    values,
+                    selection,
+                    selectionArgs);
+        }
+
+        c.close();
+    }
+
+
 }
 
 // CustomAdapter------------------------------------------------------------------------------------
