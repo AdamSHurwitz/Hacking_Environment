@@ -7,7 +7,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,15 +38,15 @@ public class MainActivity extends AppCompatActivity {
         // DrawerView
 
         // get Array[] of items
-        drawerItems = getResources().getStringArray(R.array.sample_array  );
+        // drawerItems = getResources().getStringArray(R.array.sample_array  );
         // get View of drawer_layout
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        // mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         // get View of ListView id
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        // mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_item_view, drawerItems));
+        /*mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.drawer_item_view, drawerItems));*/
         // Set the list's click listener
         // mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
