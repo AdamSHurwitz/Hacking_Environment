@@ -1,11 +1,10 @@
 package com.example.adamhurwitz.hackingenvironment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class DisplayMessageActivity extends AppCompatActivity {
 
@@ -13,9 +12,13 @@ public class DisplayMessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.added_activity);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         // receive the intent
-        Intent intent = getIntent();
-        if (intent != null) {
+        /*Intent intent = getIntent();
+         if (intent != null) {
             String message = intent.getStringExtra(
                     com.example.adamhurwitz.hackingenvironment.NewActivityTestFragment.EXTRA_MESSAGE);
             // display the message
@@ -23,12 +26,12 @@ public class DisplayMessageActivity extends AppCompatActivity {
             textView.setTextSize(40);
             textView.setText(message);
             setContentView(textView);
-        }
+        }*/
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // If your minSdkVersion is 11 or higher, instead use:
-        // getActionBar().setDisplayHomeAsUpEnabled(true);
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 

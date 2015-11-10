@@ -14,7 +14,7 @@ import android.widget.Button;
 public class NewActivityTestFragment extends Fragment {
     private final String LOG_TAG = NewActivityTestFragment.class.getSimpleName();
 
-    public static final String EXTRA_MESSAGE = "com.example.adamhurwitz.hackingenvironment.MainActivity";
+    //public static final String EXTRA_MESSAGE = "com.example.adamhurwitz.hackingenvironment.MainActivity";
 
     public NewActivityTestFragment() {
     }
