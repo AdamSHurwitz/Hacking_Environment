@@ -10,8 +10,10 @@
         <item name="colorPrimary">#2196F3</item>
         <!-- color of statusbar (use 700 color) -->
         <item name="colorPrimaryDark">#1976D2</item>
-        <!-- status bar to transparent -->
+        <!-- status bar color -->
         <item name="@android:statusBarColor">#1976D2</item>
+        <!-- status bar transparent-->
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <!-- color of action bar text-->
         <item name="android:textColor">#B2DFDB</item>
         <!-- color of action bar menu text-->
@@ -36,7 +38,6 @@
         <!--background color of buttons-->
         <item name="colorButtonNormal">#2196F3</item>
 
-        <item name="android:statusBarColor">@android:color/transparent</item>
 
     </style>
 
