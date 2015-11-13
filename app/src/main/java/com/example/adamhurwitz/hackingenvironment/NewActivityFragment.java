@@ -11,12 +11,12 @@ import android.widget.Button;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class NewActivityTestFragment extends Fragment {
-    private final String LOG_TAG = NewActivityTestFragment.class.getSimpleName();
+public class NewActivityFragment extends Fragment {
+    private final String LOG_TAG = NewActivityFragment.class.getSimpleName();
 
     //public static final String EXTRA_MESSAGE = "com.example.adamhurwitz.hackingenvironment.MainActivity";
 
-    public NewActivityTestFragment() {
+    public NewActivityFragment() {
     }
 
 

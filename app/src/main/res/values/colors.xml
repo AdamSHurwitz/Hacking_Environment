@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="window_background" type="color">#26A69A</item>
-    <item name="actionbar_text" type="color">#212121</item>
+    <item name="primary_color" type="color">#2196F3</item>
 
     <!-- DrawerView -->
     <item name="drawer_text_color" type="color">#B2DFDB</item>

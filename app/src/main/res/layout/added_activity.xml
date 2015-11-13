@@ -4,6 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <include layout="@layout/view_pager" />
+
     <!--<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/drawer_layout"
@@ -40,13 +42,13 @@
             app:menu="@menu/drawer"/>
     </android.support.v4.widget.DrawerLayout>-->
 
-    <include layout="@layout/view_pager" />
+
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="128dp">
+        android:paddingTop="100dp">
 
         <TextView
             android:layout_width="wrap_content"

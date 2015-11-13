@@ -13,14 +13,17 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.added_activity);
+
+        // Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         // receive the intent
         /*Intent intent = getIntent();
          if (intent != null) {
             String message = intent.getStringExtra(
-                    com.example.adamhurwitz.hackingenvironment.NewActivityTestFragment.EXTRA_MESSAGE);
+                    com.example.adamhurwitz.hackingenvironment.NewActivityFragment.EXTRA_MESSAGE);
             // display the message
             TextView textView = new TextView(this);
             textView.setTextSize(40);

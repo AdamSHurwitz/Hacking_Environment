@@ -32,10 +32,18 @@
     <!-- Drawer -->
     <string name="drawer_title">Drawer Title</string>
     <string name="navigation_subheader">SUBHEADER</string>
-    <string name="navigation_sub_item_1">Item 1</string>
-    <string name="navigation_sub_item_2">Item 2</string>
-    <string name="navigation_subheader2">SUBHEADER 2</string>
+    <string name="toast">TOAST</string>
+    <string name="add_fragment">Add Fragment To \'Add Fragment\' Tab</string>
+    <string name="new_fragment">Launch New Activity</string>
+    <string name="navigate_to_tab">Navigate To Tab</string>
+    <string name="closeDrawer">Navigation View</string>
+    <string name="openDrawer">Navigation View Closed</string>
+
+    <!-- Replace Fragment Test -->
+    <string name="added_to_layout">ADD TO THIS LAYOUT BY CLICKING \'ADD FRAGMENT\' IN DRAWER MENU </string>
 
     <!-- New Test -->
     <string name="new_test"> Nuevo Testo </string>
+
+
 </resources>
