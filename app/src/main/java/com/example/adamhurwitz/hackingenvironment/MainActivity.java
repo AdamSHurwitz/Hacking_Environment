@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
-    // DrawerView: Create DrawerLayout - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    // DrawerView: Initialize DrawerLayout - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     private DrawerLayout mDrawerLayout;
     // ---------------------------------------------------------------------------------------------
 
@@ -36,14 +36,13 @@ public class MainActivity extends AppCompatActivity {
         // Navigation View
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-        //Setting Navigation View Item Selected Listener to handle the item click of
-        // the navigation menu
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        // Click Listeners for DrawerView Menu Items
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
 
             // This method will trigger on item Click of navigation menu
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-
 
                 //Checking if the item is in checked state or not, if not make it in checked state
                 if (menuItem.isChecked()) menuItem.setChecked(false);
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Initializing Drawer Layout and ActionBarToggle
+        // Initialize Drawer Layout and ActionBarToggle
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 toolbar, R.string.openDrawer, R.string.closeDrawer) {
@@ -133,22 +132,6 @@ public class MainActivity extends AppCompatActivity {
             TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
             tabLayout.setupWithViewPager(viewPager);
         }
-        // ----------------------------------------------------------------------------------------
-
-        // DrawerView
-
-        // get Array[] of items
-        // drawerItems = getResources().getStringArray(R.array.sample_array  );
-        // get View of drawer_layout
-        // mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        // get View of ListView id
-        // mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
-        // Set the adapter for the list view
-        /*mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_item_view, drawerItems));*/
-        // Set the list's click listener
-        // mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // ----------------------------------------------------------------------------------------
 
