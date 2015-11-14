@@ -39,8 +39,8 @@
     <string name="closeDrawer">Navigation View</string>
     <string name="openDrawer">Navigation View Closed</string>
 
-    <!-- Replace Fragment Test -->
-    <string name="added_to_layout">ADD TO THIS LAYOUT BY CLICKING \'ADD FRAGMENT\' IN DRAWER MENU </string>
+    <!-- Add Fragment Test -->
+    <string name="add_fragment_btn">ADD FRAGMENT BELOW</string>
 
     <!-- New Test -->
     <string name="new_test"> Nuevo Testo </string>

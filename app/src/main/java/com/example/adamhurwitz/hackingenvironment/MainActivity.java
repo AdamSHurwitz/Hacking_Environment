@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // DrawerView: Initialize Toolbar and Navigation View, Set Listener - - - - - - - - - - - - - -
+        // DrawerView: Initialize Toolbar and Navigation View, Set Listener - - - - - - - - - - - -
 
         // Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         // Navigation View
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-        //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
+        //Setting Navigation View Item Selected Listener to handle the item click of
+        // the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
             // This method will trigger on item Click of navigation menu
@@ -45,42 +46,49 @@ public class MainActivity extends AppCompatActivity {
 
 
                 //Checking if the item is in checked state or not, if not make it in checked state
-                if(menuItem.isChecked()) menuItem.setChecked(false);
+                if (menuItem.isChecked()) menuItem.setChecked(false);
                 else menuItem.setChecked(true);
 
                 //Closing drawer on item click
                 mDrawerLayout.closeDrawers();
 
                 //Check to see which item was being clicked and perform appropriate action
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
 
 
-                    //Replacing the main content with ContentFragment Which is our Inbox View;
-                    case R.id.add_fragment:
-                        Toast.makeText(getApplicationContext(), "ADD FRAGMENT", Toast.LENGTH_SHORT).show();
-                        ContentFragment fragment = new ContentFragment();
-                        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    //Replacing the main content with AddedFragmentWithinTab Which is our Inbox View;
+                   /* case R.id.add_fragment:
+                        Toast.makeText(getApplicationContext(), "ADD FRAGMENT", Toast.LENGTH_SHORT)
+                                .show();
+                        AddedFragmentWithinTab fragment = new AddedFragmentWithinTab();
+                        android.support.v4.app.FragmentTransaction fragmentTransaction =
+                                getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.frame,fragment);
                         fragmentTransaction.commit();
-                        return true;
+                        return true;*/
 
                     // For rest of the options we just show a toast on click
 
                     case R.id.toast:
-                        Toast.makeText(getApplicationContext(),"TOAST",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "TOAST", Toast.LENGTH_SHORT).show();
                         return true;
 
                     case R.id.launch_activity:
-                            Intent intent = new Intent(getApplicationContext(),
-                            com.example.adamhurwitz.hackingenvironment.DisplayMessageActivity.class);
-                            startActivity(intent);
+                        Toast.makeText(getApplicationContext(), "LAUNCH ACTIVITY", Toast
+                                .LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(),
+                                LaunchedNewActivity
+                                        .class);
+                        startActivity(intent);
 
                     case R.id.navigate_to_tab:
-                        Toast.makeText(getApplicationContext(),"ADD NAVIGATION TO TAB",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "ADD NAVIGATION TO TAB", Toast
+                                .LENGTH_SHORT).show();
                         return true;
 
                     default:
-                        //Toast.makeText(getApplicationContext(),"Somethings Wrong",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Somethings Wrong",
+                        Toast.LENGTH_SHORT).show();
                         return true;
 
                 }
@@ -89,17 +97,20 @@ public class MainActivity extends AppCompatActivity {
 
         // Initializing Drawer Layout and ActionBarToggle
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,toolbar,R.string.openDrawer, R.string.closeDrawer){
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                toolbar, R.string.openDrawer, R.string.closeDrawer) {
 
             @Override
             public void onDrawerClosed(View drawerView) {
-                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
+                // Code here will be triggered once the drawer closes as we dont want anything to
+                // happen so we leave this blank
                 super.onDrawerClosed(drawerView);
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
-                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
+                // Code here will be triggered once the drawer open as we dont want anything to
+                // happen so we leave this blank
 
                 super.onDrawerOpened(drawerView);
             }
@@ -147,14 +158,14 @@ public class MainActivity extends AppCompatActivity {
     // NavTabs: Add Fragments to the TabsAdapter, TabsAdapter recycles views - - - - - - - - - - - -
     private void setupViewPager(ViewPager viewPager) {
         TabsAdapter adapter = new TabsAdapter(getSupportFragmentManager());
-        adapter.addFragment(new NewActivityFragment(), "NewActivity");
+        adapter.addFragment(new LaunchNewActivityFragment(), "NewActivity");
         adapter.addFragment(new SharedPrefTestFragment(), "SharedPref");
         adapter.addFragment(new SQLiteTestFragment(), "SQLite");
-        adapter.addFragment(new AddFragmentToTab(), "Add Fragment");
-        adapter.addFragment(new NewTestFragment(), "NewTest");
+        adapter.addFragment(new AddFragmentWithinTabFragment(), "Add Fragment");
+        adapter.addFragment(new NewTestFragment(), "NewTestFragment");
         viewPager.setAdapter(adapter);
     }
-    // --------------------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------------
 
 
     @Override
@@ -170,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-       int id = item.getItemId();
+        int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {

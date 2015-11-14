@@ -6,13 +6,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class DisplayMessageActivity extends AppCompatActivity {
+public class LaunchedNewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.added_activity);
+        setContentView(R.layout.new_activity_launched);
 
         // Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -23,7 +23,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         /*Intent intent = getIntent();
          if (intent != null) {
             String message = intent.getStringExtra(
-                    com.example.adamhurwitz.hackingenvironment.NewActivityFragment.EXTRA_MESSAGE);
+                    com.example.adamhurwitz.hackingenvironment.LaunchNewActivityFragment.EXTRA_MESSAGE);
             // display the message
             TextView textView = new TextView(this);
             textView.setTextSize(40);
@@ -31,7 +31,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
             setContentView(textView);
         }*/
 
-
+        // Back Button To Go Home
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // If your minSdkVersion is 11 or higher, instead use:
         //getActionBar().setDisplayHomeAsUpEnabled(true);

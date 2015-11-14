@@ -10,7 +10,7 @@ import android.view.ViewGroup;
  * A placeholder fragment containing a simple view.
  */
 public class LaunchFragment extends Fragment {
-    private final String LOG_TAG = NewActivityFragment.class.getSimpleName();
+    private final String LOG_TAG = LaunchNewActivityFragment.class.getSimpleName();
 
     //public static final String EXTRA_MESSAGE = "com.example.adamhurwitz.hackingenvironment.MainActivity";
 
@@ -20,7 +20,7 @@ public class LaunchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View inflatedView = inflater.inflate(R.layout.add_fragment_test, container, false);
+        View inflatedView = inflater.inflate(R.layout.add_fragment_here, container, false);
 
         return inflatedView;
     }

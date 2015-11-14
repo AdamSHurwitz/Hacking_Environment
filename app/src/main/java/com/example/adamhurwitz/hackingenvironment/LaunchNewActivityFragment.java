@@ -11,19 +11,19 @@ import android.widget.Button;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class NewActivityFragment extends Fragment {
-    private final String LOG_TAG = NewActivityFragment.class.getSimpleName();
+public class LaunchNewActivityFragment extends Fragment {
+    private final String LOG_TAG = LaunchNewActivityFragment.class.getSimpleName();
 
     //public static final String EXTRA_MESSAGE = "com.example.adamhurwitz.hackingenvironment.MainActivity";
 
-    public NewActivityFragment() {
+    public LaunchNewActivityFragment() {
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View inflatedView = inflater.inflate(R.layout.new_activity_test, container, false);
+        View inflatedView = inflater.inflate(R.layout.new_activity, container, false);
 
         /**
          * Called when the user clicks the Send button
@@ -42,7 +42,7 @@ public class NewActivityFragment extends Fragment {
     public void sendMessage(View v) {
         // Do something in response to button
         Intent intent = new Intent(getActivity(),
-                com.example.adamhurwitz.hackingenvironment.DisplayMessageActivity.class);
+                LaunchedNewActivity.class);
         /*EditText editText = (EditText) findViewById(R.id.edit_message);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);*/
