@@ -4,23 +4,21 @@
 
         <!-- Customize your theme here. -->
 
-        <!-- action bar style | overflow menu | navigation bar -->
+        <!-- Status Bar | Action Bar | Navigation Bar -->
 
-        <!-- color of action bar (use 500 color) -->
-        <item name="colorPrimary">@color/primary_color</item>
-        <!-- color of statusbar (use 700 color) -->
-        <item name="colorPrimaryDark">#1976D2</item>
-        <!-- status bar color -->
-        <item name="@android:statusBarColor">#1976D2</item>
-        <!-- status bar transparent-->
+        <!-- color of Status Bar and Menu Icons (use 700 color) -->
+        <item name="colorPrimaryDark">#01579B</item>
+        <!-- opaqueness of Status Bar: Needs to Be Transparent for DrawerView -->
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <!-- color of action bar text-->
+        <!-- color of Action Bar (use 500 color) -->
+        <item name="colorPrimary">@color/primary_color</item>
+        <!-- color of Action Bar text-->
         <item name="android:textColor">#B2DFDB</item>
-        <!-- color of action bar menu text-->
+        <!-- color of Action Bar menu text-->
         <item name="android:actionMenuTextColor">#FFA000</item>
-        <!-- color of popup menu-->
+        <!-- color of Popup Menu-->
         <item name="actionOverflowMenuStyle">@style/CMOptionsMenu</item>
-        <!-- color of navigation bar-->
+        <!-- color of Navigation Bar-->
         <item name="@android:navigationBarColor">#2196F3</item>
 
         <!-- enable overlay mode -->
