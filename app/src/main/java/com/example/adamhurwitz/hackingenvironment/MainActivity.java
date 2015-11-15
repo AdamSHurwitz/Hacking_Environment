@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
-    // DrawerView: Initialize DrawerLayout - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    // DrawerView: Initialize DrawerLayout - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     private DrawerLayout mDrawerLayout;
     // ---------------------------------------------------------------------------------------------
 
@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                                 LaunchedNewActivity
                                         .class);
                         startActivity(intent);
+                        return true;
 
                     case R.id.navigate_to_tab:
                         Toast.makeText(getApplicationContext(), "ADD NAVIGATION TO TAB", Toast
