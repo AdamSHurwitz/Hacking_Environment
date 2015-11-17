@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 public class LaunchedNewActivity extends AppCompatActivity {
 
@@ -13,6 +15,11 @@ public class LaunchedNewActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_activity_launched);
+
+        // Status Bar: Add Color
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.status_bar));
 
         // Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

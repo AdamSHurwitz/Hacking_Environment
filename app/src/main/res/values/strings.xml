@@ -14,6 +14,9 @@
     <string name="button_test">TEST</string>
     <string name="button_get_pref">GET PREF</string>
 
+    <!-- New Activity Test -->
+    <string name="launched_activity">This Activity Has Been Launched. Woohoo!</string>
+
     <!-- SharedPref Test-->
     <string name="preference_file_key">com.example.myapp.PREFERENCE_FILE_KEY</string>
     <string name="preference_key">key</string>

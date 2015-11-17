@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new SharedPrefTestFragment(), "SharedPref");
         adapter.addFragment(new SQLiteTestFragment(), "SQLite");
         adapter.addFragment(new AddFragmentWithinTabFragment(), "Add Fragment");
+        adapter.addFragment(new ArrayAdapterFragment(), "ArrayAdapter Fragment");
         adapter.addFragment(new NewTestFragment(), "NewTestFragment");
         viewPager.setAdapter(adapter);
     }

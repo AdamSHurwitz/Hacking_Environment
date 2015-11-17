@@ -2,6 +2,7 @@
 <resources>
     <item name="window_background" type="color">#26A69A</item>
     <item name="primary_color" type="color">#2196F3</item>
+    <item name="status_bar" type="color">#1976D2</item>
 
     <!-- DrawerView -->
     <item name="drawer_text_color" type="color">#B2DFDB</item>
