@@ -28,18 +28,18 @@ public class LaunchNewActivityFragment extends Fragment {
         /**
          * Called when the user clicks the Send button
          */
-        Button writeToSharedPref = (Button) inflatedView.findViewById(R.id.sendMessage);
-        writeToSharedPref.setOnClickListener(new View.OnClickListener() {
+        Button launchActivity = (Button) inflatedView.findViewById(R.id.launch_activity_btn);
+        launchActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendMessage(v);
+                launchActivity(v);
             }
         });
 
     return inflatedView;
 }
 
-    public void sendMessage(View v) {
+    public void launchActivity(View v) {
         // Do something in response to button
         Intent intent = new Intent(getActivity(),
                 LaunchedNewActivity.class);
