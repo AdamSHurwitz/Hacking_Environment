@@ -48,5 +48,8 @@
     <!-- New Test -->
     <string name="new_test"> Nuevo Testo </string>
 
+    <!-- AsyncTask-->
+    <string name="detail_view"> Detail View </string>
+
 
 </resources>

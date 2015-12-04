@@ -32,13 +32,13 @@ public class ArrayAdapterFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.arrayadapter_grid_view_layout, container, false);
+        View view = inflater.inflate(R.layout.grid_view_layout, container, false);
 
-        dummyDataAdapter = new GridViewAdapter(
+        dummyDataAdapter = new GridViewArrayAdapter(
                 // Current context (this fragment's containing activity)
                 getActivity(),
                 // ID of view item layout, not needed since we get it in getView()
-                R.layout.arrayadapter_grid_item_layout,
+                R.layout.grid_item_layout,
                 // ArrayAdapter
                 dummyData
                 );
