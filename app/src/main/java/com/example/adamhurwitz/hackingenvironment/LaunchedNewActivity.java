@@ -1,6 +1,9 @@
 package com.example.adamhurwitz.hackingenvironment;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -16,15 +19,21 @@ public class LaunchedNewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_activity_launched);
 
-        // Status Bar: Add Color
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.status_bar));
-
         // Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Status Bar: Add Color - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.status_bar));
+
+        // ----------------------------------------------------------------------------------------
+
+        // Back Button To Go Home
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // If your minSdkVersion is 11 or higher, instead use:
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
 
         // receive the intent
         /*Intent intent = getIntent();
@@ -38,10 +47,6 @@ public class LaunchedNewActivity extends AppCompatActivity {
             setContentView(textView);
         }*/
 
-        // Back Button To Go Home
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // If your minSdkVersion is 11 or higher, instead use:
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 

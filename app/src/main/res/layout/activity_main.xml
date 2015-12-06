@@ -3,5 +3,5 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <!-- connects to NavTabs and DrawerView layout -->
-    <include layout="@layout/view_pager" />
+    <include layout="@layout/drawer" />
 </LinearLayout>
