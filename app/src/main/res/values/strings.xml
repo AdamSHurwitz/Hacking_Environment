@@ -7,8 +7,6 @@
     <string name="title_activity_display_message">My Message</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_search">Search</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Buttons -->
     <string name="button_test">TEST</string>
@@ -49,7 +47,8 @@
     <string name="new_test"> Nuevo Testo </string>
 
     <!-- AsyncTask-->
-    <string name="detail_view"> Detail View </string>
+    <string name="detail_view"> Detail View</string>
+    <string name="about">About This Doodle</string>
 
 
 </resources>

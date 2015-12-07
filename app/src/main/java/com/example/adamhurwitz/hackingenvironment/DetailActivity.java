@@ -13,7 +13,6 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_layout);
 
@@ -21,19 +20,18 @@ public class DetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Navigation View
+        //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         // Status Bar: Add Color
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getResources().getColor(R.color.status_bar));
 
-        // Navigation View
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-
         // Back Button To Go Home
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // If your minSdkVersion is 11 or higher, instead use:
         //getActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
 
 
@@ -55,8 +53,6 @@ public class DetailActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
-
     }
 }

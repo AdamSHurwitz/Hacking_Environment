@@ -147,7 +147,8 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new SQLiteTestFragment(), "SQLite");
         adapter.addFragment(new AddFragmentWithinTabFragment(), "Add Fragment");
         adapter.addFragment(new ArrayAdapterFragment(), "ArrayAdapter Fragment");
-        adapter.addFragment(new AsyncTaskFragment(), "Async Fragment");
+        adapter.addFragment(new AsyncTaskFragment1(), "Async Fragment (1/2)");
+        adapter.addFragment(new AsyncTaskFragment2(), "Async Fragment (2/2)");
         adapter.addFragment(new NewTestFragment(), "New Test Fragment");
         viewPager.setAdapter(adapter);
     }
