@@ -29,7 +29,6 @@ public class DetailFragment extends Fragment {
         Intent intent = getActivity().getIntent();
         if (intent != null) {
 
-            // TODO: Potentially remove
             DoodleData doodleData = intent.getParcelableExtra("Doodle Object");
 
             // Create DoodleData Within 'detail_fragment_layout.xml'
