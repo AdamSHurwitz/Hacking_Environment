@@ -40,7 +40,7 @@ public class DetailFragment extends Fragment {
             // switch this to getActivity() since must get Context from Activity
             Picasso.with(getActivity())
                     .load(imageUrl)
-                    .resize(1200, 500)
+                    .resize(1300, 500)
                     .centerCrop()
                     .placeholder(R.drawable.user_placeholder)
                     .error(R.drawable.user_placeholder_error)
@@ -52,7 +52,7 @@ public class DetailFragment extends Fragment {
 
             //Create Doodle Title within 'detail_fragment_layout.xml'
             TextView price = (TextView) view.findViewById(R.id.detail_price);
-            price.setText(doodleData.getPrice());
+            price.setText("$" + doodleData.getPrice());
 
             //Create MovieData User Release Date Within 'fragment_detail.xml'
             TextView releaseDate = (TextView) view.findViewById(R.id.detail_releasedate);
