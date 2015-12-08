@@ -1,7 +1,6 @@
 package com.example.adamhurwitz.hackingenvironment;
 
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -28,6 +27,7 @@ public class DetailActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getResources().getColor(R.color.status_bar));
 
+        //TODO: Navigation Back To Tab Fragment
         // Back Button To Go Home
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // If your minSdkVersion is 11 or higher, instead use:

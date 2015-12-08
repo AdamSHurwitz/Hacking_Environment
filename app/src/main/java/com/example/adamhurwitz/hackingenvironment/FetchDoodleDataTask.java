@@ -59,7 +59,8 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, ArrayList<Doodl
             // Construct the URL to fetch data from and make the connection.
             Uri builtUri = Uri.parse(FAS_API_BASE_URL).buildUpon()
                     .appendQueryParameter(SORT_PARAMETER, params[0])
-                    .appendQueryParameter(IS_RECENT_BOOLEAN, "true")
+                    //.appendQueryParameter(IS_RECENT_BOOLEAN, params[1])
+                    .appendQueryParameter(params[1], "true")
                     .build();
             URL url = new URL(builtUri.toString());
             urlConnection = (HttpURLConnection) url.openConnection();

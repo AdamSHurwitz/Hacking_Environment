@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         return true;
 
+                    //TODO: Navigation to Tab Fragment
                     case R.id.navigate_to_tab:
                         Toast.makeText(getApplicationContext(), "ADD NAVIGATION TO TAB", Toast
                                 .LENGTH_SHORT).show();

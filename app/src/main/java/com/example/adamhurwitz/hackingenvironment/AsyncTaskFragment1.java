@@ -93,7 +93,7 @@ public class AsyncTaskFragment1 extends Fragment {
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
             FetchDoodleDataTask doodleTask = new FetchDoodleDataTask(gridViewAdapter,
                     doodleDataList);
-            doodleTask.execute("release_date.desc");
+            doodleTask.execute("release_date.desc", "recent");
         }
     }
 }
