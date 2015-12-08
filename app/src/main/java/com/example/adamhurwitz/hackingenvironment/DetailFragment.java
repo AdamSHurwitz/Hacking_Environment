@@ -40,7 +40,7 @@ public class DetailFragment extends Fragment {
             // switch this to getActivity() since must get Context from Activity
             Picasso.with(getActivity())
                     .load(imageUrl)
-                    .resize(1300, 500)
+                    .resize(1200, 500)
                     .centerCrop()
                     .placeholder(R.drawable.user_placeholder)
                     .error(R.drawable.user_placeholder_error)
