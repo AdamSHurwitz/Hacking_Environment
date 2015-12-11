@@ -27,7 +27,7 @@ public class DetailActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getResources().getColor(R.color.status_bar));
 
-        //TODO: Navigation Back To Tab Fragment
+        //TODO: Navigation Back To Tab Fragment, savedBundleState(), onRestoreState()
         // Back Button To Go Home
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // If your minSdkVersion is 11 or higher, instead use:
@@ -38,7 +38,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_display_message, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

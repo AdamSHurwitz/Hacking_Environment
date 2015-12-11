@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class NewTestFragment extends Fragment {
+public class CursorFragment extends Fragment {
     private final String LOG_TAG = NewTestFragment.class.getSimpleName();
 
-    public NewTestFragment() {
+    public CursorFragment() {
     }
+
+    //TODO: Build CursorFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

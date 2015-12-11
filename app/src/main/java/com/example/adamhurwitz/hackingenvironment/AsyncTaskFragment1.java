@@ -7,10 +7,12 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -33,6 +35,8 @@ public class AsyncTaskFragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.grid_recentview_layout, container, false);
+
+        setHasOptionsMenu(true);
 
         gridViewAdapter = new GridViewAsyncAdapter(getActivity(), R.layout.grid_recentitem_layout,
                 doodleDataList);
@@ -73,6 +77,23 @@ public class AsyncTaskFragment1 extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_toast) {
+            Context context = getActivity();
+            CharSequence text = "MENU BUTTON!";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

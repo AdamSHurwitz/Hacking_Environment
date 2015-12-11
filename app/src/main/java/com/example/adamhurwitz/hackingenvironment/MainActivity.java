@@ -44,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
 
-                //Checking if the item is in checked state or not, if not make it in checked state
+                // Checking if the item is in checked state or not, if not make it in checked state
                 if (menuItem.isChecked()) menuItem.setChecked(false);
                 else menuItem.setChecked(true);
 
-                //Closing navtabs on item click
+                // Closing navtabs on item click
                 mDrawerLayout.closeDrawers();
 
-                //Check to see which item was being clicked and perform appropriate action
+                // Check to see which item was being clicked and perform appropriate action
                 switch (menuItem.getItemId()) {
 
 
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         return true;
 
-                    //TODO: Navigation to Tab Fragment
+                    //TODO: Navigation to Tab Fragment, savedBundleState(), onRestoreState()
                     case R.id.navigate_to_tab:
                         Toast.makeText(getApplicationContext(), "ADD NAVIGATION TO TAB", Toast
                                 .LENGTH_SHORT).show();
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new ArrayAdapterFragment(), "ArrayAdapter Fragment");
         adapter.addFragment(new AsyncTaskFragment1(), "Async Fragment (1/2)");
         adapter.addFragment(new AsyncTaskFragment2(), "Async Fragment (2/2)");
-        //TODO: Add CursorAdapter
+        adapter.addFragment(new CursorFragment(), "Async + Cursor Adapter");
         adapter.addFragment(new NewTestFragment(), "New Test Fragment");
         viewPager.setAdapter(adapter);
     }
