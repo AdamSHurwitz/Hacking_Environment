@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CursorAdapter;
 import android.widget.ImageView;
 
 import com.example.adamhurwitz.hackingenvironment.data.CursorContract;
@@ -17,7 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 
-public class GridViewCursorAdapter extends CursorAdapter {
+public class AsyncCursorAdapter extends android.widget.CursorAdapter {
     // declare Context variable
     Context context;
     ArrayList<DoodleData> doodleDataList;
@@ -29,14 +28,14 @@ public class GridViewCursorAdapter extends CursorAdapter {
      * @param cursor  Cursor from which to get the data
      * @param flags Determine behavior of adapter
      */
-    // creates constructor to create GridViewArrayAdapter object
-    public GridViewCursorAdapter(Context context, Cursor cursor, int flags) {
+    // creates constructor to create StaticArrayAdapter object
+    public AsyncCursorAdapter(Context context, Cursor cursor, int flags) {
 
         super(context, cursor, flags);
         this.context = context;
     }
 
-    // getView to create view, telling Adapter what's included in the grid_item_layout
+    // getView to create view, telling Adapter what's included in the static_item_layout
     @Override
     /**
      * Overriding the getView method so that the adapter can recycle views appropriately when using

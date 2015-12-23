@@ -33,14 +33,14 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, ArrayList<Doodl
     public static final String IS_RECENT_BOOLEAN = "recent";
 
     private ArrayList<DoodleData> doodleDataList = new ArrayList<>();
-    private GridViewAsyncAdapter gridViewAdapter;
+    private AsyncParcelableArrayAdapter gridViewAdapter;
 
     /**
      * Constructor for the FetchDoodleDataTask object.
      * @param gridViewAdapter An adapter to recycle items correctly in the grid view.
      * @param doodleDataList A list of objects with information about Google doodles.
      */
-    public FetchDoodleDataTask(GridViewAsyncAdapter gridViewAdapter,
+    public FetchDoodleDataTask(AsyncParcelableArrayAdapter gridViewAdapter,
                                ArrayList<DoodleData> doodleDataList) {
         this.doodleDataList = doodleDataList;
         this.gridViewAdapter = gridViewAdapter;

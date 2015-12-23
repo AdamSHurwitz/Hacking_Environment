@@ -11,8 +11,8 @@ import android.widget.GridView;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ArrayAdapterFragment extends Fragment {
-    private final String LOG_TAG = ArrayAdapterFragment.class.getSimpleName();
+public class StaticArrayAdapterFragment extends Fragment {
+    private final String LOG_TAG = StaticArrayAdapterFragment.class.getSimpleName();
 
     // Array of Images From Drawable Directory - - - - - - - - - - - - - - - - - - - - - - - - - - -
     public final Integer[] dummyData = {R.drawable.popular1,R.drawable.popular2,R.drawable.popular3,
@@ -21,7 +21,7 @@ public class ArrayAdapterFragment extends Fragment {
             R.drawable.popular11,R.drawable.popular12,R.drawable.popular13,R.drawable.popular14,
             R.drawable.popular15,R.drawable.popular16,R.drawable.popular17,R.drawable.popular18};
 
-    public ArrayAdapterFragment() {
+    public StaticArrayAdapterFragment() {
     }
 
     // Create ArrayAdapter
@@ -32,13 +32,13 @@ public class ArrayAdapterFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.grid_view_layout, container, false);
+        View view = inflater.inflate(R.layout.static_view_layout, container, false);
 
-        dummyDataAdapter = new GridViewArrayAdapter(
+        dummyDataAdapter = new StaticArrayAdapter(
                 // Current context (this fragment's containing activity)
                 getActivity(),
                 // ID of view item layout, not needed since we get it in getView()
-                R.layout.grid_item_layout,
+                R.layout.static_item_layout,
                 // ArrayAdapter
                 dummyData
                 );

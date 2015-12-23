@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
-public class GridViewArrayAdapter extends ArrayAdapter<Integer> {
-    private final String LOG_TAG = GridViewArrayAdapter.class.getSimpleName();
+public class StaticArrayAdapter extends ArrayAdapter<Integer> {
+    private final String LOG_TAG = StaticArrayAdapter.class.getSimpleName();
 
     // declare Context variable
     Context context;
@@ -17,17 +17,17 @@ public class GridViewArrayAdapter extends ArrayAdapter<Integer> {
 
     /**
      * @param context  is the Context
-     * @param resource is the grid_view_layout
+     * @param resource is the static_view_layout
      */
-    // creates constructor to create GridViewArrayAdapter object
-    public GridViewArrayAdapter(Context context, int resource, Integer[] dummyData) {
+    // creates constructor to create StaticArrayAdapter object
+    public StaticArrayAdapter(Context context, int resource, Integer[] dummyData) {
 
         super(context, resource, dummyData);
         this.context = context;
         this.dummyData = dummyData;
     }
 
-    // getView to create view, telling Adapter what's included in the grid_item_layout
+    // getView to create view, telling Adapter what's included in the static_item_layout
     @Override
     public View getView(int position, View view, ViewGroup parent) {
 
@@ -40,8 +40,8 @@ public class GridViewArrayAdapter extends ArrayAdapter<Integer> {
 
         // first clutter of views when nothing is loaded
         if (view == null) {
-            // need inflator to inflate the grid_item_layout
-            view = inflater.inflate(R.layout.grid_item_layout, parent, false);
+            // need inflator to inflate the static_item_layout
+            view = inflater.inflate(R.layout.static_item_layout, parent, false);
             holder = new ViewHolder();
             // once view is inflated we can grab elements, getting and saving grid_item_imageview
             // as ImageView

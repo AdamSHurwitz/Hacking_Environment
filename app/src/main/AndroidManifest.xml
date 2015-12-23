@@ -28,7 +28,15 @@
                 android:value="com.example.adamhurwitz.hackingenvironment.MainActivity" />
         </activity>
         <activity
-            android:name=".DetailActivity"
+            android:name=".AsyncParcelableDetailActivity"
+            android:label="@string/detail_view"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.adamhurwitz.hackingenvironment.MainActivity" />
+        </activity>
+        <activity
+            android:name=".CursorDetailActivity"
             android:label="@string/detail_view"
             android:parentActivityName=".MainActivity" >
             <meta-data

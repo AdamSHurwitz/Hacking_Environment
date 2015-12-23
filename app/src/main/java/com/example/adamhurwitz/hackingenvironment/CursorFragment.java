@@ -1,6 +1,7 @@
 package com.example.adamhurwitz.hackingenvironment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
@@ -10,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.example.adamhurwitz.hackingenvironment.data.CursorContract;
@@ -20,10 +22,10 @@ import com.example.adamhurwitz.hackingenvironment.data.CursorDbHelper;
  */
 public class CursorFragment extends Fragment {
 
-    private GridViewCursorAdapter cursorAdapter;
+    private AsyncCursorAdapter asyncCursorAdapter;
 
     /**
-     * Empty constructor for the AsyncTaskFragment1() class.
+     * Empty constructor for the AsyncParcelableFragment1() class.
      */
     public CursorFragment() {
     }
@@ -53,17 +55,17 @@ public class CursorFragment extends Fragment {
                 sortOrder                                 // The sort order
         );
 
-        cursorAdapter = new GridViewCursorAdapter(getActivity(), cursor, 0);
+        asyncCursorAdapter = new AsyncCursorAdapter(getActivity(), cursor, 0);
 
         // Get a reference to the grid view layout and attach the adapter to it.
         GridView gridView = (GridView) view.findViewById(R.id.grid_recentview_layout);
-        gridView.setAdapter(cursorAdapter);
+        gridView.setAdapter(asyncCursorAdapter);
 
 
         // Create Toast
 
         // gridView.setOnItemClickListener(new OnItem... [auto-completes])
-       /* gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             // parent = parent view, view = grid_item view, position = grid_item position
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -73,22 +75,33 @@ public class CursorFragment extends Fragment {
             }
         });*/
 
-      /*  gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            // parent is parent view, view is grid_item view, position is grid_item position
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+                String item_id = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                        .COLUMN_NAME_ITEMID));
+                String title = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                        .COLUMN_NAME_TITLE));
+                String image = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                        .COLUMN_NAME_IMAGEURL));
+                String description = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                        .COLUMN_NAME_DESCRIPTION));
+                String price = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                        .COLUMN_NAME_PRICE));
+                String release_date = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                        .COLUMN_NAME_RELEASEDATE));
+
+                String[] doodleDataItems = {item_id, title, image, description, price, release_date};
 
                 Intent intent = new Intent(getActivity(),
-                        com.example.adamhurwitz.hackingenvironment.DetailActivity.class);
+                        CursorDetailActivity.class);
 
-                String message = movieObjects.get(position).getTitle();
-                 intent.putExtra(EXTRA_MESSAGE, message);
-
-                intent.putExtra("Doodle Object", doodleDataList.get(position));
+                intent.putExtra("Cursor Doodle Attributes", doodleDataItems);
 
                 startActivity(intent);
             }
-        });*/
+        });
 
         return view;
     }
@@ -96,7 +109,7 @@ public class CursorFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        cursorAdapter.notifyDataSetChanged();
+        asyncCursorAdapter.notifyDataSetChanged();
         getDoodleData();
     }
 
@@ -108,7 +121,7 @@ public class CursorFragment extends Fragment {
         // Make sure that the device is actually connected to the internet before trying to get data
         // about the Google doodles.
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-            CursorFetchDoodleDataTask doodleTask = new CursorFetchDoodleDataTask(cursorAdapter,
+            CursorFetchDoodleDataTask doodleTask = new CursorFetchDoodleDataTask(asyncCursorAdapter,
                     getContext());
             doodleTask.execute("release_date.desc", "vintage");
 

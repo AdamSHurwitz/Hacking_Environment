@@ -41,17 +41,17 @@ public class CursorFetchDoodleDataTask extends AsyncTask<String, Void, Void> {
     public static final String IS_RECENT_BOOLEAN = "recent";
     public static final String IS_VINTAGE_BOOLEAN = "vintage";
 
-    private GridViewCursorAdapter gridViewCursorAdapter;
+    private AsyncCursorAdapter asyncCursorAdapter;
     private final Context context;
 
     /**
      * Constructor for the FetchDoodleDataTask object.
      *
-     * @param gridViewCursorAdapter An adapter to recycle items correctly in the grid view.
+     * @param asyncCursorAdapter An adapter to recycle items correctly in the grid view.
      * @param context               Context of Activity
      */
-    public CursorFetchDoodleDataTask(GridViewCursorAdapter gridViewCursorAdapter, Context context) {
-        this.gridViewCursorAdapter = gridViewCursorAdapter;
+    public CursorFetchDoodleDataTask(AsyncCursorAdapter asyncCursorAdapter, Context context) {
+        this.asyncCursorAdapter = asyncCursorAdapter;
         this.context = context;
     }
 
@@ -139,7 +139,7 @@ public class CursorFetchDoodleDataTask extends AsyncTask<String, Void, Void> {
      * @param doodleData A list of objects with information about the Google doodles.
      */
     public void onPostExecute(Void param) {
-        gridViewCursorAdapter.notifyDataSetChanged();
+        asyncCursorAdapter.notifyDataSetChanged();
     }
 
     /**

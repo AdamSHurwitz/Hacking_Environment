@@ -2,7 +2,6 @@ package com.example.adamhurwitz.hackingenvironment;
 
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,7 +32,7 @@ public class SQLiteTestFragment extends Fragment {
     // Create ListView for Adapter
     private ListView sqlResultList;
     // Create Adapter
-    private CustomAdapter adapter;
+    private SQLiteArrayAdapter adapter;
     //----------------------------------------------------------------------------------------------
 
     public SQLiteTestFragment() {
@@ -87,7 +85,7 @@ public class SQLiteTestFragment extends Fragment {
         // Build the Adapter
 
         // Set the adapter for the list view
-        adapter = new CustomAdapter(getActivity(),
+        adapter = new SQLiteArrayAdapter(getActivity(),
                 // link to layout table_row_view.xml and pass in ArrayList<> rowObjects
                 R.layout.table_row_view, rowObjects);
         sqlResultList.setAdapter(adapter);
@@ -313,39 +311,3 @@ public class SQLiteTestFragment extends Fragment {
 
 
 }
-
-// CustomAdapter------------------------------------------------------------------------------------
-class CustomAdapter extends ArrayAdapter<RowObject> {
-
-    // Create ArrayList<> rowObjects
-    private ArrayList<RowObject> rowObjects;
-
-    // Create CustomAdapter
-    public CustomAdapter(Context context, int resource, ArrayList<RowObject> rowObjects) {
-        super(context, resource, rowObjects);
-        this.rowObjects = rowObjects;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) getContext()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        // Inflate table_row_view.xml
-        View rowView = inflater.inflate(R.layout.table_row_view, parent, false);
-
-
-        // get IDs of row layout inserting data into
-        TextView entryID = (TextView) rowView.findViewById(R.id.entry_id);
-        entryID.setText(String.valueOf(rowObjects.get(position).getID()));
-
-        TextView concept = (TextView) rowView.findViewById(R.id.column_name_conecpt);
-        concept.setText(String.valueOf(rowObjects.get(position).getConceptName()));
-
-        TextView tabNum = (TextView) rowView.findViewById(R.id.column_name_tabnumber);
-        tabNum.setText(String.valueOf(rowObjects.get(position).getTabNum()));
-
-        return rowView;
-    }
-}
-//--------------------------------------------------------------------------------------------------
