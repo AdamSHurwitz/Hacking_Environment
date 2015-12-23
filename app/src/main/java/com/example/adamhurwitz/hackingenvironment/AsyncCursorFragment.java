@@ -20,14 +20,14 @@ import com.example.adamhurwitz.hackingenvironment.data.CursorDbHelper;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class CursorFragment extends Fragment {
+public class AsyncCursorFragment extends Fragment {
 
     private AsyncCursorAdapter asyncCursorAdapter;
 
     /**
      * Empty constructor for the AsyncParcelableFragment1() class.
      */
-    public CursorFragment() {
+    public AsyncCursorFragment() {
     }
 
     @Override
@@ -95,7 +95,7 @@ public class CursorFragment extends Fragment {
                 String[] doodleDataItems = {item_id, title, image, description, price, release_date};
 
                 Intent intent = new Intent(getActivity(),
-                        CursorDetailActivity.class);
+                        AsyncCursorDetailActivity.class);
 
                 intent.putExtra("Cursor Doodle Attributes", doodleDataItems);
 
@@ -121,7 +121,7 @@ public class CursorFragment extends Fragment {
         // Make sure that the device is actually connected to the internet before trying to get data
         // about the Google doodles.
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-            CursorFetchDoodleDataTask doodleTask = new CursorFetchDoodleDataTask(asyncCursorAdapter,
+            AsyncCursorFetchDoodleDataTask doodleTask = new AsyncCursorFetchDoodleDataTask(asyncCursorAdapter,
                     getContext());
             doodleTask.execute("release_date.desc", "vintage");
 

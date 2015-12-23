@@ -36,7 +36,7 @@
                 android:value="com.example.adamhurwitz.hackingenvironment.MainActivity" />
         </activity>
         <activity
-            android:name=".CursorDetailActivity"
+            android:name=".AsyncCursorDetailActivity"
             android:label="@string/detail_view"
             android:parentActivityName=".MainActivity" >
             <meta-data

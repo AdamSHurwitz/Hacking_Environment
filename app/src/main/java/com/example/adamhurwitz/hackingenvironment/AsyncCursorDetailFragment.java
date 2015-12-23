@@ -14,10 +14,10 @@ import com.squareup.picasso.Picasso;
 /**
  * Created by adamhurwitz on 12/5/15.
  */
-public class CursorDetailFragment extends Fragment {
+public class AsyncCursorDetailFragment extends Fragment {
 
 
-    public CursorDetailFragment() {
+    public AsyncCursorDetailFragment() {
     }
 
     //@Override

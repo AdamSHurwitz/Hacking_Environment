@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class CursorDetailActivity extends AppCompatActivity {
+public class AsyncCursorDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

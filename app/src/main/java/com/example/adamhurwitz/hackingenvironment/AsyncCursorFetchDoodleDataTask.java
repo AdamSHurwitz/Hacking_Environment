@@ -25,9 +25,9 @@ import java.net.URL;
 /**
  * Created by adamhurwitz on 12/2/15.
  */
-public class CursorFetchDoodleDataTask extends AsyncTask<String, Void, Void> {
+public class AsyncCursorFetchDoodleDataTask extends AsyncTask<String, Void, Void> {
 
-    public static final String LOG_TAG = CursorFetchDoodleDataTask.class.getSimpleName();
+    public static final String LOG_TAG = AsyncCursorFetchDoodleDataTask.class.getSimpleName();
     public static final String FAS_API_BASE_URL = "https://fas-api.appspot.com/";
     public static final String SORT_PARAMETER = "sort_order";
     public static final String ID_PARAMETER = "item_id";
@@ -50,7 +50,7 @@ public class CursorFetchDoodleDataTask extends AsyncTask<String, Void, Void> {
      * @param asyncCursorAdapter An adapter to recycle items correctly in the grid view.
      * @param context               Context of Activity
      */
-    public CursorFetchDoodleDataTask(AsyncCursorAdapter asyncCursorAdapter, Context context) {
+    public AsyncCursorFetchDoodleDataTask(AsyncCursorAdapter asyncCursorAdapter, Context context) {
         this.asyncCursorAdapter = asyncCursorAdapter;
         this.context = context;
     }
