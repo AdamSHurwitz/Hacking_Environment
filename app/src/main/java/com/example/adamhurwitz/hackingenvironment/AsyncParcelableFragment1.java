@@ -112,7 +112,7 @@ public class AsyncParcelableFragment1 extends Fragment {
         // Make sure that the device is actually connected to the internet before trying to get data
         // about the Google doodles.
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-            FetchDoodleDataTask doodleTask = new FetchDoodleDataTask(gridViewAdapter,
+            AsyncParcelableFetchDoodleDataTask doodleTask = new AsyncParcelableFetchDoodleDataTask(gridViewAdapter,
                     doodleDataList);
             doodleTask.execute("release_date.desc", "recent");
         }

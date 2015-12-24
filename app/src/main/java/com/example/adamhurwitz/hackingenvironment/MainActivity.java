@@ -150,7 +150,8 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new StaticArrayAdapterFragment(), "Display Static Data");
         adapter.addFragment(new AsyncParcelableFragment1(), "Async Fragment (1/2)");
         adapter.addFragment(new AsyncParcelableFragment2(), "Async Fragment (2/2)");
-        adapter.addFragment(new AsyncCursorFragment(), "Async + Cursor Adapter");
+        adapter.addFragment(new AsyncCursorFragment1(), "Async + Cursor Adapter (1/2)");
+        adapter.addFragment(new AsyncCursorFragment2(), "Async + Cursor Adapter (2/2)");
         adapter.addFragment(new NewTestFragment(), "New Test Fragment");
         viewPager.setAdapter(adapter);
     }

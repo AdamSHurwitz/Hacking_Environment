@@ -19,9 +19,9 @@ import java.util.ArrayList;
 /**
  * Created by adamhurwitz on 12/2/15.
  */
-public class FetchDoodleDataTask extends AsyncTask<String, Void, ArrayList<DoodleData>> {
+public class AsyncParcelableFetchDoodleDataTask extends AsyncTask<String, Void, ArrayList<DoodleData>> {
 
-    public static final String LOG_TAG = FetchDoodleDataTask.class.getSimpleName();
+    public static final String LOG_TAG = AsyncParcelableFetchDoodleDataTask.class.getSimpleName();
     public static final String FAS_API_BASE_URL = "https://fas-api.appspot.com/";
     public static final String SORT_PARAMETER = "sort_order";
     public static final String ID_PARAMETER = "item_id";
@@ -36,12 +36,12 @@ public class FetchDoodleDataTask extends AsyncTask<String, Void, ArrayList<Doodl
     private AsyncParcelableArrayAdapter gridViewAdapter;
 
     /**
-     * Constructor for the FetchDoodleDataTask object.
+     * Constructor for the AsyncParcelableFetchDoodleDataTask object.
      * @param gridViewAdapter An adapter to recycle items correctly in the grid view.
      * @param doodleDataList A list of objects with information about Google doodles.
      */
-    public FetchDoodleDataTask(AsyncParcelableArrayAdapter gridViewAdapter,
-                               ArrayList<DoodleData> doodleDataList) {
+    public AsyncParcelableFetchDoodleDataTask(AsyncParcelableArrayAdapter gridViewAdapter,
+                                              ArrayList<DoodleData> doodleDataList) {
         this.doodleDataList = doodleDataList;
         this.gridViewAdapter = gridViewAdapter;
     }
