@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.adamhurwitz.hackingenvironment.data.Contract;
 import com.example.adamhurwitz.hackingenvironment.data.SQLDbHelper;
@@ -31,6 +33,8 @@ public class SharedPrefTestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View inflatedView = inflater.inflate(R.layout.shared_pref_test, container, false);
+
+        setHasOptionsMenu(true);
 
         // SharedPref Test
 
@@ -219,5 +223,22 @@ public class SharedPrefTestFragment extends Fragment {
 
         // Issue SQL statement.
         db.delete(Contract.Tests.TABLE_NAME, selection, selectionArgs);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_toast) {
+            Context context = getActivity();
+            CharSequence text = "MENU BUTTON!";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
