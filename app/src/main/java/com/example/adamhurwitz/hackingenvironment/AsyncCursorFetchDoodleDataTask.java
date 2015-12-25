@@ -25,6 +25,9 @@ import java.net.URL;
 /**
  * Created by adamhurwitz on 12/2/15.
  */
+
+// param1 passes into doInBackground()
+// param3 declares return type for doInBackground()
 public class AsyncCursorFetchDoodleDataTask extends AsyncTask<String, Void, Void> {
 
     public static final String LOG_TAG = AsyncCursorFetchDoodleDataTask.class.getSimpleName();
@@ -48,7 +51,7 @@ public class AsyncCursorFetchDoodleDataTask extends AsyncTask<String, Void, Void
      * Constructor for the AsyncParcelableFetchDoodleDataTask object.
      *
      * @param asyncCursorAdapter An adapter to recycle items correctly in the grid view.
-     * @param context               Context of Activity
+     * @param context            Context of Activity
      */
     public AsyncCursorFetchDoodleDataTask(AsyncCursorAdapter asyncCursorAdapter, Context context) {
         this.asyncCursorAdapter = asyncCursorAdapter;

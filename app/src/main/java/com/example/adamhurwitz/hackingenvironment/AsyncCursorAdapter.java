@@ -13,13 +13,10 @@ import com.example.adamhurwitz.hackingenvironment.data.CursorContract;
 import com.example.adamhurwitz.hackingenvironment.data.CursorDbHelper;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-
 
 public class AsyncCursorAdapter extends android.widget.CursorAdapter {
     // declare Context variable
     Context context;
-    ArrayList<DoodleData> doodleDataList;
 
     /**
      * Constructor for the GridViewAdapter object.
