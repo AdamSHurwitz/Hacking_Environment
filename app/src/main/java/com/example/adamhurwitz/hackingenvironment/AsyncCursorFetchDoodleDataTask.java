@@ -65,7 +65,7 @@ public class AsyncCursorFetchDoodleDataTask extends AsyncTask<String, Void, Void
         BufferedReader reader = null;
 
         // This variable will contain the raw JSON response as a string.
-        String doodleDataJsonResponse = null;
+        String jsonResponse= null;
 
         try {
             if (params[1] != "popular") {
@@ -83,6 +83,7 @@ public class AsyncCursorFetchDoodleDataTask extends AsyncTask<String, Void, Void
                         .appendQueryParameter(SORT_PARAMETER, params[0])
                         .build();
                 URL url = new URL(builtUri.toString());
+                Log.v("URL_HERE: ", builtUri.toString());
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
@@ -108,7 +109,8 @@ public class AsyncCursorFetchDoodleDataTask extends AsyncTask<String, Void, Void
                 return null;
             }
 
-            doodleDataJsonResponse = buffer.toString();
+            jsonResponse= buffer.toString();
+            Log.v("JSON_String_here: ", jsonResponse);
 
         } catch (IOException e) {
             // If there was no valid Google doodle data returned, there is no point in attempting to
@@ -132,8 +134,8 @@ public class AsyncCursorFetchDoodleDataTask extends AsyncTask<String, Void, Void
         // If valid data was returned, return the parsed data.
         try {
             Log.i(LOG_TAG, "The Google doodle data that was returned is: " +
-                    doodleDataJsonResponse);
-            parseDoodleDataJsonResponse(doodleDataJsonResponse);
+                    jsonResponse);
+            parseJSONResponse(jsonResponse);
             return null;
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
@@ -157,27 +159,28 @@ public class AsyncCursorFetchDoodleDataTask extends AsyncTask<String, Void, Void
     /**
      * Parses the JSON response for information about the Google doodles.
      *
-     * @param doodleDataJsonResponse A JSON string which needs to be parsed for data about the
+     * @param jsonResponse A JSON string which needs to be parsed for data about the
      *                               Google doodles.
      */
-    private void parseDoodleDataJsonResponse(String doodleDataJsonResponse)
+    private void parseJSONResponse(String jsonResponse)
             throws JSONException {
 
         try {
-            JSONArray doodlesInfo = new JSONArray(doodleDataJsonResponse);
-            for (int index = 0; index < doodlesInfo.length(); index++) {
-                JSONObject doodleDataJson = doodlesInfo.getJSONObject(index);
-                putDoodleDataIntoDb(
-                        doodleDataJson.getString(ID_PARAMETER),
-                        doodleDataJson.getString(TITLE_PARAMETER),
-                        doodleDataJson.getString(RELEASE_DATE_PARAMETER),
-                        doodleDataJson.getString(DESCRIPTION_PARAMETER),
-                        doodleDataJson.getString(SEARCH_STRINGS),
-                        doodleDataJson.getInt(PRICE_PARAMETER),
-                        doodleDataJson.getString(IMAGE_URL_PARAMETER),
-                        doodleDataJson.getDouble(POPULARITY),
-                        doodleDataJson.getBoolean(IS_RECENT_BOOLEAN),
-                        doodleDataJson.getBoolean(IS_VINTAGE_BOOLEAN));
+            JSONArray jsonarray = new JSONArray(jsonResponse);
+            for (int index = 0; index < jsonarray.length(); index++) {
+                JSONObject jsonObject = jsonarray.getJSONObject(index);
+                putDataIntoDb(
+                        jsonObject.getString(ID_PARAMETER),
+                        jsonObject.getString(TITLE_PARAMETER),
+                        jsonObject.getString(RELEASE_DATE_PARAMETER),
+                        jsonObject.getString(DESCRIPTION_PARAMETER),
+                        jsonObject.getString(SEARCH_STRINGS),
+                        jsonObject.getInt(PRICE_PARAMETER),
+                        jsonObject.getString(IMAGE_URL_PARAMETER),
+                        jsonObject.getDouble(POPULARITY),
+                        jsonObject.getBoolean(IS_RECENT_BOOLEAN),
+                        jsonObject.getBoolean(IS_VINTAGE_BOOLEAN));
+                Log.v("JSON_RESPONSE", jsonResponse);
             }
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
@@ -185,10 +188,10 @@ public class AsyncCursorFetchDoodleDataTask extends AsyncTask<String, Void, Void
         }
     }
 
-    public void putDoodleDataIntoDb(String item_id, String title, String date, String description,
+    public void putDataIntoDb(String item_id, String title, String date, String description,
                                     String search_strings, int price, String image,
                                     Double popularity, Boolean recent, Boolean vintage) {
-        Log.v("putInfoIntoDatabase", "called here");
+        Log.v("ALPHA", title);
 
         // Access database
         CursorDbHelper mDbHelper = new CursorDbHelper(context);

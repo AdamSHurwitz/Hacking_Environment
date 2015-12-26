@@ -53,7 +53,7 @@ public class AsyncParcelableFetchDoodleDataTask extends AsyncTask<String, Void, 
         BufferedReader reader = null;
 
         // This variable will contain the raw JSON response as a string.
-        String doodleDataJsonResponse = null;
+        String jsonResponse = null;
 
         try {
             // Construct the URL to fetch data from and make the connection.
@@ -87,7 +87,7 @@ public class AsyncParcelableFetchDoodleDataTask extends AsyncTask<String, Void, 
                 return null;
             }
 
-            doodleDataJsonResponse = buffer.toString();
+            jsonResponse = buffer.toString();
 
         } catch (IOException e) {
             // If there was no valid Google doodle data returned, there is no point in attempting to
@@ -111,8 +111,8 @@ public class AsyncParcelableFetchDoodleDataTask extends AsyncTask<String, Void, 
         // If valid data was returned, return the parsed data.
         try {
             Log.i(LOG_TAG, "The Google doodle data that was returned is: " +
-                    doodleDataJsonResponse);
-            return parseDoodleDataJsonResponse(doodleDataJsonResponse);
+                    jsonResponse);
+            return parseJsonResponse(jsonResponse);
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
             e.printStackTrace();
@@ -134,22 +134,22 @@ public class AsyncParcelableFetchDoodleDataTask extends AsyncTask<String, Void, 
 
     /**
      * Parses the JSON response for information about the Google doodles.
-     * @param doodleDataJsonResponse A JSON string which needs to be parsed for data about the
+     * @param jsonResponse A JSON string which needs to be parsed for data about the
      *                               Google doodles.
      */
-    private ArrayList<DoodleData> parseDoodleDataJsonResponse(String doodleDataJsonResponse)
+    private ArrayList<DoodleData> parseJsonResponse(String jsonResponse)
             throws JSONException {
         try {
-            JSONArray doodlesInfo = new JSONArray(doodleDataJsonResponse);
-            for (int index = 0; index < doodlesInfo.length(); index++) {
-                JSONObject doodleDataJson = doodlesInfo.getJSONObject(index);
-                DoodleData doodleData = new DoodleData(doodleDataJson.getString(ID_PARAMETER),
-                        doodleDataJson.getString(TITLE_PARAMETER),
-                        doodleDataJson.getString(RELEASE_DATE_PARAMETER),
-                        doodleDataJson.getString(DESCRIPTION_PARAMETER),
-                        doodleDataJson.getString(PRICE_PARAMETER),
-                        doodleDataJson.getString(IMAGE_URL_PARAMETER),
-                        doodleDataJson.getBoolean(IS_RECENT_BOOLEAN));
+            JSONArray jsonArray = new JSONArray(jsonResponse);
+            for (int index = 0; index < jsonArray.length(); index++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(index);
+                DoodleData doodleData = new DoodleData(jsonObject.getString(ID_PARAMETER),
+                        jsonObject.getString(TITLE_PARAMETER),
+                        jsonObject.getString(RELEASE_DATE_PARAMETER),
+                        jsonObject.getString(DESCRIPTION_PARAMETER),
+                        jsonObject.getString(PRICE_PARAMETER),
+                        jsonObject.getString(IMAGE_URL_PARAMETER),
+                        jsonObject.getBoolean(IS_RECENT_BOOLEAN));
                 doodleDataList.add(doodleData);
             }
             return doodleDataList;
