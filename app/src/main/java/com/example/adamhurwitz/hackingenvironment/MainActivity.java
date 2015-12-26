@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     //TODO: Navigation to Tab Fragment, savedBundleState(), onRestoreState()
+                    //http://developer.android.com/training/basics/activity-lifecycle/recreating.html
                     case R.id.navigate_to_tab:
                         Toast.makeText(getApplicationContext(), "ADD NAVIGATION TO TAB", Toast
                                 .LENGTH_SHORT).show();

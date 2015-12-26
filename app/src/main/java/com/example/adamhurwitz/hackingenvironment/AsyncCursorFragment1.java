@@ -48,6 +48,8 @@ public class AsyncCursorFragment1 extends Fragment {
                 CursorContract.ProductData._ID + " DESC";
         String[] wherevalues = {"1"};
 
+
+        //TODO: Add SharedPreferences To Change All Queries (x4)
         // If you are querying entire table, can leave everything as Null
         Cursor cursor = db.query(
                 CursorContract.ProductData.TABLE_NAME,  // The table to query

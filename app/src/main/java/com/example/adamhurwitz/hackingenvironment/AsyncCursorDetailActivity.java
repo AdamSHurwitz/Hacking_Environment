@@ -28,6 +28,7 @@ public class AsyncCursorDetailActivity extends AppCompatActivity {
         window.setStatusBarColor(getResources().getColor(R.color.status_bar));
 
         //TODO: Navigation Back To Tab Fragment, savedBundleState(), onRestoreState()
+        //http://developer.android.com/training/basics/activity-lifecycle/recreating.html
         // Back Button To Go Home
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // If your minSdkVersion is 11 or higher, instead use:
