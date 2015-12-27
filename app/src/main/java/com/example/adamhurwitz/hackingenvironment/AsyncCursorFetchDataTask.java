@@ -28,9 +28,9 @@ import java.net.URL;
 
 // param1 passes into doInBackground()
 // param3 declares return type for doInBackground()
-public class AsyncCursorFetchDoodleDataTask extends AsyncTask<String, Void, Void> {
+public abstract class AsyncCursorFetchDataTask extends AsyncTask<String, Void, Void> {
 
-    public static final String LOG_TAG = AsyncCursorFetchDoodleDataTask.class.getSimpleName();
+    public static final String LOG_TAG = AsyncCursorFetchDataTask.class.getSimpleName();
     public static final String FAS_API_BASE_URL = "https://fas-api.appspot.com/";
     public static final String SORT_PARAMETER = "sort_order";
     public static final String ID_PARAMETER = "item_id";
@@ -44,17 +44,14 @@ public class AsyncCursorFetchDoodleDataTask extends AsyncTask<String, Void, Void
     public static final String IS_RECENT_BOOLEAN = "recent";
     public static final String IS_VINTAGE_BOOLEAN = "vintage";
 
-    private AsyncCursorAdapter asyncCursorAdapter;
     private final Context context;
 
     /**
      * Constructor for the AsyncParcelableFetchDoodleDataTask object.
      *
-     * @param asyncCursorAdapter An adapter to recycle items correctly in the grid view.
      * @param context            Context of Activity
      */
-    public AsyncCursorFetchDoodleDataTask(AsyncCursorAdapter asyncCursorAdapter, Context context) {
-        this.asyncCursorAdapter = asyncCursorAdapter;
+    public AsyncCursorFetchDataTask(Context context) {
         this.context = context;
     }
 
@@ -144,16 +141,6 @@ public class AsyncCursorFetchDoodleDataTask extends AsyncTask<String, Void, Void
 
         // Any other case that gets here is an error that was not caught, so return null.
         return null;
-    }
-
-    @Override
-    /**
-     * Override the onPostExecute method to notify the grid view adapter that new data was received
-     * so that the items in the grid view can appropriately reflect the changes.
-     * @param doodleData A list of objects with information about the Google doodles.
-     */
-    public void onPostExecute(Void param) {
-        asyncCursorAdapter.notifyDataSetChanged();
     }
 
     /**
