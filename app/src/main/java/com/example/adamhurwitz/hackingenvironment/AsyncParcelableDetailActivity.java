@@ -27,7 +27,7 @@ public class AsyncParcelableDetailActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getResources().getColor(R.color.status_bar));
 
-        //TODO: Navigation Back To Tab Fragment, savedBundleState(), onRestoreState()
+        //TODO: Enable Up Button Navigation For Fragment, savedBundleState(), onRestoreState()
         //http://developer.android.com/training/basics/activity-lifecycle/recreating.html
         // Back Button To Go Home
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

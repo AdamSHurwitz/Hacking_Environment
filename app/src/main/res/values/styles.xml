@@ -8,6 +8,7 @@
 
         <!-- color of Status Bar and Menu Icons (use 700 color) -->
         <item name="colorPrimaryDark">@color/status_bar</item>
+        <!--TODO: Add ActionBar With Partial Opaqueness -->
         <!-- opaqueness of Status Bar: Needs to Be Transparent for DrawerView -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <!-- color of Status Bar -->

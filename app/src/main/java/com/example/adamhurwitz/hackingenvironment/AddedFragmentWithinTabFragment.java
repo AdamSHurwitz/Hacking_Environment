@@ -10,12 +10,12 @@ import android.widget.Button;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class AddFragmentWithinTabFragment extends Fragment {
+public class AddedFragmentWithinTabFragment extends Fragment {
     private final String LOG_TAG = LaunchNewActivityFragment.class.getSimpleName();
 
     //public static final String EXTRA_MESSAGE = "com.example.adamhurwitz.hackingenvironment.MainActivity";
 
-    public AddFragmentWithinTabFragment() {
+    public AddedFragmentWithinTabFragment() {
     }
 
     @Override

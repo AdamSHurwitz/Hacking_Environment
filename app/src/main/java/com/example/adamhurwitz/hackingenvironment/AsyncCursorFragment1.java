@@ -117,16 +117,13 @@ public class AsyncCursorFragment1 extends Fragment {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_toast) {
-            Context context = getActivity();
-            CharSequence text = "MENU BUTTON!";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            return true;
+        switch (item.getItemId()){
+            case R.id.action_toast:
+                Toast toast = Toast.makeText(getActivity(), "MENU BUTTON!", Toast.LENGTH_SHORT);
+                toast.show();
+                return true;
+            default: return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     private class AsyncCursorTask1 extends AsyncCursorFetchDataTask {
