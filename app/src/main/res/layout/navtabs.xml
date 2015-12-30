@@ -16,7 +16,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <!-- Action Bar -->
-        <include layout="@layout/menu_bar" />
+        <include layout="@layout/toolbar" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"

@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,22 +41,22 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
 
-            // This method will trigger on item Click of navigation menu
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    // This method will trigger on item Click of navigation menu
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
 
-                // Checking if the item is in checked state or not, if not make it in checked state
-                if (menuItem.isChecked()) menuItem.setChecked(false);
-                else menuItem.setChecked(true);
+                        // Checking if the item is in checked state or not, if not make it in checked state
+                        if (menuItem.isChecked()) menuItem.setChecked(false);
+                        else menuItem.setChecked(true);
 
-                // Closing navtabs on item click
-                mDrawerLayout.closeDrawers();
+                        // Closing navtabs on item click
+                        mDrawerLayout.closeDrawers();
 
-                // Check to see which item was being clicked and perform appropriate action
-                switch (menuItem.getItemId()) {
+                        // Check to see which item was being clicked and perform appropriate action
+                        switch (menuItem.getItemId()) {
 
 
-                    //Replacing the main content with AddedFragmentWithinTab Which is our Inbox View;
+                            //Replacing the main content with AddedFragmentWithinTab Which is our Inbox View;
                    /* case R.id.add_fragment:
                         Toast.makeText(getApplicationContext(), "ADD FRAGMENT", Toast.LENGTH_SHORT)
                                 .show();
@@ -66,36 +67,36 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         return true;*/
 
-                    // For rest of the options we just show a toast on click
+                            // For rest of the options we just show a toast on click
 
-                    case R.id.toast:
-                        Toast.makeText(getApplicationContext(), "TOAST", Toast.LENGTH_SHORT).show();
-                        return true;
+                            case R.id.toast:
+                                Toast.makeText(getApplicationContext(), "TOAST", Toast.LENGTH_SHORT).show();
+                                return true;
 
-                    case R.id.launch_activity:
-                        Toast.makeText(getApplicationContext(), "LAUNCH ACTIVITY", Toast
-                                .LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(),
-                                LaunchedNewActivity
-                                        .class);
-                        startActivity(intent);
-                        return true;
+                            case R.id.launch_activity:
+                                Toast.makeText(getApplicationContext(), "LAUNCH ACTIVITY", Toast
+                                        .LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(),
+                                        LaunchedNewActivity
+                                                .class);
+                                startActivity(intent);
+                                return true;
 
-                    //TODO: Enable Navigation to Tab Fragment, savedBundleState(), onRestoreState()
-                    //http://developer.android.com/training/basics/activity-lifecycle/recreating.html
-                    case R.id.navigate_to_tab:
-                        Toast.makeText(getApplicationContext(), "ADD NAVIGATION TO TAB", Toast
-                                .LENGTH_SHORT).show();
-                        return true;
+                            //TODO: Enable Navigation to Tab Fragment, savedBundleState(), onRestoreState()
+                            //http://developer.android.com/training/basics/activity-lifecycle/recreating.html
+                            case R.id.navigate_to_tab:
+                                Toast.makeText(getApplicationContext(), "ADD NAVIGATION TO TAB", Toast
+                                        .LENGTH_SHORT).show();
+                                return true;
 
-                    default:
-                        Toast.makeText(getApplicationContext(),"Somethings Wrong",
-                        Toast.LENGTH_SHORT).show();
-                        return true;
+                            default:
+                                Toast.makeText(getApplicationContext(), "Somethings Wrong",
+                                        Toast.LENGTH_SHORT).show();
+                                return true;
 
-                }
-            }
-        });
+                        }
+                    }
+                });
 
         // Initialize Drawer Layout and ActionBarToggle - - - - - - - - - - - - - - - - - - - - - -
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -171,15 +172,21 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_toast:
+                Toast toast = Toast.makeText(this, "MENU BUTTON!", Toast.LENGTH_SHORT);
+                toast.show();
+                Log.v(LOG_TAG, "MENU CALLED: MENU BTN");
+                return true;
+            case R.id.settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                Toast toast2 = Toast.makeText(this, "SETTINGS", Toast.LENGTH_SHORT);
+                toast2.show();
+                Log.v(LOG_TAG, "MENU CALLED: SETTINGS");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }
 

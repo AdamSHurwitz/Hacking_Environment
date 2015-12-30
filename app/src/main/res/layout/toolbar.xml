@@ -8,5 +8,4 @@
     app:layout_scrollFlags="snap"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <!-- How To Interact With Toolbar-->
-    <!-- app:layout_scrollFlags="scroll|enterAlways|snap" -->
+    <!-- How To Interact With Toolbar--><!-- app:layout_scrollFlags="scroll|enterAlways|snap" -->

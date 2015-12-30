@@ -5,7 +5,7 @@
     >
     <!-- connects to NavTabs and DrawerView layout -->
 
-    <include layout="@layout/menu_bar" />
+    <include layout="@layout/toolbar" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

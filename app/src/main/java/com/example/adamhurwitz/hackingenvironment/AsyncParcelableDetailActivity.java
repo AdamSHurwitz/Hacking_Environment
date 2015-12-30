@@ -1,15 +1,18 @@
 package com.example.adamhurwitz.hackingenvironment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 public class AsyncParcelableDetailActivity extends AppCompatActivity {
-
+private final String LOG_TAG = AsyncParcelableDetailActivity.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +51,20 @@ public class AsyncParcelableDetailActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_toast:
+                Toast toast = Toast.makeText(this, "MENU BUTTON!", Toast.LENGTH_SHORT);
+                toast.show();
+                Log.v(LOG_TAG, "MENU CALLED: MENU BTN");
+                return true;
+            case R.id.settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                Toast toast2 = Toast.makeText(this, "SETTINGS", Toast.LENGTH_SHORT);
+                toast2.show();
+                Log.v(LOG_TAG, "MENU CALLED: SETTINGS");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 }

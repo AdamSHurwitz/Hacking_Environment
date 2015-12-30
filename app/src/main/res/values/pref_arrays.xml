@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="entries">
+    <item>option1</item>
+    <item>option2</item>
+</string-array>
+<string-array name="entry_values">
+    <item>option1_value</item>
+    <item>option2_value</item>
+</string-array>
+</resources>
