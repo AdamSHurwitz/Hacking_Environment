@@ -1,6 +1,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <EditTextPreference
-        android:defaultValue="EMPTY"
+        android:defaultValue="Insert text to be shown in SHAREDPREF view"
         android:key="@string/sharedpref_settings_key"
         android:summary="@string/sharedpref_settings_summary"
         android:title="@string/sharedpref_settings_title"></EditTextPreference>

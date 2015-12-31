@@ -41,14 +41,20 @@
                 android:id="@+id/writeToSharedPref"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/button_test" />
+                android:text="@string/saveto_sharedpref_btn" />
 
             <Button
                 android:id="@+id/getFromSharedPref"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/button_get_pref" />
+                android:text="@string/getpref_btn" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/getFromSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/getsetting_btn" />
 
         <TextView
             android:id="@+id/shared_pref_output"

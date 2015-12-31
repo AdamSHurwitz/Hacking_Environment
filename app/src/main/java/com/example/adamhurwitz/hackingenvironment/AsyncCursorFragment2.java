@@ -2,11 +2,13 @@ package com.example.adamhurwitz.hackingenvironment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -103,11 +105,46 @@ public class AsyncCursorFragment2 extends Fragment {
                 this.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
 
-        // Make sure that the device is actually connected to the internet before trying to get data
-        // about the Google doodles.
-        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+        // Get SharedPref Value
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String result = pref.getString("asynccursor2_settings_key",
+                "popular");
+
+        // Based on SharedPref Value Execute AsyncTask
+        switch (result) {
+            case "popular":
+                Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
+                // Make sure that the device is actually connected to the internet before trying to get data
+                // about the Google doodles.
+                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+                    AsyncCursorFetchDataTask doodleTask =
+                            new AsyncCursorTask2(getContext());
+                    doodleTask.execute("popularity.desc", "popular");
+                }
+            case "recent":
+                Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
+                // Make sure that the device is actually connected to the internet before trying to get data
+                // about the Google doodles.
+                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+                    AsyncCursorFetchDataTask doodleTask =
+                            new AsyncCursorTask2(getContext());
+                    doodleTask.execute("release_date.desc", "recent");
+                }
+            case "vintage":
+                Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
+                // Make sure that the device is actually connected to the internet before trying to get data
+                // about the Google doodles.
+                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+                    AsyncCursorFetchDataTask doodleTask =
+                            new AsyncCursorTask2(getContext());
+                    doodleTask.execute("release_date.desc", "vintage");
+                }
+
+                // Make sure that the device is actually connected to the internet before trying to get data
+                // about the Google doodles.
+        /*if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
             AsyncCursorFetchDataTask doodleTask = new AsyncCursorTask2(getContext());
-            doodleTask.execute("popularity.desc", "popular");
+            doodleTask.execute("popularity.desc", "popular"); */
 
         }
     }

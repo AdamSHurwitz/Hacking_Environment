@@ -3,6 +3,7 @@ package com.example.adamhurwitz.hackingenvironment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -47,6 +48,15 @@ public class SharedPrefTestFragment extends Fragment {
             }
         });
 
+
+        Button getFromSetting = (Button) inflatedView.findViewById(R.id.getFromSettings);
+        getFromSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFromSetting(v);
+            }
+        });
+
         return inflatedView;
     }
 
@@ -72,6 +82,15 @@ public class SharedPrefTestFragment extends Fragment {
 
         TextView sharedPrefOutput = (TextView) getActivity().findViewById(R.id.shared_pref_output);
         sharedPrefOutput.setText(preference);
+    }
+
+    // Read Shared Preferences From Settings
+    public void getFromSetting(View view) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String result = prefs.getString("sharedpref_settings_key",
+                "Insert text to be shown in SHAREDPREF view");
+        TextView sharedPrefOutput = (TextView) getActivity().findViewById(R.id.shared_pref_output);
+        sharedPrefOutput.setText(result);
     }
     //----------------------------------------------------------------------------------------------
 
