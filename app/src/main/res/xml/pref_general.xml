@@ -1,45 +1,44 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <EditTextPreference
-        android:defaultValue="0"
-        android:key="@string/settings_key"
-        android:summary="@string/settings_description"
-        android:title="@string/sharedpref_settings_title">
-    </EditTextPreference>
+        android:defaultValue="EMPTY"
+        android:key="@string/sharedpref_settings_key"
+        android:summary="@string/sharedpref_settings_summary"
+        android:title="@string/sharedpref_settings_title"></EditTextPreference>
     <ListPreference
-        android:defaultValue="0"
-        android:entries="@array/entries"
-        android:entryValues="@array/entry_values"
-        android:key="@string/settings_key"
+        android:defaultValue="popular"
+        android:entries="@array/asyncparcelable1_settings_entries"
+        android:entryValues="@array/asyncparcelable1_settings_values"
+        android:key="@string/asyncparcelable1_settings_key"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
-        android:summary="@string/settings_description"
-        android:title="@string/asyncfragment1_settings_title"></ListPreference>
+        android:summary="@string/asyncparcelable1_settings_summary"
+        android:title="@string/asyncparcelable1_settings_title"></ListPreference>
     <ListPreference
-        android:defaultValue="0"
-        android:entries="@array/entries"
-        android:entryValues="@array/entry_values"
-        android:key="@string/settings_key"
+        android:defaultValue="popular"
+        android:entries="@array/asyncparcelable2_settings_entries"
+        android:entryValues="@array/asyncparcelable2_settings_values"
+        android:key="@string/asyncparcelable2_settings_key"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
-        android:summary="@string/settings_description"
-        android:title="@string/asyncfragment2_settings_title"></ListPreference>
+        android:summary="@string/asyncparcelable2_settings_summary"
+        android:title="@string/asyncparcelable2_settings_title"></ListPreference>
     <ListPreference
-        android:defaultValue="0"
-        android:entries="@array/entries"
-        android:entryValues="@array/entry_values"
-        android:key="@string/settings_key"
+        android:defaultValue="popular"
+        android:entries="@array/asynccursor1_settings_entries"
+        android:entryValues="@array/asynccursor1_settings_values"
+        android:key="@string/asynccursor1_settings_key"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
-        android:summary="@string/settings_description"
+        android:summary="@string/asynccursor1_settings_summary"
         android:title="@string/asynccursor1_settings_title"></ListPreference>
     <ListPreference
-        android:defaultValue="0"
-        android:entries="@array/entries"
-        android:entryValues="@array/entry_values"
-        android:key="@string/settings_key"
+        android:defaultValue="popular"
+        android:entries="@array/asynccursor2_settings_entries"
+        android:entryValues="@array/asynccursor2_settings_values"
+        android:key="@string/asynccursor2_settings_key"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
-        android:summary="@string/settings_description"
+        android:summary="@string/asynccursor2_settings_summary"
         android:title="@string/asynccursor2_settings_title"></ListPreference>
 
 

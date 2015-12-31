@@ -14,13 +14,31 @@
 
     <!-- Settings -->
     <string name="settings_title">Preferences</string>
-    <string name="settings_key">sort_by</string>
-    <string name="settings_description">Choose how to sort the GridView</string>
-    <string name="asyncfragment1_settings_title">Async Fragment (1/2)</string>
-    <string name="asyncfragment2_settings_title">Async Fragment (2/2)</string>
-    <string name="asynccursor1_settings_title">Async + Cursor Adapter (1/2)</string>
-    <string name="asynccursor2_settings_title">Async + Cursor Adapter (2/2)</string>
-    <string name="sharedpref_settings_title">SharedPref</string>
+
+    <string name="sharedpref_settings_key">sharedpref_settings_key</string>
+    <string name="sharedpref_settings_summary">choose what displays in sharedpref view</string>
+    <string name="sharedpref_settings_title">SHAREDPREF</string>
+
+    <string name="asyncparcelable1_settings_key">asyncparcelable1_settings_key</string>
+    <string name="asyncparcelable1_settings_summary">choose how to sort the async w/ parcelable
+        gridview (1/2)</string>
+    <string name="asyncparcelable1_settings_title">ASYNC W/ PARCELABLE (1/2)</string>
+
+    <string name="asyncparcelable2_settings_key">asyncparcelable2_settings_key</string>
+    <string name="asyncparcelable2_settings_summary">choose how to sort the async w/ parcelable
+        gridview (2/2)</string>
+    <string name="asyncparcelable2_settings_title">ASYNC W/ PARCELABLE (2/2)</string>
+
+    <string name="asynccursor1_settings_key">asynccursor1_settings_key</string>
+    <string name="asynccursor1_settings_summary">choose how to sort the async w/ cursor
+        gridview (1/2)</string>
+    <string name="asynccursor1_settings_title">ASYNC W/ CURSORADAPTER (1/2)</string>
+
+    <string name="asynccursor2_settings_key">asynccursor2_settings_key</string>
+       <string name="asynccursor2_settings_summary">choose how to sort the async w/ cursor
+        gridview (2/2)</string>
+    <string name="asynccursor2_settings_title">ASYNC W/ CURSORADAPTER (2/2)</string>
+
 
     <!-- New Activity Test -->
     <string name="launched_activity">This Activity Has Been Launched. Woohoo!</string>

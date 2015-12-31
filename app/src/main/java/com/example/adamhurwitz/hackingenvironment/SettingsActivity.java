@@ -22,14 +22,26 @@ public class SettingsActivity extends PreferenceActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Create LinearLayout for list and inflate settings_toolbar
+        LinearLayout root = (LinearLayout) findViewById(android.R.id.list).getParent().getParent()
+                .getParent();
+        Toolbar toolbar = (Toolbar) LayoutInflater.from(this).inflate(R.layout.settings_toolbar,
+                root, false);
+
         // Add 'general' preferences, defined in the XML file
         addPreferencesFromResource(R.xml.pref_general);
         // For all preferences, attach an OnPreferenceChangeListener so the UI summary can be
         // updated when the preference changes.
-        bindPreferenceSummaryToValue(findPreference(getString(R.string.settings_key)));;
-
-        LinearLayout root = (LinearLayout) findViewById(android.R.id.list).getParent().getParent().getParent();
-        Toolbar toolbar = (Toolbar) LayoutInflater.from(this).inflate(R.layout.settings_toolbar, root, false);
+        bindPreferenceSummaryToValue(findPreference(getString(
+                R.string.sharedpref_settings_key)));
+        bindPreferenceSummaryToValue(findPreference(getString(
+                R.string.asyncparcelable1_settings_key)));
+        bindPreferenceSummaryToValue(findPreference(getString(
+                R.string.asyncparcelable2_settings_key)));
+        bindPreferenceSummaryToValue(findPreference(getString(
+                R.string.asynccursor1_settings_key)));
+        bindPreferenceSummaryToValue(findPreference(getString(
+                R.string.asynccursor2_settings_key)));
 
         // Status Bar: Add Color
         Window window = getWindow();

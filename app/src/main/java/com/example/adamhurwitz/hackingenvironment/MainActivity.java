@@ -149,11 +149,12 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new SharedPrefTestFragment(), "SharedPref");
         adapter.addFragment(new SQLiteTestFragment(), "SQLite");
         adapter.addFragment(new AddedFragmentWithinTabFragment(), "Add Fragment");
-        adapter.addFragment(new StaticArrayAdapterFragment(), "Display Static Data");
-        adapter.addFragment(new AsyncParcelableFragment1(), "Async Fragment (1/2)");
-        adapter.addFragment(new AsyncParcelableFragment2(), "Async Fragment (2/2)");
-        adapter.addFragment(new AsyncCursorFragment1(), "Async + Cursor Adapter (1/2)");
-        adapter.addFragment(new AsyncCursorFragment2(), "Async + Cursor Adapter (2/2)");
+        adapter.addFragment(new StaticArrayAdapterFragment(), "Static Array Adapter");
+        adapter.addFragment(new AsyncParcelableFragment1(), "Async w/ Parcelable (1/2)");
+        adapter.addFragment(new AsyncParcelableFragment2(), "Async w/ Parcelable (2/2)");
+        adapter.addFragment(new AsyncCursorFragment1(), "Async w/ CursorAdapter (1/2)");
+        adapter.addFragment(new AsyncCursorFragment2(), "Async w/ CursorAdapter (2/2)");
+        adapter.addFragment(new NewTestFragment(), "Favorites w/ Recycler + CursorAdapter");
         adapter.addFragment(new NewTestFragment(), "New Test Fragment");
         viewPager.setAdapter(adapter);
     }

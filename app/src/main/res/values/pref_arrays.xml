@@ -1,11 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string-array name="entries">
-    <item>option1</item>
-    <item>option2</item>
-</string-array>
-<string-array name="entry_values">
-    <item>option1_value</item>
-    <item>option2_value</item>
-</string-array>
+    <string-array name="asyncparcelable1_settings_entries">
+        <item>Popular</item>
+        <item>Recent</item>
+        <item>Vintage</item>
+    </string-array>
+    <string-array name="asyncparcelable1_settings_values">
+        <item>popular</item>
+        <item>recent</item>
+        <item>vintage</item>
+    </string-array>
+
+    <string-array name="asyncparcelable2_settings_entries">
+        <item>Popular</item>
+        <item>Recent</item>
+        <item>Vintage</item>
+    </string-array>
+    <string-array name="asyncparcelable2_settings_values">
+        <item>popular</item>
+        <item>recent</item>
+        <item>vintage</item>
+    </string-array>
+
+    <string-array name="asynccursor1_settings_entries">
+        <item>Popular</item>
+        <item>Recent</item>
+        <item>Vintage</item>
+    </string-array>
+    <string-array name="asynccursor1_settings_values">
+        <item>popular</item>
+        <item>recent</item>
+        <item>vintage</item>
+    </string-array>
+
+    <string-array name="asynccursor2_settings_entries">
+        <item>Popular</item>
+        <item>Recent</item>
+        <item>Vintage</item>
+    </string-array>
+    <string-array name="asynccursor2_settings_values">
+        <item>popular</item>
+        <item>recent</item>
+        <item>vintage</item>
+    </string-array>
+
 </resources>
