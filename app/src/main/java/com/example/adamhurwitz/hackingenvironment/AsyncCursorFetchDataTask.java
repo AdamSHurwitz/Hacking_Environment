@@ -64,27 +64,40 @@ public abstract class AsyncCursorFetchDataTask extends AsyncTask<String, Void, V
         // This variable will contain the raw JSON response as a string.
         String jsonResponse= null;
 
+        //TODO: Use As Example For Switch Case Based on Shared Preferences
         try {
-            if (params[1] != "popular") {
+            // Construct the URL to fetch data from and make the connection.
+            Uri builtUri = Uri.parse(FAS_API_BASE_URL).buildUpon()
+                    .appendQueryParameter(SORT_PARAMETER, params[0])
+                    .build();
+            URL url = new URL(builtUri.toString());
+            Log.v("REC/VINT_URL_HERE: ", builtUri.toString());
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            /*if (params[1] != "popular") {
                 // Construct the URL to fetch data from and make the connection.
                 Uri builtUri = Uri.parse(FAS_API_BASE_URL).buildUpon()
                         .appendQueryParameter(SORT_PARAMETER, params[0])
                         .appendQueryParameter(params[1], "true")
                         .build();
                 URL url = new URL(builtUri.toString());
+                Log.v("REC/VINT_URL_HERE: ", builtUri.toString());
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
             } else {    // Construct the URL to fetch data from and make the connection.
                 Uri builtUri = Uri.parse(FAS_API_BASE_URL).buildUpon()
                         .appendQueryParameter(SORT_PARAMETER, params[0])
+                        .appendQueryParameter(params[1], "true")
                         .build();
                 URL url = new URL(builtUri.toString());
-                Log.v("URL_HERE: ", builtUri.toString());
+                Log.v("POPULAR_URL_HERE: ", builtUri.toString());
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
-            }
+            }*/
 
             // See if the input stream is not null and a connection could be made. If it is null, do
             // not process any further.

@@ -9,7 +9,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -177,13 +176,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_toast:
                 Toast toast = Toast.makeText(this, "MENU BUTTON!", Toast.LENGTH_SHORT);
                 toast.show();
-                Log.v(LOG_TAG, "MENU CALLED: MENU BTN");
                 return true;
             case R.id.settings:
                 startActivity(new Intent(this, SettingsActivity.class));
-                Toast toast2 = Toast.makeText(this, "SETTINGS", Toast.LENGTH_SHORT);
-                toast2.show();
-                Log.v(LOG_TAG, "MENU CALLED: SETTINGS");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

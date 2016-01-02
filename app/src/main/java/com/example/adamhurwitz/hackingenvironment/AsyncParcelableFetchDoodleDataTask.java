@@ -37,8 +37,9 @@ public class AsyncParcelableFetchDoodleDataTask extends AsyncTask<String, Void, 
 
     /**
      * Constructor for the AsyncParcelableFetchDoodleDataTask object.
+     *
      * @param gridViewAdapter An adapter to recycle items correctly in the grid view.
-     * @param doodleDataList A list of objects with information about Google doodles.
+     * @param doodleDataList  A list of objects with information about Google doodles.
      */
     public AsyncParcelableFetchDoodleDataTask(AsyncParcelableArrayAdapter gridViewAdapter,
                                               ArrayList<DoodleData> doodleDataList) {
@@ -48,7 +49,6 @@ public class AsyncParcelableFetchDoodleDataTask extends AsyncTask<String, Void, 
 
     @Override
     protected ArrayList<DoodleData> doInBackground(String... params) {
-
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 
@@ -56,14 +56,48 @@ public class AsyncParcelableFetchDoodleDataTask extends AsyncTask<String, Void, 
         String jsonResponse = null;
 
         try {
-            // Construct the URL to fetch data from and make the connection.
+            //TODO: Add Switch Case Based on Shared Preferences
+            // Construct the URL to fetch data from and make the connection for "recent" and
+            // "popular" views
+            if (params[1] == "popular") {
+                Uri builtUri = Uri.parse(FAS_API_BASE_URL).buildUpon()
+                        //.appendQueryParameter(SORT_PARAMETER, params[0])
+                        .appendQueryParameter(params[1], "true")
+                        .build();
+                URL url1 = new URL(builtUri.toString());
+                Log.v(LOG_TAG, builtUri.toString());
+                urlConnection = (HttpURLConnection) url1.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.connect();
+            } else if (params[1] == "recent") {
+                Uri builtUri = Uri.parse(FAS_API_BASE_URL).buildUpon()
+                        .appendQueryParameter(SORT_PARAMETER, params[0])
+                        .appendQueryParameter("recent", "true")
+                        .build();
+                URL url2 = new URL(builtUri.toString());
+                Log.v(LOG_TAG, builtUri.toString());
+                urlConnection = (HttpURLConnection) url2.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.connect();
+            } else if (params[1] == "vintage") {
+                Uri builtUri = Uri.parse(FAS_API_BASE_URL).buildUpon()
+                        .appendQueryParameter(SORT_PARAMETER, params[0])
+                        .appendQueryParameter("vintage", "true")
+                        .build();
+                URL url2 = new URL(builtUri.toString());
+                Log.v(LOG_TAG, builtUri.toString());
+                urlConnection = (HttpURLConnection) url2.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.connect();
+            }
+
             Uri builtUri = Uri.parse(FAS_API_BASE_URL).buildUpon()
-                    .appendQueryParameter(SORT_PARAMETER, params[0])
-                    //.appendQueryParameter(IS_RECENT_BOOLEAN, params[1])
+                    //.appendQueryParameter(SORT_PARAMETER, params[0])
                     .appendQueryParameter(params[1], "true")
                     .build();
-            URL url = new URL(builtUri.toString());
-            urlConnection = (HttpURLConnection) url.openConnection();
+            URL url1 = new URL(builtUri.toString());
+            Log.v(LOG_TAG, builtUri.toString());
+            urlConnection = (HttpURLConnection) url1.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
@@ -89,12 +123,18 @@ public class AsyncParcelableFetchDoodleDataTask extends AsyncTask<String, Void, 
 
             jsonResponse = buffer.toString();
 
-        } catch (IOException e) {
+        } catch (
+                IOException e
+                )
+
+        {
             // If there was no valid Google doodle data returned, there is no point in attempting to
             // parse it.
             Log.e(LOG_TAG, "Error, IOException.", e);
             return null;
-        } finally {
+        } finally
+
+        {
             // Make sure to close the connection and the reader no matter what.
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -109,11 +149,17 @@ public class AsyncParcelableFetchDoodleDataTask extends AsyncTask<String, Void, 
         }
 
         // If valid data was returned, return the parsed data.
-        try {
+        try
+
+        {
             Log.i(LOG_TAG, "The Google doodle data that was returned is: " +
                     jsonResponse);
             return parseJsonResponse(jsonResponse);
-        } catch (JSONException e) {
+        } catch (
+                JSONException e
+                )
+
+        {
             Log.e(LOG_TAG, e.getMessage(), e);
             e.printStackTrace();
         }
@@ -134,8 +180,9 @@ public class AsyncParcelableFetchDoodleDataTask extends AsyncTask<String, Void, 
 
     /**
      * Parses the JSON response for information about the Google doodles.
+     *
      * @param jsonResponse A JSON string which needs to be parsed for data about the
-     *                               Google doodles.
+     *                     Google doodles.
      */
     private ArrayList<DoodleData> parseJsonResponse(String jsonResponse)
             throws JSONException {

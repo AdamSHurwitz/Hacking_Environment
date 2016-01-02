@@ -2,11 +2,9 @@ package com.example.adamhurwitz.hackingenvironment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -82,21 +80,6 @@ public class AsyncParcelableFragment1 extends Fragment {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()) {
-            case R.id.action_toast:
-                Toast toast = Toast.makeText(getActivity(), "MENU BUTTON!", Toast.LENGTH_SHORT);
-                toast.show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         doodleDataList.clear();
@@ -109,40 +92,27 @@ public class AsyncParcelableFragment1 extends Fragment {
                 this.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
 
-        // Get SharedPref Value
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String result = pref.getString("asyncparcelable1_settings_key",
-                "popular");
+        // Make sure that the device is actually connected to the internet before trying to get data
+        // about the Google doodles.
+        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            AsyncParcelableFetchDoodleDataTask doodleTask =
+                    new AsyncParcelableFetchDoodleDataTask(gridViewAdapter, doodleDataList);
+            doodleTask.execute("release_date.desc", "recent");
+        }
+    }
 
-        // Based on SharedPref Value Execute AsyncTask
-        switch (result) {
-            case "popular":
-                Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
-                // Make sure that the device is actually connected to the internet before trying to get data
-                // about the Google doodles.
-                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-                    AsyncParcelableFetchDoodleDataTask doodleTask =
-                            new AsyncParcelableFetchDoodleDataTask(gridViewAdapter, doodleDataList);
-                    doodleTask.execute("popularity.desc", "popular");
-                }
-            case "recent":
-                Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
-                // Make sure that the device is actually connected to the internet before trying to get data
-                // about the Google doodles.
-                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-                    AsyncParcelableFetchDoodleDataTask doodleTask =
-                            new AsyncParcelableFetchDoodleDataTask(gridViewAdapter, doodleDataList);
-                    doodleTask.execute("release_date.desc", "recent");
-                }
-            case "vintage":
-                Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
-                // Make sure that the device is actually connected to the internet before trying to get data
-                // about the Google doodles.
-                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-                    AsyncParcelableFetchDoodleDataTask doodleTask =
-                            new AsyncParcelableFetchDoodleDataTask(gridViewAdapter, doodleDataList);
-                    doodleTask.execute("release_date.desc", "vintage");
-                }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) {
+            case R.id.action_toast:
+                Toast toast = Toast.makeText(getActivity(), "MENU BUTTON!", Toast.LENGTH_SHORT);
+                toast.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

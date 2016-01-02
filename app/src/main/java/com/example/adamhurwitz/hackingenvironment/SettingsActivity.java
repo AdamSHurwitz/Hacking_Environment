@@ -35,10 +35,6 @@ public class SettingsActivity extends PreferenceActivity
         bindPreferenceSummaryToValue(findPreference(getString(
                 R.string.sharedpref_settings_key)));
         bindPreferenceSummaryToValue(findPreference(getString(
-                R.string.asyncparcelable1_settings_key)));
-        bindPreferenceSummaryToValue(findPreference(getString(
-                R.string.asyncparcelable2_settings_key)));
-        bindPreferenceSummaryToValue(findPreference(getString(
                 R.string.asynccursor1_settings_key)));
         bindPreferenceSummaryToValue(findPreference(getString(
                 R.string.asynccursor2_settings_key)));

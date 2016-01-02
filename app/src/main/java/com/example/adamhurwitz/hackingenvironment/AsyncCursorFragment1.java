@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -26,7 +27,8 @@ import com.example.adamhurwitz.hackingenvironment.data.CursorDbHelper;
 public class AsyncCursorFragment1 extends Fragment {
 
     private AsyncCursorAdapter asyncCursorAdapter;
-    private final String LOG_TAG = AsyncCursorFragment1.class.getSimpleName();
+    public String showFilter = "";
+
     /**
      * Empty constructor for the AsyncParcelableFragment1() class.
      */
@@ -34,6 +36,7 @@ public class AsyncCursorFragment1 extends Fragment {
     }
 
     @Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.grid_recentview_layout, container, false);
@@ -88,6 +91,8 @@ public class AsyncCursorFragment1 extends Fragment {
             }
         });
 
+        Toast.makeText(getContext(),"Filtering by " + showFilter +"...",Toast.LENGTH_SHORT).show();
+
         return view;
     }
 
@@ -105,57 +110,43 @@ public class AsyncCursorFragment1 extends Fragment {
 
         // Get SharedPref Value
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String result = pref.getString("asynccursor1_settings_key",
+        String result = pref.getString("asynccursor2_settings_key",
                 "popular");
-
-        // Based on SharedPref Value Execute AsyncTask
-        switch (result) {
-            case "popular":
-                Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
-                // Make sure that the device is actually connected to the internet before trying to get data
-                // about the Google doodles.
-                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-                    AsyncCursorFetchDataTask doodleTask =
-                            new AsyncCursorTask1(getContext());
-                    doodleTask.execute("popularity.desc", "popular");
-                }
-            case "recent":
-                Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
-                // Make sure that the device is actually connected to the internet before trying to get data
-                // about the Google doodles.
-                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-                    AsyncCursorFetchDataTask doodleTask =
-                            new AsyncCursorTask1(getContext());
-                    doodleTask.execute("release_date.desc", "recent");
-                }
-            case "vintage":
-                Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
-                // Make sure that the device is actually connected to the internet before trying to get data
-                // about the Google doodles.
-                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-                    AsyncCursorFetchDataTask doodleTask =
-                            new AsyncCursorTask1(getContext());
-                    doodleTask.execute("release_date.desc", "vintage");
-                }
-        }
 
         // Make sure that the device is actually connected to the internet before trying to get data
         // about the Google doodles.
-        /*if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-            AsyncCursorFetchDataTask doodleTask = new AsyncCursorTask1(
-                    getContext());
-            doodleTask.execute("release_date.desc", "vintage");
-        }*/
+        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            AsyncCursorFetchDataTask doodleTask = new AsyncCursorTask2(getContext());
+            doodleTask.execute("item_id.desc");
+
+        }
     }
 
-    private class AsyncCursorTask1 extends AsyncCursorFetchDataTask {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) {
+            case R.id.action_toast:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void showFilter(String filterBy){
+        showFilter = filterBy;
+    }
+
+    private class AsyncCursorTask2 extends AsyncCursorFetchDataTask {
 
         /**
          * Constructor for the AsyncParcelableFetchDoodleDataTask object.
          *
-         * @param context            Context of Activity
+         * @param context Context of Activity
          */
-        public AsyncCursorTask1(Context context) {
+        public AsyncCursorTask2(Context context) {
             super(context);
         }
 
@@ -165,26 +156,60 @@ public class AsyncCursorFragment1 extends Fragment {
             CursorDbHelper mDbHelper = new CursorDbHelper(getContext());
             // Gets the data repository in read mode
             SQLiteDatabase db = mDbHelper.getReadableDatabase();
+            // The columns for the WHERE clause
+            String whereColumns = "";
+            // The values for the WHERE clause
+            String[] whereValues = {"0","0"};
             // How you want the results sorted in the resulting Cursor
-            String sortOrder =
-                    CursorContract.ProductData._ID + " DESC";
-            String[] wherevalues = {"1"};
+            String sortOrder = "";
 
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
+            String filterBy = pref.getString("asynccursor1_settings_key", "popular");
+            whereColumns = CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND "
+                    + CursorContract.ProductData.COLUMN_NAME_RECENT + " = ?";
 
-            //TODO: Add SharedPreferences To Change All Queries (x4)
-            // If you are querying entire table, can leave everything as Null
+            showFilter(filterBy);
+
+            switch (filterBy){
+                case "popular":
+                    whereValues[0] = "0";
+                    whereValues[1] = "0";
+                    sortOrder = CursorContract.ProductData.COLUMN_NAME_POPULARITY + " DESC";
+                    break;
+                case "recent":
+                    whereValues[0] = "0";
+                    whereValues[1] = "1";
+                    sortOrder = CursorContract.ProductData.COLUMN_NAME_RELEASEDATE + " DESC";
+                    /*Toast.makeText(getContext(),"Filtering by " + filterBy+"...", Toast.LENGTH_SHORT)
+                            .show();*/
+                    break;
+                case "vintage":
+                    whereValues[0] = "1";
+                    whereValues[1] = "0";
+                    sortOrder = CursorContract.ProductData.COLUMN_NAME_RELEASEDATE + " DESC";
+                    Toast.makeText(getContext(),"Filtering by " + filterBy+"...", Toast.LENGTH_SHORT)
+                            .show();
+                    break;
+                default:
+                    whereValues[0] = "0";
+                    whereValues[1] = "0";
+                    sortOrder = CursorContract.ProductData.COLUMN_NAME_POPULARITY + " DESC";
+                    /*Toast.makeText(getContext(),"Filtering by " + filterBy +"...", Toast.LENGTH_SHORT)
+                            .show();*/
+                    break;
+            }
             Cursor cursor = db.query(
                     CursorContract.ProductData.TABLE_NAME,  // The table to query
                     null,                               // The columns to return
-                    CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ?",  // The columns for the WHERE clause
-                    wherevalues,                            // The values for the WHERE clause
+                    whereColumns,  // The columns for the WHERE clause
+                    whereValues,                            // The values for the WHERE clause
                     null,                                     // don't group the rows
                     null,                                     // don't filter by row groups
                     sortOrder                                 // The sort order
             );
-
             asyncCursorAdapter.changeCursor(cursor);
             asyncCursorAdapter.notifyDataSetChanged();
         }
     }
+
 }
