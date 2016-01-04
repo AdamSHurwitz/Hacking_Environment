@@ -2,6 +2,8 @@ package com.example.adamhurwitz.hackingenvironment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,17 +17,39 @@ public class StaticRecyclerViewFragment extends Fragment {
 
     private final String LOG_TAG = StaticRecyclerViewFragment.class.getSimpleName();
 
+    public final Integer[] imageData = {R.drawable.popular1, R.drawable.popular2, R.drawable.popular3,
+            R.drawable.popular4, R.drawable.popular5, R.drawable.popular6, R.drawable.popular7,
+            R.drawable.popular7, R.drawable.popular8, R.drawable.popular9, R.drawable.popular10,
+            R.drawable.popular11, R.drawable.popular12, R.drawable.popular13, R.drawable.popular14,
+            R.drawable.popular15, R.drawable.popular16, R.drawable.popular17, R.drawable.popular18};
+    public final String[] stringData = {"popular1", "popular2", "popular3",
+            "popular4", "popular5", "popular6", "popular7",
+            "popular7", "popular8", "popular9", "popular10",
+            "popular11", "popular12", "popular13", "popular14",
+            "popular15", "popular16", "popular17", "popular18"};
+
     public StaticRecyclerViewFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View inflatedView = inflater.inflate(R.layout.staticrecyclerview_layout, container, false);
+        RecyclerView rv = (RecyclerView) inflater.inflate(
+                R.layout.staticrecyclerview_layout, container, false);
+        setupRecyclerView(rv);
+        return rv;
+    }
 
-        setHasOptionsMenu(true);
-
-        return inflatedView;
+    private void setupRecyclerView(RecyclerView recyclerView) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(new RecyclerViewAdapter(
+                // Current context
+                getActivity(),
+                // ID of the view item layout, not needed since we get it in onCreateViewHolder
+                //R.layout.staticrecycler_item_layout,
+                // Data passing into ArrayAdapter
+                imageData,
+                stringData));
     }
 
     @Override
@@ -42,5 +66,6 @@ public class StaticRecyclerViewFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
 }

@@ -43,7 +43,7 @@ public class StaticArrayAdapterFragment extends Fragment {
                 getActivity(),
                 // ID of view item layout, not needed since we get it in getView()
                 R.layout.static_item_layout,
-                // ArrayAdapter
+                // Data passing into ArrayAdapter
                 dummyData
                 );
 

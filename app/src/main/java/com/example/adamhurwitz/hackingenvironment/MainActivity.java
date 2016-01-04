@@ -144,12 +144,12 @@ public class MainActivity extends AppCompatActivity {
     // NavTabs: Add Fragments to the TabsAdapter, TabsAdapter recycles views - - - - - - - - - - - -
     private void setupViewPager(ViewPager viewPager) {
         TabsAdapter adapter = new TabsAdapter(getSupportFragmentManager());
-        adapter.addFragment(new StaticRecyclerViewFragment(), "Static RecyclerView");
         adapter.addFragment(new LaunchNewActivityFragment(), "NewActivity");
         adapter.addFragment(new SharedPrefTestFragment(), "SharedPref");
         adapter.addFragment(new SQLiteTestFragment(), "SQLite");
         adapter.addFragment(new AddedFragmentWithinTabFragment(), "Add Fragment");
         adapter.addFragment(new StaticArrayAdapterFragment(), "Static Array Adapter");
+        adapter.addFragment(new StaticRecyclerViewFragment(), "Static RecyclerView");
         adapter.addFragment(new AsyncParcelableFragment1(), "Async w/ Parcelable (1/2)");
         adapter.addFragment(new AsyncParcelableFragment2(), "Async w/ Parcelable (2/2)");
         adapter.addFragment(new AsyncCursorFragment1(), "Async w/ CursorAdapter (1/2)");
