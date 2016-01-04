@@ -22,18 +22,33 @@
     android:paddingRight="16dp"
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
 
+    // center item view horizontally and show views vertically
+<!--android:gravity="center_horizontal"
+    android:orientation="vertical">-->
+
+    // images appear in circle shape
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/recycler_item_image"
+        android:layout_width="@dimen/list_item_image_smallsize"
+        android:layout_height="@dimen/list_item_image_smallsize"
+        android:layout_marginRight="16dp"
+        android:gravity="center"/>
+
+    // images appear normally
+    <!--<ImageView
         android:id="@+id/recycler_item_image"
         android:layout_width="@dimen/list_item_image_size"
         android:layout_height="@dimen/list_item_image_size"
-        android:layout_marginRight="16dp"/>
+        android:gravity="center"/>-->
 
     <TextView
         android:id="@+id/recycler_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceListItem"/>
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:gravity="left"/>
 
 </LinearLayout>

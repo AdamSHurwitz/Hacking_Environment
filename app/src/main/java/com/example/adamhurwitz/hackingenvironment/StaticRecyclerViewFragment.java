@@ -41,7 +41,13 @@ public class StaticRecyclerViewFragment extends Fragment {
     }
 
     private void setupRecyclerView(RecyclerView recyclerView) {
+
+        // set LinearLayoutManager
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // set GridLayoutManager
+        // recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+
         recyclerView.setAdapter(new RecyclerViewAdapter(
                 // Current context
                 getActivity(),
