@@ -52,7 +52,7 @@ public class StaticRecyclerViewFragment extends Fragment {
         // set GridLayoutManager
         // recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
 
-        recyclerView.setAdapter(new RecyclerViewAdapter(
+        recyclerView.setAdapter(new StaticRecyclerViewAdapter(
                 // Current context
                 getActivity(),
                 // ID of the view item layout, not needed since we get it in onCreateViewHolder

@@ -22,21 +22,25 @@
     <string name="sharedpref_settings_summary">choose what displays in sharedpref view</string>
     <string name="sharedpref_settings_title">SHAREDPREF</string>
 
+    <!--asyncparcelable1-->
     <string name="asyncparcelable1_settings_key">asyncparcelable1_settings_key</string>
     <string name="asyncparcelable1_settings_summary">choose how to sort the async w/ parcelable
         gridview (1/2)</string>
     <string name="asyncparcelable1_settings_title">ASYNC W/ PARCELABLE (1/2)</string>
 
+    <!--asyncparcelable2-->
     <string name="asyncparcelable2_settings_key">asyncparcelable2_settings_key</string>
     <string name="asyncparcelable2_settings_summary">choose how to sort the async w/ parcelable
         gridview (2/2)</string>
     <string name="asyncparcelable2_settings_title">ASYNC W/ PARCELABLE (2/2)</string>
 
+    <!--asynccursor1-->
     <string name="asynccursor1_settings_key">asynccursor1_settings_key</string>
     <string name="asynccursor1_settings_summary">choose how to sort the async w/ cursor
         gridview (1/2)</string>
     <string name="asynccursor1_settings_title">ASYNC W/ CURSORADAPTER (1/2)</string>
 
+    <!--asynccursor2-->
     <string name="asynccursor2_settings_key">asynccursor2_settings_key</string>
        <string name="asynccursor2_settings_summary">choose how to sort the async w/ cursor
         gridview (2/2)</string>
@@ -80,6 +84,18 @@
     <!-- AsyncTask-->
     <string name="detail_view"> Detail View</string>
     <string name="about">About This Doodle</string>
+
+    <!-- Static Recycler View -->
+    <string name="detail_text">Detail text will be pulled from object and displayed here! It is not
+        the critic who counts; not the man who points out how the strong man stumbles, or where the
+        doer of deeds could have done them better. The credit belongs to the man who is actually in
+        the arena, whose face is marred by dust and sweat and blood; who strives valiantly; who
+        errs, who comes short again and again, because there is no effort without error and
+        shortcoming; but who does actually strive to do the deeds; who knows great enthusiasms, the
+        great devotions; who spends himself in a worthy cause; who at the best knows in the end the
+        triumph of high achievement, and who at the worst, if he fails, at least fails while daring
+        greatly, so that his place shall never be with those cold and timid souls who neither know
+        victory nor defeat.</string>
 
 
 </resources>

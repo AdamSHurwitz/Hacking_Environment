@@ -28,7 +28,6 @@ public class AsyncCursorDetailFragment extends Fragment {
         //Activity has intent, must get intent from Activity
         Intent intent = getActivity().getIntent();
         if (intent != null) {
-
             String[] doodleDataElements = intent.getStringArrayExtra("Cursor Doodle Attributes");
             // doodleDataElements[0] = item_id
             // doodleDataElements[1] = title
