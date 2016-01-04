@@ -17,6 +17,7 @@ public class StaticRecyclerViewFragment extends Fragment {
 
     private final String LOG_TAG = StaticRecyclerViewFragment.class.getSimpleName();
 
+    // build Arrays/ArrayLists for static data
     public final Integer[] imageData = {R.drawable.popular1, R.drawable.popular2, R.drawable.popular3,
             R.drawable.popular4, R.drawable.popular5, R.drawable.popular6, R.drawable.popular7,
             R.drawable.popular7, R.drawable.popular8, R.drawable.popular9, R.drawable.popular10,
@@ -28,9 +29,11 @@ public class StaticRecyclerViewFragment extends Fragment {
             "popular11", "popular12", "popular13", "popular14",
             "popular15", "popular16", "popular17", "popular18"};
 
+    // create object for class
     public StaticRecyclerViewFragment() {
     }
 
+    // build RecyclerView and inflate parent layout view
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class StaticRecyclerViewFragment extends Fragment {
         return rv;
     }
 
+    // helper method to create LayoutManager and Adapter
     private void setupRecyclerView(RecyclerView recyclerView) {
 
         // set LinearLayoutManager
@@ -58,6 +62,7 @@ public class StaticRecyclerViewFragment extends Fragment {
                 stringData));
     }
 
+    // used for selection of items in menu bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

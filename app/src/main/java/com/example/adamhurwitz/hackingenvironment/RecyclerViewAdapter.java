@@ -15,12 +15,29 @@ import com.bumptech.glide.Glide;
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
+    // build ViewHolder subclass to create objects for data being passed into the Adapter
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        //public final ImageView imageView;
+        public final ImageView imageItem;
+        public final TextView textItem;
+
+        public ViewHolder(View view) {
+            super(view);
+            imageItem = (ImageView) view.findViewById(R.id.recycler_item_image);
+            textItem = (TextView) view.findViewById(R.id.recycler_item_text);
+        }
+    }
+
+    // Initiate the following
     Context context;
     Integer[] imageData;
     String[] stringData;
 
     /**
-     * @param context  is the Context
+     * Create Object for Adapter
+     * @param context    is the Context
+     * @param imageData  is Array of images
+     * @param stringData is Array of image titles
      */
     // creates constructor to create StaticArrayAdapter object
     public RecyclerViewAdapter(Context context, Integer[] imageData, String[] stringData) {
@@ -49,17 +66,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public int getItemCount() {
         return imageData.length;
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        //public final ImageView imageView;
-        public final ImageView imageItem;
-        public final TextView textItem;
-
-        public ViewHolder(View view) {
-            super(view);
-            imageItem = (ImageView) view.findViewById(R.id.recycler_item_image);
-            textItem = (TextView) view.findViewById(R.id.recycler_item_text);
-        }
     }
 }
