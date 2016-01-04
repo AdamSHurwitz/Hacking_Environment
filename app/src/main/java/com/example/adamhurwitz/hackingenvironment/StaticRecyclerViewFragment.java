@@ -38,7 +38,7 @@ public class StaticRecyclerViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         RecyclerView rv = (RecyclerView) inflater.inflate(
-                R.layout.staticrecyclerview_layout, container, false);
+                R.layout.staticrecycler_layout, container, false);
         setupRecyclerView(rv);
         return rv;
     }
