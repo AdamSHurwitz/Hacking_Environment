@@ -52,6 +52,14 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
+                <ImageButton
+                    android:id="@+id/favorite_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/favorite_btn" />
+
                 <ImageView
                     android:id="@+id/detail_doodle_image"
                     android:layout_width="wrap_content"
