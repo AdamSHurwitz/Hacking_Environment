@@ -214,11 +214,15 @@ public abstract class AsyncCursorFetchDataTask extends AsyncTask<String, Void, V
         values.put(CursorContract.ProductData.COLUMN_NAME_POPULARITY, popularity);
         values.put(CursorContract.ProductData.COLUMN_NAME_RECENT, recent);
         values.put(CursorContract.ProductData.COLUMN_NAME_VINTAGE, vintage);
+        values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, "1");
+
+        Log.v(LOG_TAG, "Content Values " + values.toString());
 
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
                 CursorContract.ProductData._ID + " DESC";
-        String whereValue[] = {item_id};
+        String[] whereValueId = {item_id};
+        String[] whereValueTitle = {title};
 
         // Insert the new row, returning the primary key value of the new row
         long thisRowID;
@@ -228,8 +232,8 @@ public abstract class AsyncCursorFetchDataTask extends AsyncTask<String, Void, V
         Cursor cursor = db.query(
                 CursorContract.ProductData.TABLE_NAME,  // The table to query
                 null,                                // The columns to return
-                CursorContract.ProductData.COLUMN_NAME_ITEMID + "= ?", // The columns for the WHERE clause
-                whereValue, // The values for the WHERE clause
+                CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?", // The columns for the WHERE clause
+                whereValueTitle, // The values for the WHERE clause
                 null,                                     // don't group the rows
                 null,                                     // don't filter by row groups
                 sortOrder                                 // The sort order
@@ -243,16 +247,15 @@ public abstract class AsyncCursorFetchDataTask extends AsyncTask<String, Void, V
                     values);
         }
 
+        // No updates for now, don't want to wipe out Favorites selection
         // If the Item ID Does Exist, Update All Values
-        else {
+        /*else {
             thisRowID = db.update(
                     CursorContract.ProductData.TABLE_NAME,
                     values,
-                    CursorContract.ProductData.COLUMN_NAME_ITEMID + "= ?",
-                    whereValue);
-        }
-
-
+                    CursorContract.ProductData._ID + "= ?",
+                    whereValueTitle);
+        }*/
     }
 }
 

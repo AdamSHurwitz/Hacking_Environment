@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +26,7 @@ import com.example.adamhurwitz.hackingenvironment.data.CursorDbHelper;
  * A placeholder fragment containing a simple view.
  */
 public class AsyncCursorFragment1 extends Fragment {
-
+    private final String LOG_TAG = AsyncCursorFragment1.class.getSimpleName();
     private AsyncCursorAdapter asyncCursorAdapter;
     public String showFilter = "";
 
@@ -79,8 +80,15 @@ public class AsyncCursorFragment1 extends Fragment {
                         .COLUMN_NAME_PRICE));
                 String release_date = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
                         .COLUMN_NAME_RELEASEDATE));
+                String favorite = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
+                        .COLUMN_NAME_FAVORITE));
 
-                String[] doodleDataItems = {item_id, title, image, description, price, release_date};
+                Toast.makeText(getContext(), favorite, Toast.LENGTH_SHORT).show();
+
+                String[] doodleDataItems = {item_id, title, image, description, price, release_date,
+                        favorite};
+
+                Log.v(LOG_TAG, "Before Intent: " + favorite);
 
                 Intent intent = new Intent(getActivity(),
                         AsyncCursorDetailActivity.class);
@@ -91,7 +99,7 @@ public class AsyncCursorFragment1 extends Fragment {
             }
         });
 
-        Toast.makeText(getContext(),"Filtering by " + showFilter +"...",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Filtering by " + showFilter + "...", Toast.LENGTH_SHORT).show();
 
         return view;
     }
@@ -135,7 +143,7 @@ public class AsyncCursorFragment1 extends Fragment {
         }
     }
 
-    public void showFilter(String filterBy){
+    public void showFilter(String filterBy) {
         showFilter = filterBy;
     }
 
@@ -159,7 +167,7 @@ public class AsyncCursorFragment1 extends Fragment {
             // The columns for the WHERE clause
             String whereColumns = "";
             // The values for the WHERE clause
-            String[] whereValues = {"0","0"};
+            String[] whereValues = {"0", "0"};
             // How you want the results sorted in the resulting Cursor
             String sortOrder = "";
 
@@ -170,7 +178,7 @@ public class AsyncCursorFragment1 extends Fragment {
 
             showFilter(filterBy);
 
-            switch (filterBy){
+            switch (filterBy) {
                 case "popular":
                     whereValues[0] = "0";
                     whereValues[1] = "0";
@@ -187,7 +195,7 @@ public class AsyncCursorFragment1 extends Fragment {
                     whereValues[0] = "1";
                     whereValues[1] = "0";
                     sortOrder = CursorContract.ProductData.COLUMN_NAME_RELEASEDATE + " DESC";
-                    Toast.makeText(getContext(),"Filtering by " + filterBy+"...", Toast.LENGTH_SHORT)
+                    Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
                             .show();
                     break;
                 default:

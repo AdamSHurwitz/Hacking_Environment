@@ -36,14 +36,15 @@ public class AsyncCursorDetailFragment extends Fragment {
         //Activity has intent, must get intent from Activity
         Intent intent = getActivity().getIntent();
         if (intent != null) {
-            String[] doodleDataElements = intent.getStringArrayExtra("Cursor Doodle Attributes");
+            final String[] doodleDataElements = intent
+                    .getStringArrayExtra("Cursor Doodle Attributes");
             // doodleDataElements[0] = item_id
             // doodleDataElements[1] = title
             // doodleDataElements[2] = image
             // doodleDataElements[3] = description
             // doodleDataElements[4] = price
             // doodleDataElements[5] = release_date
-
+            // doodleDataElements[6] = favorite
 
             // Create DoodleData Within 'detail_fragment_layout.xml'
             ImageView doodle_image = (ImageView) view.findViewById(R.id.detail_doodle_image);
@@ -83,13 +84,15 @@ public class AsyncCursorDetailFragment extends Fragment {
                     if (toggle.equals("off")) {
                         toggle = "on";
                         favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
-                        Toast.makeText(getContext(),toggle,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),toggle + " favorite: " + doodleDataElements[6]
+                                ,Toast.LENGTH_SHORT).show();
                     }
                     // Turn button off
                     else if (toggle.equals("on")) {
                         toggle = "off";
                         favoriteButton.setImageResource(R.drawable.star_default_18dp);
-                        Toast.makeText(getContext(),toggle,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),toggle + " favorite: " + doodleDataElements[6]
+                                ,Toast.LENGTH_SHORT).show();
                     }
                 }
             });
