@@ -6,8 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -20,10 +22,16 @@ public class AsyncCursorDetailFragment extends Fragment {
     public AsyncCursorDetailFragment() {
     }
 
+    String toggle = "off";
+
     //@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.detail_fragment_layout, container, false);
+
+        // get id for favorite_btn
+        final ImageButton favoriteButton = (ImageButton) view.findViewById(R.id.favorite_btn);
+
         //receive the intent
         //Activity has intent, must get intent from Activity
         Intent intent = getActivity().getIntent();
@@ -65,6 +73,26 @@ public class AsyncCursorDetailFragment extends Fragment {
             //Create MovieData User Rating Within 'fragment_detail.xml'
             TextView about = (TextView) view.findViewById(R.id.detail_description);
             about.setText(doodleDataElements[3]);
+
+            // Click listener for favorite button
+            favoriteButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    // Perform action on click
+
+                    // Turn button on
+                    if (toggle.equals("off")) {
+                        toggle = "on";
+                        favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
+                        Toast.makeText(getContext(),toggle,Toast.LENGTH_SHORT).show();
+                    }
+                    // Turn button off
+                    else if (toggle.equals("on")) {
+                        toggle = "off";
+                        favoriteButton.setImageResource(R.drawable.star_default_18dp);
+                        Toast.makeText(getContext(),toggle,Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
         }
         return view;
