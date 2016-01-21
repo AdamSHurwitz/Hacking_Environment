@@ -14,7 +14,7 @@ public class CursorContract {
         Inner class that defines the table contents of the table
      */
     public static abstract class ProductData implements BaseColumns {
-        public static final String  TABLE_NAME = "product_table";
+        public static final String TABLE_NAME = "product_table";
         public static final String COLUMN_NAME_DESCRIPTION = "description";
         public static final String COLUMN_NAME_IMAGEURL = "image_url";
         public static final String COLUMN_NAME_ITEMID = "item_id";

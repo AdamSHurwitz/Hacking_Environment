@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -84,15 +83,15 @@ public class AsyncCursorDetailFragment extends Fragment {
                     if (toggle.equals("off")) {
                         toggle = "on";
                         favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
-                        Toast.makeText(getContext(),toggle + " favorite: " + doodleDataElements[6]
-                                ,Toast.LENGTH_SHORT).show();
+                        /*Toast.makeText(getContext(),toggle + " favorite: " + doodleDataElements[6]
+                                ,Toast.LENGTH_SHORT).show();*/
                     }
                     // Turn button off
                     else if (toggle.equals("on")) {
                         toggle = "off";
                         favoriteButton.setImageResource(R.drawable.star_default_18dp);
-                        Toast.makeText(getContext(),toggle + " favorite: " + doodleDataElements[6]
-                                ,Toast.LENGTH_SHORT).show();
+                        /*Toast.makeText(getContext(),toggle + " favorite: " + doodleDataElements[6]
+                                ,Toast.LENGTH_SHORT).show();*/
                     }
                 }
             });

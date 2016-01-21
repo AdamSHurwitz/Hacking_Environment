@@ -14,20 +14,21 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.example.adamhurwitz.hackingenvironment.service.Service;
+
 import java.util.ArrayList;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class AsyncParcelableFragment1 extends Fragment {
-
+public class ServiceFragment extends Fragment {
     private ArrayList<DoodleData> doodleDataList = new ArrayList<>();
     private AsyncParcelableArrayAdapter gridViewAdapter;
 
     /**
      * Empty constructor for the AsyncParcelableFragment1() class.
      */
-    public AsyncParcelableFragment1() {
+    public ServiceFragment() {
     }
 
     @Override
@@ -95,10 +96,14 @@ public class AsyncParcelableFragment1 extends Fragment {
         // Make sure that the device is actually connected to the internet before trying to get data
         // about the Google doodles.
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-            AsyncParcelableFetchDoodleDataTask doodleTask =
+            /*AsyncParcelableFetchDoodleDataTask doodleTask =
                     new AsyncParcelableFetchDoodleDataTask(gridViewAdapter, doodleDataList);
+            doodleTask.execute("release_date.desc", "recent");*/
 
-            doodleTask.execute("release_date.desc", "recent");
+            String[] params = {"release_date.desc", "recent"};
+
+            getActivity().startService(new Intent(getActivity(), Service.class)
+                    .putExtra("service_extra",params));
         }
     }
 

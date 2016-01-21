@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_USER_DICTIONARY"/>
 
     <application
         android:allowBackup="true"
@@ -58,6 +59,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.adamhurwitz.hackingenvironment.MainActivity" />
         </activity>
+        <service android:name=".service.Service"/>
+        <provider
+            android:authorities="com.example.adamhurwitz.hackingenvironment"
+            android:name=".data.ProductProvider" />
     </application>
 
 </manifest>
