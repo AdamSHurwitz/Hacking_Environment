@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.example.adamhurwitz.hackingenvironment.data.CursorContract;
-import com.example.adamhurwitz.hackingenvironment.data.CursorDbHelper;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -124,7 +122,9 @@ public class ContentProviderFragment extends Fragment {
         // Make sure that the device is actually connected to the internet before trying to get data
         // about the Google doodles.
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-            ContentProviderFetchDataTask contentProviderTask = new ContentProviderTask(
+            /*ContentProviderFetchDataTask contentProviderTask = new ContentProviderTask(
+                    getContext(), asyncCursorAdapter) {*/
+            ContentProviderFetchDataTask contentProviderTask = new ContentProviderFetchDataTask(
                     getContext(), asyncCursorAdapter) {
             };
             contentProviderTask.execute("item_id.desc");
@@ -143,83 +143,4 @@ public class ContentProviderFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    public void showFilter(String filterBy) {
-        showFilter = filterBy;
-    }
-
-    private class ContentProviderTask extends ContentProviderFetchDataTask {
-
-        /**
-         * Constructor for the AsyncParcelableFetchDoodleDataTask object.
-         *
-         * @param context Context of Activity
-         */
-        public ContentProviderTask(Context context, AsyncCursorAdapter asyncCursorAdapter) {
-
-            super(context, asyncCursorAdapter);
-        }
-
-        @Override
-        public void onPostExecute(Void param) {
-            // Access database
-            CursorDbHelper mDbHelper = new CursorDbHelper(getContext());
-            // Gets the data repository in read mode
-            SQLiteDatabase db = mDbHelper.getReadableDatabase();
-            // The columns for the WHERE clause
-            String whereColumns = "";
-            // The values for the WHERE clause
-            String[] whereValues = {"0", "0"};
-            // How you want the results sorted in the resulting Cursor
-            String sortOrder = "";
-
-            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
-            String filterBy = pref.getString("asynccursor1_settings_key", "popular");
-            whereColumns = CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND "
-                    + CursorContract.ProductData.COLUMN_NAME_RECENT + " = ?";
-
-            showFilter(filterBy);
-
-            switch (filterBy) {
-                case "popular":
-                    whereValues[0] = "0";
-                    whereValues[1] = "0";
-                    sortOrder = CursorContract.ProductData.COLUMN_NAME_POPULARITY + " DESC";
-                    break;
-                case "recent":
-                    whereValues[0] = "0";
-                    whereValues[1] = "1";
-                    sortOrder = CursorContract.ProductData.COLUMN_NAME_RELEASEDATE + " DESC";
-                    /*Toast.makeText(getContext(),"Filtering by " + filterBy+"...", Toast.LENGTH_SHORT)
-                            .show();*/
-                    break;
-                case "vintage":
-                    whereValues[0] = "1";
-                    whereValues[1] = "0";
-                    sortOrder = CursorContract.ProductData.COLUMN_NAME_RELEASEDATE + " DESC";
-                    Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
-                            .show();
-                    break;
-                default:
-                    whereValues[0] = "0";
-                    whereValues[1] = "0";
-                    sortOrder = CursorContract.ProductData.COLUMN_NAME_POPULARITY + " DESC";
-                    /*Toast.makeText(getContext(),"Filtering by " + filterBy +"...", Toast.LENGTH_SHORT)
-                            .show();*/
-                    break;
-            }
-            Cursor cursor = db.query(
-                    CursorContract.ProductData.TABLE_NAME,  // The table to query
-                    null,                               // The columns to return
-                    whereColumns,  // The columns for the WHERE clause
-                    whereValues,                            // The values for the WHERE clause
-                    null,                                     // don't group the rows
-                    null,                                     // don't filter by row groups
-                    sortOrder                                 // The sort order
-            );
-            asyncCursorAdapter.changeCursor(cursor);
-            asyncCursorAdapter.notifyDataSetChanged();
-        }
-    }
-
 }

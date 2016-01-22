@@ -2,10 +2,12 @@ package com.example.adamhurwitz.hackingenvironment;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.example.adamhurwitz.hackingenvironment.data.CursorContract;
@@ -21,6 +23,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Vector;
 
 /**
  * Created by adamhurwitz on 12/2/15.
@@ -46,6 +49,8 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
 
     private final Context context;
     private AsyncCursorAdapter asyncCursorAdapter;
+    public String showFilter = "";
+    Vector<ContentValues> cVVector;
 
 
     /**
@@ -170,6 +175,10 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
 
         try {
             JSONArray jsonarray = new JSONArray(jsonResponse);
+
+            // Initialize ArrayList of Content Values size of data Array length
+            //cVVector = new Vector<>(jsonarray.length());
+
             for (int index = 0; index < jsonarray.length(); index++) {
                 JSONObject jsonObject = jsonarray.getJSONObject(index);
                 putDataIntoDb(
@@ -219,6 +228,16 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
         values.put(CursorContract.ProductData.COLUMN_NAME_VINTAGE, vintage);
         values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, "1");
 
+        /*cVVector.add(values);
+        if ( cVVector.size() > 0 ) {
+            ContentValues[] cvArray = new ContentValues[cVVector.size()];
+            cVVector.toArray(cvArray);
+            context.getContentResolver().bulkInsert(ContentProviderContract.ProductData.CONTENT_URI,
+                    cvArray);
+        }*/
+
+        //Log.v(LOG_TAG, "Bulk Insert: " + cVVector.size());
+
         Log.v(LOG_TAG, "Content Values " + values.toString());
 
         // How you want the results sorted in the resulting Cursor
@@ -250,7 +269,8 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
                     values);
         }
 
-    // Example of DB Query and Insert using ContentProvider - - - - - - - - - - - - - - - - - - - -
+
+        // Example of DB Query and Insert using ContentProvider - - - - - - - - - - - - - - - - - - - -
 
     /* long addLocation(String locationSetting, String cityName, double lat, double lon) {
         long locationId;
@@ -293,7 +313,7 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
         return locationId;
     } */
 
-    // Example of Bulk Insert - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // Example of Bulk Insert - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         /*if ( cVVector.size() > 0 ) {
             ContentValues[] cvArray = new ContentValues[cVVector.size()];
@@ -301,6 +321,71 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
             mContext.getContentResolver().bulkInsert(WeatherEntry.CONTENT_URI, cvArray);
         }*/
 
+    }
+
+    public void showFilter(String filterBy) {
+        showFilter = filterBy;
+    }
+
+    @Override
+    public void onPostExecute(Void param) {
+        // Access database
+        CursorDbHelper mDbHelper = new CursorDbHelper(context);
+        // Gets the data repository in read mode
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        // The columns for the WHERE clause
+        String whereColumns = "";
+        // The values for the WHERE clause
+        String[] whereValues = {"0", "0"};
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder = "";
+
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        String filterBy = pref.getString("asynccursor1_settings_key", "popular");
+        whereColumns = CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND "
+                + CursorContract.ProductData.COLUMN_NAME_RECENT + " = ?";
+
+        showFilter(filterBy);
+
+        switch (filterBy) {
+            case "popular":
+                whereValues[0] = "0";
+                whereValues[1] = "0";
+                sortOrder = CursorContract.ProductData.COLUMN_NAME_POPULARITY + " DESC";
+                break;
+            case "recent":
+                whereValues[0] = "0";
+                whereValues[1] = "1";
+                sortOrder = CursorContract.ProductData.COLUMN_NAME_RELEASEDATE + " DESC";
+                    /*Toast.makeText(getContext(),"Filtering by " + filterBy+"...", Toast.LENGTH_SHORT)
+                            .show();*/
+                break;
+            case "vintage":
+                whereValues[0] = "1";
+                whereValues[1] = "0";
+                sortOrder = CursorContract.ProductData.COLUMN_NAME_RELEASEDATE + " DESC";
+                /*Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
+                        .show();*/
+                break;
+            default:
+                whereValues[0] = "0";
+                whereValues[1] = "0";
+                sortOrder = CursorContract.ProductData.COLUMN_NAME_POPULARITY + " DESC";
+                    /*Toast.makeText(getContext(),"Filtering by " + filterBy +"...", Toast.LENGTH_SHORT)
+                            .show();*/
+                break;
+        }
+        Cursor cursor = db.query(
+                CursorContract.ProductData.TABLE_NAME,  // The table to query
+                null,                               // The columns to return
+                whereColumns,  // The columns for the WHERE clause
+                whereValues,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+        asyncCursorAdapter.changeCursor(cursor);
+        asyncCursorAdapter.notifyDataSetChanged();
     }
 }
 
