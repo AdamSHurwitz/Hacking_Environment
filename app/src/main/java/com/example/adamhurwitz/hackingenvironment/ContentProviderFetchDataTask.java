@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.example.adamhurwitz.hackingenvironment.data.ContentProviderContract;
 import com.example.adamhurwitz.hackingenvironment.data.CursorContract;
 import com.example.adamhurwitz.hackingenvironment.data.CursorDbHelper;
 
@@ -177,7 +178,7 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
             JSONArray jsonarray = new JSONArray(jsonResponse);
 
             // Initialize ArrayList of Content Values size of data Array length
-            //cVVector = new Vector<>(jsonarray.length());
+            cVVector = new Vector<>(jsonarray.length());
 
             for (int index = 0; index < jsonarray.length(); index++) {
                 JSONObject jsonObject = jsonarray.getJSONObject(index);
@@ -228,17 +229,20 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
         values.put(CursorContract.ProductData.COLUMN_NAME_VINTAGE, vintage);
         values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, "1");
 
-        /*cVVector.add(values);
-        if ( cVVector.size() > 0 ) {
+        cVVector.add(values);
+
+        //if ( cVVector.size() > 0 ) {
             ContentValues[] cvArray = new ContentValues[cVVector.size()];
             cVVector.toArray(cvArray);
-            context.getContentResolver().bulkInsert(ContentProviderContract.ProductData.CONTENT_URI,
-                    cvArray);
-        }*/
+            context.getContentResolver().bulkInsert(ContentProviderContract
+                            .ContentProviderProductData.CONTENT_URI, cvArray);
+        //}
+
+        Log.v(LOG_TAG, "Length_of_Vector: " + cVVector.size());
 
         //Log.v(LOG_TAG, "Bulk Insert: " + cVVector.size());
 
-        Log.v(LOG_TAG, "Content Values " + values.toString());
+        /*Log.v(LOG_TAG, "Content Values " + values.toString());
 
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
@@ -267,7 +271,7 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
                     CursorContract.ProductData.TABLE_NAME,
                     null,
                     values);
-        }
+        }*/
 
 
         // Example of DB Query and Insert using ContentProvider - - - - - - - - - - - - - - - - - - - -

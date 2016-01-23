@@ -28,24 +28,23 @@ public class ContentProviderContract {
     // looking at weather data. content://com.example.android.sunshine.app/givemeroot/ will fail,
     // as the ContentProvider hasn't been given any information on what to do with "givemeroot".
     // At least, let's hope not.  Don't be that dev, reader.  Don't be that dev.
-    public static final String PATH_PRODUCT = "product_table";
+    public static final String PATH_PRODUCTTABLE = "contentprovider_product_table";
 
     /*
         Inner class that defines the table contents of the table
      */
-    public static abstract class ProductData implements BaseColumns {
+    public static abstract class ContentProviderProductData implements BaseColumns {
 
         public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon()
-                .appendPath(PATH_PRODUCT).build();
-
+                .appendPath(PATH_PRODUCTTABLE).build();
         public static final String CONTENT_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/"
-                        + PATH_PRODUCT;
+                        + PATH_PRODUCTTABLE;
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/"
-                        + PATH_PRODUCT;
+                        + PATH_PRODUCTTABLE;
 
-        public static final String TABLE_NAME = "product_table";
+        public static final String TABLE_NAME = "contentprovider_product_table";
         public static final String COLUMN_NAME_DESCRIPTION = "description";
         public static final String COLUMN_NAME_IMAGEURL = "image_url";
         public static final String COLUMN_NAME_ITEMID = "item_id";

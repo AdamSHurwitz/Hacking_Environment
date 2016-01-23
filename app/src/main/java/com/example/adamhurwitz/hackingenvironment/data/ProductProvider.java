@@ -18,23 +18,29 @@ package com.example.adamhurwitz.hackingenvironment.data;
 import android.annotation.TargetApi;
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 public class ProductProvider extends ContentProvider {
+    private static final String LOG_TAG = ProductProvider.class.getSimpleName();
 
     // The URI Matcher used by this content provider.
     private static final UriMatcher uriMatcher = buildUriMatcher();
-    private CursorDbHelper cursorDbHelper;
-    static final int PRODUCT = 100;
+    private ContentProviderDbHelper cursorDbHelper;
+    // Defines the database name
+    private static final String DBNAME = "doodle_products.db";
+    static final int PRODUCT = 85;
+    Context context;
 
 
     @Override
     public boolean onCreate() {
-        CursorDbHelper cursorDbHelper = new CursorDbHelper(getContext());
+        cursorDbHelper = new ContentProviderDbHelper(getContext());
         return true;
     }
 
@@ -51,15 +57,17 @@ public class ProductProvider extends ContentProvider {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = ContentProviderContract.CONTENT_AUTHORITY;
 
-        // For each type of URI you want to add, create a corresponding code.
-        matcher.addURI(authority, ContentProviderContract.PATH_PRODUCT, PRODUCT);
+        // For each type of URI you want to add, create a corresponding URI.
+        matcher.addURI(authority, ContentProviderContract.PATH_PRODUCTTABLE, PRODUCT);
         // use 'ContentProviderContract.PATH_PRODUCT + "/*"' for path with one additional item
         // string or 'ContentProviderContract.PATH_PRODUCT + "/*/#"' for path with string then a num
+        //TODO: should return 100?
+        Log.v(LOG_TAG, "UriMatcher_returns :" + String.valueOf(matcher));
         return matcher;
     }
 
 
-    //TODO: Figure out what's going on here and why' it's useful
+    // getType() not important since we're not working with BLOB data type
     @Override
     public String getType(Uri uri) {
 
@@ -68,7 +76,10 @@ public class ProductProvider extends ContentProvider {
 
         switch (match) {
             case PRODUCT:
-                return ContentProviderContract.ProductData._ID;
+                //TODO: should return something
+                Log.v(LOG_TAG, "getType :" + ContentProviderContract.ContentProviderProductData
+                        .CONTENT_TYPE);
+                return ContentProviderContract.ContentProviderProductData.CONTENT_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -79,12 +90,12 @@ public class ProductProvider extends ContentProvider {
                         String sortOrder) {
         // Here's the switch statement that, given a URI, will determine what kind of request it is,
         // and query the database accordingly.
-        Cursor retCursor;
+        Cursor cursor;
         switch (uriMatcher.match(uri)) {
             case PRODUCT: {
                 //retCursor = productCursor(uri, projection, sortOrder);
-                retCursor = cursorDbHelper.getReadableDatabase().query(
-                        ContentProviderContract.ProductData.TABLE_NAME,
+                cursor = cursorDbHelper.getReadableDatabase().query(
+                        ContentProviderContract.ContentProviderProductData.TABLE_NAME,
                         projection,
                         selection,
                         selectionArgs,
@@ -97,8 +108,8 @@ public class ProductProvider extends ContentProvider {
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
-        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
-        return retCursor;
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
+        return cursor;
     }
 
     @Nullable
@@ -109,9 +120,11 @@ public class ProductProvider extends ContentProvider {
         Uri returnUri;
         switch (match) {
             case PRODUCT: {
-                long _id = db.insert(ContentProviderContract.ProductData.TABLE_NAME, null, values);
+                long _id = db.insert(ContentProviderContract.ContentProviderProductData.TABLE_NAME,
+                        null, values);
                 if (_id > 0)
-                    returnUri = ContentProviderContract.ProductData.buildProductUri(_id);
+                    returnUri = ContentProviderContract.ContentProviderProductData.buildProductUri(
+                            _id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
@@ -132,7 +145,8 @@ public class ProductProvider extends ContentProvider {
 
         switch (match) {
             case PRODUCT:
-                rowsUpdated = db.update(ContentProviderContract.ProductData.TABLE_NAME, values,
+                rowsUpdated = db.update(ContentProviderContract.ContentProviderProductData
+                                .TABLE_NAME, values,
                         selection, selectionArgs);
                 break;
             default:
@@ -154,7 +168,8 @@ public class ProductProvider extends ContentProvider {
         switch (match) {
             case PRODUCT:
                 rowsDeleted = db.delete(
-                        ContentProviderContract.ProductData.TABLE_NAME, selection, selectionArgs);
+                        ContentProviderContract.ContentProviderProductData.TABLE_NAME, selection,
+                        selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -176,7 +191,8 @@ public class ProductProvider extends ContentProvider {
                 int returnCount = 0;
                 try {
                     for (ContentValues value : values) {
-                        long _id = db.insert(ContentProviderContract.ProductData.TABLE_NAME, null,
+                        long _id = db.insert(ContentProviderContract.ContentProviderProductData
+                                        .TABLE_NAME, null,
                                 value);
                         if (_id != -1) {
                             returnCount++;
