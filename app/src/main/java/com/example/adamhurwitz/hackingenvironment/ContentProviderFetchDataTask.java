@@ -73,7 +73,6 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
         // This variable will contain the raw JSON response as a string.
         String jsonResponse = null;
 
-        //TODO: Use As Example For Switch Case Based on Shared Preferences
         try {
             // Construct the URL to fetch data from and make the connection.
             Uri builtUri = Uri.parse(FAS_API_BASE_URL).buildUpon()
@@ -231,6 +230,8 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
 
         cVVector.add(values);
 
+
+        //TODO: Insert query to only run insert when cursor getCount() equals 0
         //if ( cVVector.size() > 0 ) {
             ContentValues[] cvArray = new ContentValues[cVVector.size()];
             cVVector.toArray(cvArray);
@@ -239,9 +240,6 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
         //}
 
         Log.v(LOG_TAG, "Length_of_Vector: " + cVVector.size());
-
-        //Log.v(LOG_TAG, "Bulk Insert: " + cVVector.size());
-
         /*Log.v(LOG_TAG, "Content Values " + values.toString());
 
         // How you want the results sorted in the resulting Cursor
