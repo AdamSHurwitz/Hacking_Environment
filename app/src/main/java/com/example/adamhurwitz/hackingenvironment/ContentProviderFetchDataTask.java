@@ -211,7 +211,7 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
         // Put Info into Database
 
         // Gets the data repository in write mode
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        //SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
@@ -232,14 +232,27 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
 
 
         //TODO: Insert query to only run insert when cursor getCount() equals 0
-        //if ( cVVector.size() > 0 ) {
-            ContentValues[] cvArray = new ContentValues[cVVector.size()];
-            cVVector.toArray(cvArray);
-            context.getContentResolver().bulkInsert(ContentProviderContract
-                            .ContentProviderProductData.CONTENT_URI, cvArray);
-        //}
-
-        Log.v(LOG_TAG, "Length_of_Vector: " + cVVector.size());
+        // Queries the user dictionary and returns results
+        Cursor cursor = context.getContentResolver().query(
+                // The content URI of the words table
+                ContentProviderContract.ContentProviderProductData.CONTENT_URI,
+                // projection: the columns to return for each row
+                null,
+                // selectionClause: selection criteria
+                ContentProviderContract.ContentProviderProductData.COLUMN_NAME_TITLE + "= ?",
+                // selectionArgs: selection criteria
+                new String[]{title},
+                // sortOrder: the sort order for the returned rows
+                ContentProviderContract.ContentProviderProductData._ID);
+        if (cursor.getCount() == 0) {
+            if (cVVector.size() > 0) {
+                ContentValues[] cvArray = new ContentValues[cVVector.size()];
+                cVVector.toArray(cvArray);
+                context.getContentResolver().bulkInsert(ContentProviderContract
+                        .ContentProviderProductData.CONTENT_URI, cvArray);
+            }
+            Log.v(LOG_TAG, "Length_of_Vector: " + cVVector.size());
+        }
         /*Log.v(LOG_TAG, "Content Values " + values.toString());
 
         // How you want the results sorted in the resulting Cursor
