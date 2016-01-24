@@ -104,21 +104,6 @@ public class ContentProviderFragment extends Fragment {
 
                 favoriteButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Toast.makeText(getContext(), "MEOW", Toast.LENGTH_SHORT).show();
-
-                        /*CursorDbHelper cursorDbHelper = new CursorDbHelper(getContext());
-                        SQLiteDatabase db = cursorDbHelper.getReadableDatabase();
-                        Cursor cursor = db.query(
-                                CursorContract.ProductData.TABLE_NAME, null,
-                                CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?",
-                                new String[]{doodleTitle}, null, null,
-                                CursorContract.ProductData._ID + " DESC");*/
-
-                        /*Cursor cursor = getContext().getContentResolver().query(
-                                ContentProviderContract.ContentProviderProductData.CONTENT_URI,
-                                null, ContentProviderContract.ContentProviderProductData
-                                        .COLUMN_NAME_TITLE + "= ?", new String[] {doodleTitle},
-                                null);*/
                         ContentValues values = new ContentValues();
                         int rowsUpdated = 0;
                         if (doodleFavortie.equals("1")) {
@@ -132,7 +117,6 @@ public class ContentProviderFragment extends Fragment {
                                 ContentProviderContract.ContentProviderProductData.CONTENT_URI,
                                 values, ContentProviderContract.ContentProviderProductData
                                         .COLUMN_NAME_TITLE + "= ?", new String[] {doodleTitle});
-                        //cursor.close();
                     }
                 });
             }
