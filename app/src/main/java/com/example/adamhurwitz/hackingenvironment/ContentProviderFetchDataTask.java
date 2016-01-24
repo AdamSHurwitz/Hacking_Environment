@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -203,35 +202,34 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
     public void putDataIntoDb(String item_id, String title, String date, String description,
                               String search_strings, int price, String image,
                               Double popularity, Boolean recent, Boolean vintage) {
-        Log.v("ALPHA", title);
 
         // Access database
         CursorDbHelper mDbHelper = new CursorDbHelper(context);
 
         // Put Info into Database
 
-        // Gets the data repository in write mode
-        //SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(CursorContract.ProductData.COLUMN_NAME_ITEMID, item_id);
-        values.put(CursorContract.ProductData.COLUMN_NAME_TITLE, title);
-        values.put(CursorContract.ProductData.COLUMN_NAME_RELEASEDATE, date);
-        values.put(CursorContract.ProductData.COLUMN_NAME_DESCRIPTION, description);
-        values.put(CursorContract.ProductData.COLUMN_NAME_SEARCHSTRINGS, search_strings);
-        values.put(CursorContract.ProductData.COLUMN_NAME_PRICE, price);
-        values.put(CursorContract.ProductData.COLUMN_NAME_IMAGEURL, image);
-        values.put(CursorContract.ProductData.COLUMN_NAME_DESCRIPTION, description);
-        values.put(CursorContract.ProductData.COLUMN_NAME_POPULARITY, popularity);
-        values.put(CursorContract.ProductData.COLUMN_NAME_RECENT, recent);
-        values.put(CursorContract.ProductData.COLUMN_NAME_VINTAGE, vintage);
-        values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, "1");
+        values.put(ContentProviderContract.ContentProviderProductData.COLUMN_NAME_ITEMID, item_id);
+        values.put(ContentProviderContract.ContentProviderProductData.COLUMN_NAME_TITLE, title);
+        values.put(ContentProviderContract.ContentProviderProductData.COLUMN_NAME_RELEASEDATE,
+                date);
+        values.put(ContentProviderContract.ContentProviderProductData.COLUMN_NAME_DESCRIPTION,
+                description);
+        values.put(ContentProviderContract.ContentProviderProductData.COLUMN_NAME_SEARCHSTRINGS,
+                search_strings);
+        values.put(ContentProviderContract.ContentProviderProductData.COLUMN_NAME_PRICE, price);
+        values.put(ContentProviderContract.ContentProviderProductData.COLUMN_NAME_IMAGEURL, image);
+        values.put(ContentProviderContract.ContentProviderProductData.COLUMN_NAME_DESCRIPTION,
+                description);
+        values.put(ContentProviderContract.ContentProviderProductData.COLUMN_NAME_POPULARITY,
+                popularity);
+        values.put(ContentProviderContract.ContentProviderProductData.COLUMN_NAME_RECENT, recent);
+        values.put(ContentProviderContract.ContentProviderProductData.COLUMN_NAME_VINTAGE, vintage);
+        values.put(ContentProviderContract.ContentProviderProductData.COLUMN_NAME_FAVORITE, "1");
 
         cVVector.add(values);
 
-
-        //TODO: Insert query to only run insert when cursor getCount() equals 0
         // Queries the user dictionary and returns results
         Cursor cursor = context.getContentResolver().query(
                 // The content URI of the words table
@@ -253,89 +251,6 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
             }
             Log.v(LOG_TAG, "Length_of_Vector: " + cVVector.size());
         }
-        /*Log.v(LOG_TAG, "Content Values " + values.toString());
-
-        // How you want the results sorted in the resulting Cursor
-        String sortOrder =
-                CursorContract.ProductData._ID + " DESC";
-        String[] whereValueId = {item_id};
-        String[] whereValueTitle = {title};
-
-        // Insert the new row, returning the primary key value of the new row
-        long thisRowID;
-
-        // If you are querying entire table, can leave everything as Null
-        // Querying when Item ID Exists
-        Cursor cursor = db.query(
-                CursorContract.ProductData.TABLE_NAME,  // The table to query
-                null,                                // The columns to return
-                CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?", // The columns for the WHERE clause
-                whereValueTitle, // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                sortOrder                                 // The sort order
-        );
-
-        // If the Item ID Does Not Exist, Insert All Values
-        if (cursor.getCount() == 0) {
-            thisRowID = db.insert(
-                    CursorContract.ProductData.TABLE_NAME,
-                    null,
-                    values);
-        }*/
-
-
-        // Example of DB Query and Insert using ContentProvider - - - - - - - - - - - - - - - - - - - -
-
-    /* long addLocation(String locationSetting, String cityName, double lat, double lon) {
-        long locationId;
-
-        // First, check if the location with this city name exists in the db
-        Cursor locationCursor = mContext.getContentResolver().query(
-                WeatherContract.LocationEntry.CONTENT_URI,
-                new String[]{WeatherContract.LocationEntry._ID},
-                WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ?",
-                new String[]{locationSetting},
-                null);
-
-        if (locationCursor.moveToFirst()) {
-            int locationIdIndex = locationCursor.getColumnIndex(WeatherContract.LocationEntry._ID);
-            locationId = locationCursor.getLong(locationIdIndex);
-        } else {
-            // Now that the content provider is set up, inserting rows of data is pretty simple.
-            // First create a ContentValues object to hold the data you want to insert.
-            ContentValues locationValues = new ContentValues();
-
-            // Then add the data, along with the corresponding name of the data type,
-            // so the content provider knows what kind of value is being inserted.
-            locationValues.put(WeatherContract.LocationEntry.COLUMN_CITY_NAME, cityName);
-            locationValues.put(WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING, locationSetting);
-            locationValues.put(WeatherContract.LocationEntry.COLUMN_COORD_LAT, lat);
-            locationValues.put(WeatherContract.LocationEntry.COLUMN_COORD_LONG, lon);
-
-            // Finally, insert location data into the database.
-            Uri insertedUri = mContext.getContentResolver().insert(
-                    WeatherContract.LocationEntry.CONTENT_URI,
-                    locationValues
-            );
-
-            // The resulting URI contains the ID for the row.  Extract the locationId from the Uri.
-            locationId = ContentUris.parseId(insertedUri);
-        }
-
-        locationCursor.close();
-        // Wait, that worked?  Yes!
-        return locationId;
-    } */
-
-        // Example of Bulk Insert - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        /*if ( cVVector.size() > 0 ) {
-            ContentValues[] cvArray = new ContentValues[cVVector.size()];
-            cVVector.toArray(cvArray);
-            mContext.getContentResolver().bulkInsert(WeatherEntry.CONTENT_URI, cvArray);
-        }*/
-
     }
 
     public void showFilter(String filterBy) {
@@ -344,11 +259,6 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
 
     @Override
     public void onPostExecute(Void param) {
-        // Access database
-        CursorDbHelper mDbHelper = new CursorDbHelper(context);
-        // Gets the data repository in read mode
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-        // The columns for the WHERE clause
         String whereColumns = "";
         // The values for the WHERE clause
         String[] whereValues = {"0", "0"};
@@ -366,38 +276,45 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
             case "popular":
                 whereValues[0] = "0";
                 whereValues[1] = "0";
-                sortOrder = CursorContract.ProductData.COLUMN_NAME_POPULARITY + " DESC";
+                sortOrder = ContentProviderContract.ContentProviderProductData
+                        .COLUMN_NAME_POPULARITY + " DESC";
                 break;
             case "recent":
                 whereValues[0] = "0";
                 whereValues[1] = "1";
-                sortOrder = CursorContract.ProductData.COLUMN_NAME_RELEASEDATE + " DESC";
-                    /*Toast.makeText(getContext(),"Filtering by " + filterBy+"...", Toast.LENGTH_SHORT)
-                            .show();*/
+                sortOrder = ContentProviderContract.ContentProviderProductData
+                        .COLUMN_NAME_RELEASEDATE + " DESC";
+                /*Toast.makeText(getContext(),"Filtering by " + filterBy+"...", Toast.LENGTH_SHORT)
+                .show();*/
                 break;
             case "vintage":
                 whereValues[0] = "1";
                 whereValues[1] = "0";
-                sortOrder = CursorContract.ProductData.COLUMN_NAME_RELEASEDATE + " DESC";
+                sortOrder = ContentProviderContract.ContentProviderProductData
+                        .COLUMN_NAME_RELEASEDATE + " DESC";
                 /*Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
-                        .show();*/
+                .show();*/
                 break;
             default:
                 whereValues[0] = "0";
                 whereValues[1] = "0";
-                sortOrder = CursorContract.ProductData.COLUMN_NAME_POPULARITY + " DESC";
-                    /*Toast.makeText(getContext(),"Filtering by " + filterBy +"...", Toast.LENGTH_SHORT)
-                            .show();*/
+                sortOrder = ContentProviderContract.ContentProviderProductData
+                        .COLUMN_NAME_POPULARITY + " DESC";
+                /*Toast.makeText(getContext(),"Filtering by " + filterBy +"...", Toast.LENGTH_SHORT)
+                .show();*/
                 break;
         }
-        Cursor cursor = db.query(
-                CursorContract.ProductData.TABLE_NAME,  // The table to query
-                null,                               // The columns to return
-                whereColumns,  // The columns for the WHERE clause
-                whereValues,                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                sortOrder                                 // The sort order
+        Cursor cursor = context.getContentResolver().query(
+                // The table to query
+                ContentProviderContract.ContentProviderProductData.CONTENT_URI,
+                // The columns to return
+                null,
+                // The columns for the WHERE clause
+                whereColumns,
+                // The values for the WHERE clause
+                whereValues,
+                // The sort order
+                sortOrder
         );
         asyncCursorAdapter.changeCursor(cursor);
         asyncCursorAdapter.notifyDataSetChanged();
