@@ -98,8 +98,7 @@ public class ContentProviderDetailFragment extends Fragment {
                 favVal = cursor.getString(favColIndex);
             }
 
-            //TODO: Build separate DetailFragment for ContentProvider
-            //TODO: Add && to if/else to handle doodleDataElements[6]
+            //Logic to handle Favoirte Button status on load
             if (favVal.equals("1")) {
                 favoriteButton.setImageResource(R.drawable.star_default_18dp);
             } else {
