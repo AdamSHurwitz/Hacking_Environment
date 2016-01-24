@@ -81,17 +81,15 @@ public class ContentProviderFragment extends Fragment {
                 String favorite = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
                         .COLUMN_NAME_FAVORITE));
 
-                Toast.makeText(getContext(), favorite, Toast.LENGTH_SHORT).show();
-
                 String[] doodleDataItems = {item_id, title, image, description, price, release_date,
                         favorite};
 
                 Log.v(LOG_TAG, "Before Intent: " + favorite);
 
                 Intent intent = new Intent(getActivity(),
-                        AsyncCursorDetailActivity.class);
+                        ContentProviderDetailActivity.class);
 
-                intent.putExtra("Cursor Doodle Attributes", doodleDataItems);
+                intent.putExtra("ContentProvider Doodle Attributes", doodleDataItems);
 
                 startActivity(intent);
             }

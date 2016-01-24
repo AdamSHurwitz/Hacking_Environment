@@ -171,13 +171,10 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
      */
     private void parseJSONResponse(String jsonResponse)
             throws JSONException {
-
         try {
             JSONArray jsonarray = new JSONArray(jsonResponse);
-
             // Initialize ArrayList of Content Values size of data Array length
             cVVector = new Vector<>(jsonarray.length());
-
             for (int index = 0; index < jsonarray.length(); index++) {
                 JSONObject jsonObject = jsonarray.getJSONObject(index);
                 putDataIntoDb(
