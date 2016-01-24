@@ -48,7 +48,7 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
     public static final String IS_VINTAGE_BOOLEAN = "vintage";
 
     private final Context context;
-    private AsyncCursorAdapter asyncCursorAdapter;
+    private ContentProviderCursorAdapter contentProviderCursorAdapter;
     public String showFilter = "";
     Vector<ContentValues> cVVector;
 
@@ -58,9 +58,9 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
      *
      * @param context Context of Activity
      */
-    public ContentProviderFetchDataTask(Context context, AsyncCursorAdapter cursorAdapter) {
+    public ContentProviderFetchDataTask(Context context, ContentProviderCursorAdapter cursorAdapter) {
         this.context = context;
-        asyncCursorAdapter = cursorAdapter;
+        contentProviderCursorAdapter = cursorAdapter;
     }
 
     @Override
@@ -313,8 +313,8 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
                 // The sort order
                 sortOrder
         );
-        asyncCursorAdapter.changeCursor(cursor);
-        asyncCursorAdapter.notifyDataSetChanged();
+        contentProviderCursorAdapter.changeCursor(cursor);
+        contentProviderCursorAdapter.notifyDataSetChanged();
     }
 }
 

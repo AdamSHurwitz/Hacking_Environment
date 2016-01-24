@@ -25,7 +25,7 @@ import com.example.adamhurwitz.hackingenvironment.data.CursorContract;
  */
 public class ContentProviderFragment extends Fragment {
     private final String LOG_TAG = ContentProviderFragment.class.getSimpleName();
-    private AsyncCursorAdapter asyncCursorAdapter;
+    private ContentProviderCursorAdapter contentProviderCursorAdapter;
     public String showFilter = "";
 
     /**
@@ -38,15 +38,15 @@ public class ContentProviderFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.grid_recentview_layout, container, false);
+        View view = inflater.inflate(R.layout.grid_contentproviderview_layout, container, false);
 
         setHasOptionsMenu(true);
 
-        asyncCursorAdapter = new AsyncCursorAdapter(getActivity(), null, 0);
+        contentProviderCursorAdapter = new ContentProviderCursorAdapter(getActivity(), null, 0);
 
         // Get a reference to the grid view layout and attach the adapter to it.
-        GridView gridView = (GridView) view.findViewById(R.id.grid_recentview_layout);
-        gridView.setAdapter(asyncCursorAdapter);
+        GridView gridView = (GridView) view.findViewById(R.id.grid_contentproviderview_layout);
+        gridView.setAdapter(contentProviderCursorAdapter);
 
 
         // Create Toast
@@ -103,7 +103,7 @@ public class ContentProviderFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        asyncCursorAdapter.notifyDataSetChanged();
+        contentProviderCursorAdapter.notifyDataSetChanged();
         getData();
     }
 
@@ -123,7 +123,7 @@ public class ContentProviderFragment extends Fragment {
             /*ContentProviderFetchDataTask contentProviderTask = new ContentProviderTask(
                     getContext(), asyncCursorAdapter) {*/
             ContentProviderFetchDataTask contentProviderTask = new ContentProviderFetchDataTask(
-                    getContext(), asyncCursorAdapter) {
+                    getContext(), contentProviderCursorAdapter) {
             };
             contentProviderTask.execute("item_id.desc");
         }
