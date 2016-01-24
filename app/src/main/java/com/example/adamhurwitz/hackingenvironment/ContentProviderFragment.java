@@ -1,5 +1,6 @@
 package com.example.adamhurwitz.hackingenvironment;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,8 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.adamhurwitz.hackingenvironment.data.ContentProviderContract;
 import com.example.adamhurwitz.hackingenvironment.data.CursorContract;
 
 /**
@@ -27,6 +30,8 @@ public class ContentProviderFragment extends Fragment {
     private final String LOG_TAG = ContentProviderFragment.class.getSimpleName();
     private ContentProviderCursorAdapter contentProviderCursorAdapter;
     public String showFilter = "";
+    String doodleTitle = "";
+    String doodleFavortie = "";
 
     /**
      * Empty constructor for the AsyncParcelableFragment1() class.
@@ -65,11 +70,14 @@ public class ContentProviderFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final ImageView favoriteButton = (ImageView) view.findViewById(
+                        R.id.gridItem_favorite_button);
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                 String item_id = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
                         .COLUMN_NAME_ITEMID));
                 String title = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
                         .COLUMN_NAME_TITLE));
+                doodleTitle = title;
                 String image = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
                         .COLUMN_NAME_IMAGEURL));
                 String description = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
@@ -80,6 +88,7 @@ public class ContentProviderFragment extends Fragment {
                         .COLUMN_NAME_RELEASEDATE));
                 String favorite = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
                         .COLUMN_NAME_FAVORITE));
+                doodleFavortie = favorite;
 
                 String[] doodleDataItems = {item_id, title, image, description, price, release_date,
                         favorite};
@@ -92,6 +101,40 @@ public class ContentProviderFragment extends Fragment {
                 intent.putExtra("ContentProvider Doodle Attributes", doodleDataItems);
 
                 startActivity(intent);
+
+                favoriteButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Toast.makeText(getContext(), "MEOW", Toast.LENGTH_SHORT).show();
+
+                        /*CursorDbHelper cursorDbHelper = new CursorDbHelper(getContext());
+                        SQLiteDatabase db = cursorDbHelper.getReadableDatabase();
+                        Cursor cursor = db.query(
+                                CursorContract.ProductData.TABLE_NAME, null,
+                                CursorContract.ProductData.COLUMN_NAME_TITLE + "= ?",
+                                new String[]{doodleTitle}, null, null,
+                                CursorContract.ProductData._ID + " DESC");*/
+
+                        /*Cursor cursor = getContext().getContentResolver().query(
+                                ContentProviderContract.ContentProviderProductData.CONTENT_URI,
+                                null, ContentProviderContract.ContentProviderProductData
+                                        .COLUMN_NAME_TITLE + "= ?", new String[] {doodleTitle},
+                                null);*/
+                        ContentValues values = new ContentValues();
+                        int rowsUpdated = 0;
+                        if (doodleFavortie.equals("1")) {
+                            favoriteButton.setImageResource(R.drawable.star_pressed_18dp);
+                            values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 2);
+                        } else {
+                            favoriteButton.setImageResource(R.drawable.star_default_18dp);
+                            values.put(CursorContract.ProductData.COLUMN_NAME_FAVORITE, 1);
+                        }
+                        rowsUpdated = getContext().getContentResolver().update(
+                                ContentProviderContract.ContentProviderProductData.CONTENT_URI,
+                                values, ContentProviderContract.ContentProviderProductData
+                                        .COLUMN_NAME_TITLE + "= ?", new String[] {doodleTitle});
+                        //cursor.close();
+                    }
+                });
             }
         });
 
