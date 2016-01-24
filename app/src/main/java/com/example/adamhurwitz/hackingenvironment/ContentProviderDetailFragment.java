@@ -98,7 +98,7 @@ public class ContentProviderDetailFragment extends Fragment {
                 favVal = cursor.getString(favColIndex);
             }
 
-            //Logic to handle Favoirte Button status on load
+            //Logic to handle Favorite Button status on load
             if (favVal.equals("1")) {
                 favoriteButton.setImageResource(R.drawable.star_default_18dp);
             } else {
