@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.adamhurwitz.hackingenvironment.data.ContentProviderContract;
+import com.example.adamhurwitz.hackingenvironment.data.CursorContract;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -93,9 +94,9 @@ public class ContentProviderDetailFragment extends Fragment {
                     null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                int favColIndex = cursor.getColumnIndex(ContentProviderContract
-                        .ContentProviderProductData.COLUMN_NAME_FAVORITE);
-                favVal = cursor.getString(favColIndex);
+                favVal = cursor.getString(
+                        cursor.getColumnIndexOrThrow(CursorContract.ProductData
+                                .COLUMN_NAME_FAVORITE));
             }
 
             //Logic to handle Favorite Button status on load

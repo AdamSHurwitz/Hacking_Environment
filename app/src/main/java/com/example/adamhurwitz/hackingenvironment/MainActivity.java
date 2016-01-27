@@ -145,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         TabsAdapter adapter = new TabsAdapter(getSupportFragmentManager());
         //adapter.addFragment(new PredefinedContentProviderFragment(), "Predefined ContentProvider");
+        adapter.addFragment(new LoaderFragment(), "Loader Fragment");
         adapter.addFragment(new ContentProviderFragment(), "ContentProvider Fragment");
         adapter.addFragment(new LaunchNewActivityFragment(), "NewActivity");
         adapter.addFragment(new SharedPrefTestFragment(), "SharedPref");

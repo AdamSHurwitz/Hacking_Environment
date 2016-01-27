@@ -10,6 +10,9 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -26,17 +29,18 @@ import com.example.adamhurwitz.hackingenvironment.data.CursorContract;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ContentProviderFragment extends Fragment {
-    private final String LOG_TAG = ContentProviderFragment.class.getSimpleName();
+public class LoaderFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+    private final String LOG_TAG = LoaderFragment.class.getSimpleName();
     private ContentProviderCursorAdapter contentProviderCursorAdapter;
     public String showFilter = "";
     String doodleTitle = "";
     String doodleFavortie = "";
+    private static final int FORECAST_LOADER = 0;
 
     /**
      * Empty constructor for the AsyncParcelableFragment1() class.
      */
-    public ContentProviderFragment() {
+    public LoaderFragment() {
     }
 
     @Override
@@ -116,7 +120,7 @@ public class ContentProviderFragment extends Fragment {
                         rowsUpdated = getContext().getContentResolver().update(
                                 ContentProviderContract.ContentProviderProductData.CONTENT_URI,
                                 values, ContentProviderContract.ContentProviderProductData
-                                        .COLUMN_NAME_TITLE + "= ?", new String[] {doodleTitle});
+                                        .COLUMN_NAME_TITLE + "= ?", new String[]{doodleTitle});
                     }
                 });
             }
@@ -149,11 +153,84 @@ public class ContentProviderFragment extends Fragment {
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
             /*ContentProviderFetchDataTask contentProviderTask = new ContentProviderTask(
                     getContext(), asyncCursorAdapter) {*/
-            ContentProviderFetchDataTask contentProviderTask = new ContentProviderFetchDataTask(
+            LoaderFetchDataTask loaderTask = new LoaderFetchDataTask(
                     getContext(), contentProviderCursorAdapter) {
             };
-            contentProviderTask.execute("item_id.desc");
+            loaderTask.execute("item_id.desc");
         }
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        getLoaderManager().initLoader(FORECAST_LOADER, null, this);
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    public void showFilter(String filterBy) {
+        showFilter = filterBy;
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+
+        // The values for the WHERE clause
+        String[] whereValues = {"0", "0"};
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder = "";
+
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String filterBy = pref.getString("asynccursor1_settings_key", "popular");
+        String whereColumns = CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND "
+                + CursorContract.ProductData.COLUMN_NAME_RECENT + " = ?";
+
+        showFilter(filterBy);
+
+        switch (filterBy) {
+            case "popular":
+                whereValues[0] = "0";
+                whereValues[1] = "0";
+                sortOrder = ContentProviderContract.ContentProviderProductData
+                        .COLUMN_NAME_POPULARITY + " DESC";
+                break;
+            case "recent":
+                whereValues[0] = "0";
+                whereValues[1] = "1";
+                sortOrder = ContentProviderContract.ContentProviderProductData
+                        .COLUMN_NAME_RELEASEDATE + " DESC";
+                /*Toast.makeText(getContext(),"Filtering by " + filterBy+"...", Toast.LENGTH_SHORT)
+                .show();*/
+                break;
+            case "vintage":
+                whereValues[0] = "1";
+                whereValues[1] = "0";
+                sortOrder = ContentProviderContract.ContentProviderProductData
+                        .COLUMN_NAME_RELEASEDATE + " DESC";
+                /*Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
+                .show();*/
+                break;
+            default:
+                whereValues[0] = "0";
+                whereValues[1] = "0";
+                sortOrder = ContentProviderContract.ContentProviderProductData
+                        .COLUMN_NAME_POPULARITY + " DESC";
+                /*Toast.makeText(getContext(),"Filtering by " + filterBy +"...", Toast.LENGTH_SHORT)
+                .show();*/
+                break;
+        }
+
+        return new CursorLoader(getActivity(),
+                ContentProviderContract.ContentProviderProductData.CONTENT_URI, null, whereColumns,
+                whereValues, sortOrder);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+        contentProviderCursorAdapter.swapCursor(cursor);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {
+        contentProviderCursorAdapter.swapCursor(null);
     }
 
     @Override
@@ -168,4 +245,5 @@ public class ContentProviderFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }
