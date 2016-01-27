@@ -45,7 +45,7 @@ public abstract class LoaderFetchDataTask extends AsyncTask<String, Void, Void> 
     public static final String IS_VINTAGE_BOOLEAN = "vintage";
 
     private final Context context;
-    private ContentProviderCursorAdapter contentProviderCursorAdapter;
+    private CursorLoaderAdapter cursorLoaderAdapter;
     public String showFilter = "";
     Vector<ContentValues> cVVector;
 
@@ -55,9 +55,9 @@ public abstract class LoaderFetchDataTask extends AsyncTask<String, Void, Void> 
      *
      * @param context Context of Activity
      */
-    public LoaderFetchDataTask(Context context, ContentProviderCursorAdapter cursorAdapter) {
+    public LoaderFetchDataTask(Context context, CursorLoaderAdapter adapter) {
         this.context = context;
-        contentProviderCursorAdapter = cursorAdapter;
+        cursorLoaderAdapter = adapter;
     }
 
     @Override

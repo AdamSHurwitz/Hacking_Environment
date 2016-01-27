@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         initialPrefString = pref.getString("loader_settings_key", "popular");
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new LoaderFragment(), LOADERFRAGMENT_TAG)
+                    .add(R.id.container, new CursorLoaderFragment(), LOADERFRAGMENT_TAG)
                     .commit();
         }
 
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         TabsAdapter adapter = new TabsAdapter(getSupportFragmentManager());
         //adapter.addFragment(new PredefinedContentProviderFragment(), "Predefined ContentProvider");
-        adapter.addFragment(new LoaderFragment(), "Loader Fragment");
+        adapter.addFragment(new CursorLoaderFragment(), "Loader Fragment");
         adapter.addFragment(new ContentProviderFragment(), "ContentProvider Fragment");
         adapter.addFragment(new LaunchNewActivityFragment(), "NewActivity");
         adapter.addFragment(new SharedPrefTestFragment(), "SharedPref");
@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
         String currentPrefString = currentPref.getString("loader_settings_key", "popular");
         // update the location in our second pane using the fragment manager
         if (currentPrefString != null && !currentPrefString.equals(initialPrefString)) {
-            LoaderFragment lf = (LoaderFragment)getSupportFragmentManager().findFragmentByTag(
+            CursorLoaderFragment lf = (CursorLoaderFragment)getSupportFragmentManager().findFragmentByTag(
                     LOADERFRAGMENT_TAG);
             if ( null != lf ) {
                 lf.onPreferenceChange();
