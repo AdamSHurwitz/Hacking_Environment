@@ -181,7 +181,6 @@ public class LoaderFragment extends Fragment implements LoaderManager.LoaderCall
         String filterBy = pref.getString("loader_settings_key", "popular");
         String whereColumns = CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND "
                 + CursorContract.ProductData.COLUMN_NAME_RECENT + " = ?";
-        //TODO: Add in check to see if SharedPref has changed and requery Cusor
         showFilter(filterBy);
 
         switch (filterBy) {
@@ -231,12 +230,69 @@ public class LoaderFragment extends Fragment implements LoaderManager.LoaderCall
 
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
+        /*
+        // The values for the WHERE clause
+        String[] whereValues = {"0", "0"};
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder = "";
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String filterBy = pref.getString("loader_settings_key", "popular");
+        String whereColumns = CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND "
+                + CursorContract.ProductData.COLUMN_NAME_RECENT + " = ?";
+        showFilter(filterBy);
+
+        switch (filterBy) {
+            case "popular":
+                whereValues[0] = "0";
+                whereValues[1] = "0";
+                sortOrder = ContentProviderContract.ContentProviderProductData
+                        .COLUMN_NAME_POPULARITY + " DESC";
+                Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
+                        .show();
+                break;
+            case "recent":
+                whereValues[0] = "0";
+                whereValues[1] = "1";
+                sortOrder = ContentProviderContract.ContentProviderProductData
+                        .COLUMN_NAME_RELEASEDATE + " DESC";
+                Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
+                        .show();
+                break;
+            case "vintage":
+                whereValues[0] = "1";
+                whereValues[1] = "0";
+                sortOrder = ContentProviderContract.ContentProviderProductData
+                        .COLUMN_NAME_RELEASEDATE + " DESC";
+                Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
+                        .show();
+                break;
+            default:
+                whereValues[0] = "0";
+                whereValues[1] = "0";
+                sortOrder = ContentProviderContract.ContentProviderProductData
+                        .COLUMN_NAME_POPULARITY + " DESC";
+                Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
+                        .show();
+                break;
+        }
+       Cursor cursor = getContext().getContentResolver().query(
+                ContentProviderContract.ContentProviderProductData.CONTENT_URI,
+                null, whereColumns, whereValues, sortOrder);
+
+        int rowsUpdated = 0;
+        rowsUpdated = getContext().getContentResolver().update(
+                ContentProviderContract.ContentProviderProductData.CONTENT_URI,
+
+        );
+        */
+
         contentProviderCursorAdapter.swapCursor(null);
     }
 
     // since we read the location when we create the loader, all we need to do is restart things
     public void onPreferenceChange() {
-        getData();
+        //TODO: Figure out why .restartLoader() isn't requerying data
+        //getData();
         getLoaderManager().restartLoader(LOADER_FRAGMENT, null, this);
     }
 
