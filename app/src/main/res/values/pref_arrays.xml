@@ -1,25 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="asynccursor1_settings_entries">
+    <string-array name="loader_settings_entries">
         <item>Popular</item>
         <item>Recent</item>
         <item>Vintage</item>
     </string-array>
-    <string-array name="asynccursor1_settings_values">
+    <string-array name="loader_settings_values">
         <item>popular</item>
         <item>recent</item>
         <item>vintage</item>
     </string-array>
-
-    <string-array name="asynccursor2_settings_entries">
-        <item>Popular</item>
-        <item>Recent</item>
-        <item>Vintage</item>
-    </string-array>
-    <string-array name="asynccursor2_settings_values">
-        <item>popular</item>
-        <item>recent</item>
-        <item>vintage</item>
-    </string-array>
-
 </resources>

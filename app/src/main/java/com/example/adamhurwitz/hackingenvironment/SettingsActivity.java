@@ -35,9 +35,7 @@ public class SettingsActivity extends PreferenceActivity
         bindPreferenceSummaryToValue(findPreference(getString(
                 R.string.sharedpref_settings_key)));
         bindPreferenceSummaryToValue(findPreference(getString(
-                R.string.asynccursor1_settings_key)));
-        bindPreferenceSummaryToValue(findPreference(getString(
-                R.string.asynccursor2_settings_key)));
+                R.string.loader_settings_key)));
 
         // Status Bar: Add Color
         Window window = getWindow();

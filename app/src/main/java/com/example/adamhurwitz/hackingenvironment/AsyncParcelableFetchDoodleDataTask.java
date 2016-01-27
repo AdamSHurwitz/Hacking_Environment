@@ -56,7 +56,6 @@ public class AsyncParcelableFetchDoodleDataTask extends AsyncTask<String, Void, 
         String jsonResponse = null;
 
         try {
-            //TODO: Add Switch Case Based on Shared Preferences
             // Construct the URL to fetch data from and make the connection for "recent" and
             // "popular" views
             if (params[1] == "popular") {

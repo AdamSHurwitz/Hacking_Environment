@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 return true;
 
-                            //TODO: Enable Navigation to Tab Fragment, savedBundleState(), onRestoreState()
+                            //TODO: Enable Down/Up Navigation to Tab Fragments, savedBundleState(), onRestoreState()
                             //http://developer.android.com/training/basics/activity-lifecycle/recreating.html
                             case R.id.navigate_to_tab:
                                 Toast.makeText(getApplicationContext(), "ADD NAVIGATION TO TAB", Toast

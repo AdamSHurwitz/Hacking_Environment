@@ -30,7 +30,6 @@ private final String LOG_TAG = AsyncParcelableDetailActivity.class.getSimpleName
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getResources().getColor(R.color.status_bar));
 
-        //TODO: Enable Up Button Navigation For Fragment, savedBundleState(), onRestoreState()
         //http://developer.android.com/training/basics/activity-lifecycle/recreating.html
         // Back Button To Go Home
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

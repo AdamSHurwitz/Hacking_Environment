@@ -46,6 +46,12 @@
         gridview (2/2)</string>
     <string name="asynccursor2_settings_title">ASYNC W/ CURSORADAPTER (2/2)</string>
 
+    <!--loader-->
+    <string name="loader_settings_key">loader_settings_key</string>
+       <string name="loader_settings_summary">choose how to sort the loader
+        gridview (2/2)</string>
+    <string name="loader_settings_title">Loader Fragment</string>
+
 
     <!-- New Activity Test -->
     <string name="launched_activity">This Activity Has Been Launched. Woohoo!</string>

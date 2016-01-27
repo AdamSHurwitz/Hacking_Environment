@@ -64,7 +64,6 @@ public abstract class AsyncCursorFetchDataTask extends AsyncTask<String, Void, V
         // This variable will contain the raw JSON response as a string.
         String jsonResponse= null;
 
-        //TODO: Use As Example For Switch Case Based on Shared Preferences
         try {
             // Construct the URL to fetch data from and make the connection.
             Uri builtUri = Uri.parse(FAS_API_BASE_URL).buildUpon()

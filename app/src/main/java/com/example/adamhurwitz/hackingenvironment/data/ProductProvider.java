@@ -61,7 +61,6 @@ public class ProductProvider extends ContentProvider {
         matcher.addURI(authority, ContentProviderContract.PATH_PRODUCTTABLE, PRODUCT);
         // use 'ContentProviderContract.PATH_PRODUCT + "/*"' for path with one additional item
         // string or 'ContentProviderContract.PATH_PRODUCT + "/*/#"' for path with string then a num
-        //TODO: should return 100?
         Log.v(LOG_TAG, "UriMatcher_returns :" + String.valueOf(matcher));
         return matcher;
     }
@@ -76,7 +75,6 @@ public class ProductProvider extends ContentProvider {
 
         switch (match) {
             case PRODUCT:
-                //TODO: should return something
                 Log.v(LOG_TAG, "getType :" + ContentProviderContract.ContentProviderProductData
                         .CONTENT_TYPE);
                 return ContentProviderContract.ContentProviderProductData.CONTENT_TYPE;

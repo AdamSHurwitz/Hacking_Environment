@@ -182,7 +182,7 @@ public class LoaderFragment extends Fragment implements LoaderManager.LoaderCall
         String filterBy = pref.getString("asynccursor1_settings_key", "popular");
         String whereColumns = CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND "
                 + CursorContract.ProductData.COLUMN_NAME_RECENT + " = ?";
-
+        //TODO: Add in check to see if SharedPref has changed and requery Cusor
         showFilter(filterBy);
 
         switch (filterBy) {
@@ -191,30 +191,32 @@ public class LoaderFragment extends Fragment implements LoaderManager.LoaderCall
                 whereValues[1] = "0";
                 sortOrder = ContentProviderContract.ContentProviderProductData
                         .COLUMN_NAME_POPULARITY + " DESC";
+                Toast.makeText(getContext(),"Filtering by " + filterBy+"...", Toast.LENGTH_SHORT)
+                        .show();
                 break;
             case "recent":
                 whereValues[0] = "0";
                 whereValues[1] = "1";
                 sortOrder = ContentProviderContract.ContentProviderProductData
                         .COLUMN_NAME_RELEASEDATE + " DESC";
-                /*Toast.makeText(getContext(),"Filtering by " + filterBy+"...", Toast.LENGTH_SHORT)
-                .show();*/
+                Toast.makeText(getContext(),"Filtering by " + filterBy+"...", Toast.LENGTH_SHORT)
+                .show();
                 break;
             case "vintage":
                 whereValues[0] = "1";
                 whereValues[1] = "0";
                 sortOrder = ContentProviderContract.ContentProviderProductData
                         .COLUMN_NAME_RELEASEDATE + " DESC";
-                /*Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
-                .show();*/
+                Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
+                .show();
                 break;
             default:
                 whereValues[0] = "0";
                 whereValues[1] = "0";
                 sortOrder = ContentProviderContract.ContentProviderProductData
                         .COLUMN_NAME_POPULARITY + " DESC";
-                /*Toast.makeText(getContext(),"Filtering by " + filterBy +"...", Toast.LENGTH_SHORT)
-                .show();*/
+                Toast.makeText(getContext(),"Filtering by " + filterBy +"...", Toast.LENGTH_SHORT)
+                .show();
                 break;
         }
 
