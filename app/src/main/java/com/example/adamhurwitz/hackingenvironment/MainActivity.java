@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Get initial SharedPreference setting
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        initialPrefString = pref.getString("asynccursor2_settings_key", "popular");
+        initialPrefString = pref.getString("loader_settings_key", "popular");
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new LoaderFragment(), LOADERFRAGMENT_TAG)
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         SharedPreferences currentPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String currentPrefString = currentPref.getString("asynccursor2_settings_key", "popular");
+        String currentPrefString = currentPref.getString("loader_settings_key", "popular");
         // update the location in our second pane using the fragment manager
         if (currentPrefString != null && !currentPrefString.equals(initialPrefString)) {
             LoaderFragment lf = (LoaderFragment)getSupportFragmentManager().findFragmentByTag(
