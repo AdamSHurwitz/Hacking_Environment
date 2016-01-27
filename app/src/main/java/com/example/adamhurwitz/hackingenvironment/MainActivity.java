@@ -1,7 +1,9 @@
 package com.example.adamhurwitz.hackingenvironment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -20,12 +22,23 @@ public class MainActivity extends AppCompatActivity {
 
     // DrawerView: Initialize DrawerLayout - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     private DrawerLayout mDrawerLayout;
+    private final String LOADERFRAGMENT_TAG = "LFTAG";
+    private String initialPrefString;
     // ---------------------------------------------------------------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Get initial SharedPreference setting
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        initialPrefString = pref.getString("asynccursor2_settings_key", "popular");
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, new LoaderFragment(), LOADERFRAGMENT_TAG)
+                    .commit();
+        }
 
         // DrawerView: Initialize Toolbar and Navigation View, Set Listener - - - - - - - - - - - -
 
@@ -187,6 +200,22 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences currentPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String currentPrefString = currentPref.getString("asynccursor2_settings_key", "popular");
+        // update the location in our second pane using the fragment manager
+        if (currentPrefString != null && !currentPrefString.equals(initialPrefString)) {
+            LoaderFragment lf = (LoaderFragment)getSupportFragmentManager().findFragmentByTag(
+                    LOADERFRAGMENT_TAG);
+            if ( null != lf ) {
+                lf.onPreferenceChange();
+            }
+            initialPrefString = currentPrefString;
         }
     }
 }

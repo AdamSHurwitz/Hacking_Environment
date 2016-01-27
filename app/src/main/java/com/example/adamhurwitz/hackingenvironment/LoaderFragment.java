@@ -35,7 +35,7 @@ public class LoaderFragment extends Fragment implements LoaderManager.LoaderCall
     public String showFilter = "";
     String doodleTitle = "";
     String doodleFavortie = "";
-    private static final int FORECAST_LOADER = 0;
+    private static final int LOADER_FRAGMENT = 0;
 
     /**
      * Empty constructor for the AsyncParcelableFragment1() class.
@@ -144,9 +144,8 @@ public class LoaderFragment extends Fragment implements LoaderManager.LoaderCall
         NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
 
         // Get SharedPref Value
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String result = pref.getString("asynccursor2_settings_key",
-                "popular");
+      /*  SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String result = pref.getString("loader_settings_key", "popular");*/
 
         // Make sure that the device is actually connected to the internet before trying to get data
         // about the Google doodles.
@@ -162,7 +161,7 @@ public class LoaderFragment extends Fragment implements LoaderManager.LoaderCall
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        getLoaderManager().initLoader(FORECAST_LOADER, null, this);
+        getLoaderManager().initLoader(LOADER_FRAGMENT, null, this);
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -179,7 +178,7 @@ public class LoaderFragment extends Fragment implements LoaderManager.LoaderCall
         String sortOrder = "";
 
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
-        String filterBy = pref.getString("asynccursor1_settings_key", "popular");
+        String filterBy = pref.getString("loader_settings_key", "popular");
         String whereColumns = CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND "
                 + CursorContract.ProductData.COLUMN_NAME_RECENT + " = ?";
         //TODO: Add in check to see if SharedPref has changed and requery Cusor
@@ -191,7 +190,7 @@ public class LoaderFragment extends Fragment implements LoaderManager.LoaderCall
                 whereValues[1] = "0";
                 sortOrder = ContentProviderContract.ContentProviderProductData
                         .COLUMN_NAME_POPULARITY + " DESC";
-                Toast.makeText(getContext(),"Filtering by " + filterBy+"...", Toast.LENGTH_SHORT)
+                Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
                         .show();
                 break;
             case "recent":
@@ -199,8 +198,8 @@ public class LoaderFragment extends Fragment implements LoaderManager.LoaderCall
                 whereValues[1] = "1";
                 sortOrder = ContentProviderContract.ContentProviderProductData
                         .COLUMN_NAME_RELEASEDATE + " DESC";
-                Toast.makeText(getContext(),"Filtering by " + filterBy+"...", Toast.LENGTH_SHORT)
-                .show();
+                Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
+                        .show();
                 break;
             case "vintage":
                 whereValues[0] = "1";
@@ -208,15 +207,15 @@ public class LoaderFragment extends Fragment implements LoaderManager.LoaderCall
                 sortOrder = ContentProviderContract.ContentProviderProductData
                         .COLUMN_NAME_RELEASEDATE + " DESC";
                 Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
-                .show();
+                        .show();
                 break;
             default:
                 whereValues[0] = "0";
                 whereValues[1] = "0";
                 sortOrder = ContentProviderContract.ContentProviderProductData
                         .COLUMN_NAME_POPULARITY + " DESC";
-                Toast.makeText(getContext(),"Filtering by " + filterBy +"...", Toast.LENGTH_SHORT)
-                .show();
+                Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
+                        .show();
                 break;
         }
 
@@ -233,6 +232,12 @@ public class LoaderFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
         contentProviderCursorAdapter.swapCursor(null);
+    }
+
+    // since we read the location when we create the loader, all we need to do is restart things
+    public void onPreferenceChange() {
+        getData();
+        getLoaderManager().restartLoader(LOADER_FRAGMENT, null, this);
     }
 
     @Override
