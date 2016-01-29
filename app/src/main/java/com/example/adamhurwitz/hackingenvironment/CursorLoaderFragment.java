@@ -37,6 +37,12 @@ public class CursorLoaderFragment extends Fragment implements LoaderManager.Load
     String doodleFavortie = "";
     private static final int LOADER_FRAGMENT = 0;
 
+    // How you want the results sorted in the resulting Cursor
+    String whereColumns = CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND "
+            + CursorContract.ProductData.COLUMN_NAME_RECENT + " = ?";
+    String[] whereValues = {"0", "0"};
+    String sortOrder = "";
+
     /**
      * Empty constructor for the AsyncParcelableFragment1() class.
      */
@@ -47,14 +53,14 @@ public class CursorLoaderFragment extends Fragment implements LoaderManager.Load
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.grid_contentproviderview_layout, container, false);
+        View view = inflater.inflate(R.layout.grid_loaderview_layout, container, false);
 
         setHasOptionsMenu(true);
 
         cursorLoaderAdapter = new CursorLoaderAdapter(getActivity(), null, 0);
 
         // Get a reference to the grid view layout and attach the adapter to it.
-        GridView gridView = (GridView) view.findViewById(R.id.grid_contentproviderview_layout);
+        GridView gridView = (GridView) view.findViewById(R.id.grid_loaderview_layout);
         gridView.setAdapter(cursorLoaderAdapter);
 
 
@@ -75,7 +81,7 @@ public class CursorLoaderFragment extends Fragment implements LoaderManager.Load
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final ImageView favoriteButton = (ImageView) view.findViewById(
-                        R.id.gridItem_favorite_button);
+                        R.id.loadergridItem_favorite_button);
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                 String item_id = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
                         .COLUMN_NAME_ITEMID));
@@ -172,15 +178,8 @@ public class CursorLoaderFragment extends Fragment implements LoaderManager.Load
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
 
-        // The values for the WHERE clause
-        String[] whereValues = {"0", "0"};
-        // How you want the results sorted in the resulting Cursor
-        String sortOrder = "";
-
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
         String filterBy = pref.getString("loader_settings_key", "popular");
-        String whereColumns = CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND "
-                + CursorContract.ProductData.COLUMN_NAME_RECENT + " = ?";
         showFilter(filterBy);
 
         switch (filterBy) {
@@ -228,15 +227,29 @@ public class CursorLoaderFragment extends Fragment implements LoaderManager.Load
         cursorLoaderAdapter.swapCursor(cursor);
     }
 
+    //TODO: Check instantiated items are passed into onLoaderReset correctly (Use debug tool)
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
-        cursorLoaderAdapter.swapCursor(null);
+        Cursor newCursor = getContext().getContentResolver().query(
+                ContentProviderContract.ContentProviderProductData.CONTENT_URI,
+                null,
+                whereColumns,
+                whereValues,
+                sortOrder
+        );
+        Log.v(LOG_TAG,"onLoaderReset Check: "+"URI: "+
+                ContentProviderContract.ContentProviderProductData.CONTENT_URI+" whereColumns: "
+        + whereColumns+" whereValues: " + whereValues+" sortOrder: " + sortOrder);
+        cursorLoaderAdapter.notifyDataSetChanged();
+        cursorLoaderAdapter.changeCursor(newCursor);
+        cursorLoaderAdapter.swapCursor(newCursor);
+        //cursorLoaderAdapter.swapCursor(null);
     }
 
     // since we read the location when we create the loader, all we need to do is restart things
     public void onPreferenceChange() {
-        //TODO: Figure out why .restartLoader() isn't requerying data
         //getData();
+        //getLoaderManager().destroyLoader(LOADER_FRAGMENT);
         getLoaderManager().restartLoader(LOADER_FRAGMENT, null, this);
     }
 

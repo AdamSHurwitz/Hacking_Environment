@@ -55,14 +55,14 @@ public class CursorLoaderAdapter extends android.widget.CursorAdapter {
         ViewHolder holder;
 
         // Inflating new view for our layout
-        View view = inflater.inflate(R.layout.grid_contentprovideritem_layout, parent, false);
+        View view = inflater.inflate(R.layout.grid_loaderitem_layout, parent, false);
         holder = new ViewHolder();
 
         // Once view is inflated we can grab elements, getting and saving grid_item_imageview
         // as ImageView
-        holder.gridItem = (ImageView) view.findViewById(R.id.grid_contentprovideritem_imageview);
+        holder.gridItem = (ImageView) view.findViewById(R.id.grid_loaderitem_imageview);
         view.setTag(holder);
-        holder.favoriteGridBtn = (ImageView) view.findViewById(R.id.gridItem_favorite_button);
+        holder.favoriteGridBtn = (ImageView) view.findViewById(R.id.loadergridItem_favorite_button);
 
         return view;
     }
