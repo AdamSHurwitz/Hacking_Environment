@@ -253,4 +253,8 @@ public class CursorLoaderFragment extends Fragment implements LoaderManager.Load
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

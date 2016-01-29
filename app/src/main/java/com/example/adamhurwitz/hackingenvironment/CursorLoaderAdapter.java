@@ -30,6 +30,12 @@ public class CursorLoaderAdapter extends android.widget.CursorAdapter {
         this.context = context;
     }
 
+    class ViewHolder {
+        // declare your views here
+        ImageView gridItem;
+        ImageView favoriteGridBtn;
+    }
+
     // getView to create view, telling Adapter what's included in the static_item_layout
     @Override
     /**
@@ -82,11 +88,5 @@ public class CursorLoaderAdapter extends android.widget.CursorAdapter {
             holder.favoriteGridBtn.setImageResource(R.drawable.star_default_18dp);
         }
         else{holder.favoriteGridBtn.setImageResource(R.drawable.star_pressed_18dp);}
-    }
-
-    class ViewHolder {
-        // declare your views here
-        ImageView gridItem;
-        ImageView favoriteGridBtn;
     }
 }
