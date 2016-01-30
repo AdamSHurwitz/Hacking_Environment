@@ -62,10 +62,6 @@ public class ContentProviderCursorAdapter extends android.widget.CursorAdapter {
     }
 
     public void bindView(View view, Context context, Cursor cursor) {
-        // Access database
-        //CursorDbHelper mDbHelper = new CursorDbHelper(context);
-        // Gets the data repository in read mode
-        //SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
         String imageURL = cursor.getString(
                 cursor.getColumnIndexOrThrow(ContentProviderContract.ContentProviderProductData

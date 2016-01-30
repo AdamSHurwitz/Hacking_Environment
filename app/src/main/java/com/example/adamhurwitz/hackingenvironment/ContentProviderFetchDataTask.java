@@ -11,7 +11,6 @@ import android.util.Log;
 
 import com.example.adamhurwitz.hackingenvironment.data.ContentProviderContract;
 import com.example.adamhurwitz.hackingenvironment.data.CursorContract;
-import com.example.adamhurwitz.hackingenvironment.data.CursorDbHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,7 +57,8 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
      *
      * @param context Context of Activity
      */
-    public ContentProviderFetchDataTask(Context context, ContentProviderCursorAdapter cursorAdapter) {
+    public ContentProviderFetchDataTask(Context context,
+                                        ContentProviderCursorAdapter cursorAdapter) {
         this.context = context;
         contentProviderCursorAdapter = cursorAdapter;
     }
@@ -199,9 +199,6 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
     public void putDataIntoDb(String item_id, String title, String date, String description,
                               String search_strings, int price, String image,
                               Double popularity, Boolean recent, Boolean vintage) {
-
-        // Access database
-        CursorDbHelper mDbHelper = new CursorDbHelper(context);
 
         // Put Info into Database
 
