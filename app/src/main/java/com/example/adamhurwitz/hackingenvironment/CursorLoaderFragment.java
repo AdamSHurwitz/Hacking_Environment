@@ -1,6 +1,5 @@
 package com.example.adamhurwitz.hackingenvironment;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.adamhurwitz.hackingenvironment.data.ContentProviderContract;
@@ -83,8 +81,8 @@ public class CursorLoaderFragment extends Fragment implements LoaderManager.Load
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final ImageView favoriteButton = (ImageView) view.findViewById(
-                        R.id.loadergridItem_favorite_button);
+          /*      final ImageButton favoriteButton = (ImageButton) view.findViewById(
+                        R.id.loadergridItem_favorite_button);*/
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                 String item_id = cursor.getString(cursor.getColumnIndex(CursorContract.ProductData
                         .COLUMN_NAME_ITEMID));
@@ -115,7 +113,7 @@ public class CursorLoaderFragment extends Fragment implements LoaderManager.Load
 
                 startActivity(intent);
 
-                favoriteButton.setOnClickListener(new View.OnClickListener() {
+               /* favoriteButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         ContentValues values = new ContentValues();
                         int rowsUpdated = 0;
@@ -131,7 +129,7 @@ public class CursorLoaderFragment extends Fragment implements LoaderManager.Load
                                 values, ContentProviderContract.ContentProviderProductData
                                         .COLUMN_NAME_TITLE + "= ?", new String[]{doodleTitle});
                     }
-                });
+                });*/
             }
         });
 
