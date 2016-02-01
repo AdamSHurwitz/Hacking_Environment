@@ -20,7 +20,6 @@ public class CursorLoaderAdapter extends android.widget.CursorAdapter {
     Context context;
     String favorite;
     String doodleTitle;
-    //Cursor mCursor;
 
     /**
      * Constructor for the GridViewAdapter object.
@@ -71,12 +70,6 @@ public class CursorLoaderAdapter extends android.widget.CursorAdapter {
     }
 
     public void bindView(View view, final Context context, Cursor cursor) {
-        final Cursor mCursor = cursor;
-        // Access database
-        //CursorDbHelper mDbHelper = new CursorDbHelper(context);
-        // Gets the data repository in read mode
-        //SQLiteDatabase db = mDbHelper.getReadableDatabase();
-
         String imageURL = cursor.getString(
                 cursor.getColumnIndexOrThrow(ContentProviderContract.ContentProviderProductData
                         .COLUMN_NAME_IMAGEURL));
