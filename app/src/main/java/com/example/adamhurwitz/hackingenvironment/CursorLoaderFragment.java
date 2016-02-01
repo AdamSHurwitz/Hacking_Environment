@@ -225,7 +225,6 @@ public class CursorLoaderFragment extends Fragment implements LoaderManager.Load
         cursorLoaderAdapter.swapCursor(cursor);
     }
 
-    //TODO: Check instantiated items are passed into onLoaderReset correctly (Use debug tool)
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
         cursorLoaderAdapter.swapCursor(null);
@@ -249,6 +248,7 @@ public class CursorLoaderFragment extends Fragment implements LoaderManager.Load
         }
     }
 
+    //TODO: Figure out how to update UI when Settings change
     @Override
     public void onResume() {
         super.onResume();
