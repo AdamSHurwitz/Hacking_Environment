@@ -76,8 +76,9 @@ public class ContentProviderCursorAdapter extends android.widget.CursorAdapter {
                 .ContentProviderProductData.COLUMN_NAME_FAVORITE));
         if (favorite.equals("1")) {
             holder.favoriteGridBtn.setImageResource(R.drawable.star_default_18dp);
+        } else {
+            holder.favoriteGridBtn.setImageResource(R.drawable.star_pressed_18dp);
         }
-        else{holder.favoriteGridBtn.setImageResource(R.drawable.star_pressed_18dp);}
     }
 
     class ViewHolder {

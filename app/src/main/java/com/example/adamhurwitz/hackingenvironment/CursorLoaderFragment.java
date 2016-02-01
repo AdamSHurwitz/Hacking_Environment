@@ -36,12 +36,15 @@ public class CursorLoaderFragment extends Fragment implements LoaderManager.Load
     String doodleTitle = "";
     String doodleFavortie = "";
     private static final int LOADER_FRAGMENT = 0;
+    //String initialPref;
 
     // How you want the results sorted in the resulting Cursor
     String whereColumns = CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND "
             + CursorContract.ProductData.COLUMN_NAME_RECENT + " = ?";
     String[] whereValues = {"0", "0"};
     String sortOrder = "";
+    String filterBy;
+    String mCurrentPref = "";
 
     /**
      * Empty constructor for the AsyncParcelableFragment1() class.
@@ -179,44 +182,72 @@ public class CursorLoaderFragment extends Fragment implements LoaderManager.Load
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
 
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
-        String filterBy = pref.getString("loader_settings_key", "popular");
+        filterBy = pref.getString("loader_settings_key", "popular");
         showFilter(filterBy);
 
-        switch (filterBy) {
-            case "popular":
-                whereValues[0] = "0";
-                whereValues[1] = "0";
-                sortOrder = ContentProviderContract.ContentProviderProductData
-                        .COLUMN_NAME_POPULARITY + " DESC";
-                Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            case "recent":
-                whereValues[0] = "0";
-                whereValues[1] = "1";
-                sortOrder = ContentProviderContract.ContentProviderProductData
-                        .COLUMN_NAME_RELEASEDATE + " DESC";
-                Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            case "vintage":
-                whereValues[0] = "1";
-                whereValues[1] = "0";
-                sortOrder = ContentProviderContract.ContentProviderProductData
-                        .COLUMN_NAME_RELEASEDATE + " DESC";
-                Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            default:
-                whereValues[0] = "0";
-                whereValues[1] = "0";
-                sortOrder = ContentProviderContract.ContentProviderProductData
-                        .COLUMN_NAME_POPULARITY + " DESC";
-                Toast.makeText(getContext(), "Filtering by " + filterBy + "...", Toast.LENGTH_SHORT)
-                        .show();
-                break;
+        if (mCurrentPref.equals(null)) {
+            switch (filterBy) {
+                case "popular":
+                    whereValues[0] = "0";
+                    whereValues[1] = "0";
+                    sortOrder = ContentProviderContract.ContentProviderProductData
+                            .COLUMN_NAME_POPULARITY + " DESC";
+                    Log.v(LOG_TAG, "Filtering by filterBy - " + filterBy);
+                    break;
+                case "recent":
+                    whereValues[0] = "0";
+                    whereValues[1] = "1";
+                    sortOrder = ContentProviderContract.ContentProviderProductData
+                            .COLUMN_NAME_RELEASEDATE + " DESC";
+                    Log.v(LOG_TAG, "Filtering by filterBy - " + filterBy);
+                    break;
+                case "vintage":
+                    whereValues[0] = "1";
+                    whereValues[1] = "0";
+                    sortOrder = ContentProviderContract.ContentProviderProductData
+                            .COLUMN_NAME_RELEASEDATE + " DESC";
+                    Log.v(LOG_TAG, "Filtering by filterBy - " + filterBy);
+                    break;
+                default:
+                    whereValues[0] = "0";
+                    whereValues[1] = "0";
+                    sortOrder = ContentProviderContract.ContentProviderProductData
+                            .COLUMN_NAME_POPULARITY + " DESC";
+                    Log.v(LOG_TAG, "Filtering by filterBy - " + filterBy);
+                    break;
+            }
+        } else {
+            switch (mCurrentPref) {
+                case "popular":
+                    whereValues[0] = "0";
+                    whereValues[1] = "0";
+                    sortOrder = ContentProviderContract.ContentProviderProductData
+                            .COLUMN_NAME_POPULARITY + " DESC";
+                    Log.v(LOG_TAG, "Filtering by mCurrentPref " + mCurrentPref);
+                    break;
+                case "recent":
+                    whereValues[0] = "0";
+                    whereValues[1] = "1";
+                    sortOrder = ContentProviderContract.ContentProviderProductData
+                            .COLUMN_NAME_RELEASEDATE + " DESC";
+                    Log.v(LOG_TAG, "Filtering by mCurrentPref " + mCurrentPref);
+                    break;
+                case "vintage":
+                    whereValues[0] = "1";
+                    whereValues[1] = "0";
+                    sortOrder = ContentProviderContract.ContentProviderProductData
+                            .COLUMN_NAME_RELEASEDATE + " DESC";
+                    Log.v(LOG_TAG, "Filtering by mCurrentPref " + mCurrentPref);
+                    break;
+                default:
+                    whereValues[0] = "0";
+                    whereValues[1] = "0";
+                    sortOrder = ContentProviderContract.ContentProviderProductData
+                            .COLUMN_NAME_POPULARITY + " DESC";
+                    Log.v(LOG_TAG, "Filtering by mCurrentPref " + mCurrentPref);
+                    break;
+            }
         }
-
         return new CursorLoader(getActivity(),
                 ContentProviderContract.ContentProviderProductData.CONTENT_URI, null, whereColumns,
                 whereValues, sortOrder);
@@ -237,9 +268,10 @@ public class CursorLoaderFragment extends Fragment implements LoaderManager.Load
                 whereValues,
                 sortOrder
         );
-        Log.v(LOG_TAG,"onLoaderReset Check: "+"URI: "+
-                ContentProviderContract.ContentProviderProductData.CONTENT_URI+" whereColumns: "
-        + whereColumns+" whereValues: " + whereValues+" sortOrder: " + sortOrder);
+        Log.v(LOG_TAG, "onLoaderReset() - " + filterBy);
+      /*  Log.v(LOG_TAG, "onLoaderReset Check: " + "URI: " +
+                ContentProviderContract.ContentProviderProductData.CONTENT_URI + " whereColumns: "
+                + whereColumns + " whereValues: " + whereValues + " sortOrder: " + sortOrder);*/
         cursorLoaderAdapter.notifyDataSetChanged();
         cursorLoaderAdapter.changeCursor(newCursor);
         cursorLoaderAdapter.swapCursor(newCursor);
@@ -247,10 +279,60 @@ public class CursorLoaderFragment extends Fragment implements LoaderManager.Load
     }
 
     // since we read the location when we create the loader, all we need to do is restart things
-    public void onPreferenceChange() {
+    public void onPreferenceChange(String currentPref) {
+        mCurrentPref = currentPref;
         //getData();
         //getLoaderManager().destroyLoader(LOADER_FRAGMENT);
-        getLoaderManager().restartLoader(LOADER_FRAGMENT, null, this);
+        //getLoaderManager().restartLoader(LOADER_FRAGMENT, null, this);
+        // How you want the results sorted in the resulting Cursor
+      /*  String whereColumns2 = CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND "
+                + CursorContract.ProductData.COLUMN_NAME_RECENT + " = ?";
+        String[] whereValues2 = {"0", "0"};
+        String sortOrder2 = "";
+        Log.v(LOG_TAG, "onPreferenceChange() - " + currentPref);
+        switch (currentPref) {
+            case "popular":
+                whereValues2[0] = "0";
+                whereValues2[1] = "0";
+                sortOrder2 = ContentProviderContract.ContentProviderProductData
+                        .COLUMN_NAME_POPULARITY + " DESC";
+                Log.v(LOG_TAG, "Filtering by " + currentPref);
+                break;
+            case "recent":
+                whereValues2[0] = "0";
+                whereValues2[1] = "1";
+                sortOrder2 = ContentProviderContract.ContentProviderProductData
+                        .COLUMN_NAME_RELEASEDATE + " DESC";
+                Log.v(LOG_TAG, "Filtering by " + currentPref);
+                break;
+            case "vintage":
+                whereValues2[0] = "1";
+                whereValues2[1] = "0";
+                sortOrder2 = ContentProviderContract.ContentProviderProductData
+                        .COLUMN_NAME_RELEASEDATE + " DESC";
+                Log.v(LOG_TAG, "Filtering by " + currentPref);
+                break;
+            default:
+                whereValues2[0] = "0";
+                whereValues2[1] = "0";
+                sortOrder2 = ContentProviderContract.ContentProviderProductData
+                        .COLUMN_NAME_POPULARITY + " DESC";
+                Log.v(LOG_TAG, "Filtering by " + currentPref);
+                break;
+        }
+
+        Cursor onResumeCursor = getContext().getContentResolver().query(
+                // The table to query
+                ContentProviderContract.ContentProviderProductData.CONTENT_URI,
+                // The columns to return
+                null,
+                // The columns for the WHERE clause
+                whereColumns2,
+                // The values for the WHERE clause
+                whereValues2,
+                // The sort order
+                sortOrder2);
+        cursorLoaderAdapter.changeCursor(onResumeCursor);*/
     }
 
     @Override
@@ -269,5 +351,124 @@ public class CursorLoaderFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onResume() {
         super.onResume();
+      /*  String whereColumns2 = CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND "
+                + CursorContract.ProductData.COLUMN_NAME_RECENT + " = ?";
+        String[] whereValues2 = {"0", "0"};
+        String sortOrder2 = "";
+        Log.v(LOG_TAG, "onPreferenceChange() - " + mCurrentPref);
+        if (!mCurrentPref.equals(null)) {
+            switch (mCurrentPref) {
+                case "popular":
+                    whereValues2[0] = "0";
+                    whereValues2[1] = "0";
+                    sortOrder2 = ContentProviderContract.ContentProviderProductData
+                            .COLUMN_NAME_POPULARITY + " DESC";
+                    Log.v(LOG_TAG, "Filtering by " + mCurrentPref);
+                    break;
+                case "recent":
+                    whereValues2[0] = "0";
+                    whereValues2[1] = "1";
+                    sortOrder2 = ContentProviderContract.ContentProviderProductData
+                            .COLUMN_NAME_RELEASEDATE + " DESC";
+                    Log.v(LOG_TAG, "Filtering by " + mCurrentPref);
+                    break;
+                case "vintage":
+                    whereValues2[0] = "1";
+                    whereValues2[1] = "0";
+                    sortOrder2 = ContentProviderContract.ContentProviderProductData
+                            .COLUMN_NAME_RELEASEDATE + " DESC";
+                    Log.v(LOG_TAG, "Filtering by " + mCurrentPref);
+                    break;
+                default:
+                    whereValues2[0] = "0";
+                    whereValues2[1] = "0";
+                    sortOrder2 = ContentProviderContract.ContentProviderProductData
+                            .COLUMN_NAME_POPULARITY + " DESC";
+                    Log.v(LOG_TAG, "Filtering by " + mCurrentPref);
+                    break;
+            }
+
+            Cursor onResumeCursor = getContext().getContentResolver().query(
+                    // The table to query
+                    ContentProviderContract.ContentProviderProductData.CONTENT_URI,
+                    // The columns to return
+                    null,
+                    // The columns for the WHERE clause
+                    whereColumns2,
+                    // The values for the WHERE clause
+                    whereValues2,
+                    // The sort order
+                    sortOrder2);
+            cursorLoaderAdapter.changeCursor(onResumeCursor);
+        }*/
+
+
+        // Check initial status of SharedPreference value against current
+        /*SharedPreferences sql_pref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String sort_value = sql_pref.getString("sort_key", "popularity.desc");
+        Log.v(LOG_TAG, "ONRESUME");
+        if (initialPref == null) {
+            initialPref = sort_value;
+            Log.v(LOG_TAG, "EMPTY TRUE - INITIALPREF INITIALIZED TO " + initialPref);
+        }
+        if (!sort_value.equals(initialPref)) {
+            Log.v(LOG_TAG, "REQUERY!"+ "I: " + initialPref + " C: " + sort_value);
+            initialPref = sort_value;
+
+            // How you want the results sorted in the resulting Cursor
+            String whereColumns2 = CursorContract.ProductData.COLUMN_NAME_VINTAGE + " = ? AND "
+                    + CursorContract.ProductData.COLUMN_NAME_RECENT + " = ?";
+            String[] whereValues2 = {"0", "0"};
+            String sortOrder2 = "";
+
+            switch (sort_value) {
+                case "popular":
+                    whereValues2[0] = "0";
+                    whereValues2[1] = "0";
+                    sortOrder2 = ContentProviderContract.ContentProviderProductData
+                            .COLUMN_NAME_POPULARITY + " DESC";
+                    Toast.makeText(getContext(), "Filtering by " + sort_value + "...", Toast.LENGTH_SHORT)
+                            .show();
+                    break;
+                case "recent":
+                    whereValues2[0] = "0";
+                    whereValues2[1] = "1";
+                    sortOrder2 = ContentProviderContract.ContentProviderProductData
+                            .COLUMN_NAME_RELEASEDATE + " DESC";
+                    Toast.makeText(getContext(), "Filtering by " + sort_value + "...", Toast.LENGTH_SHORT)
+                            .show();
+                    break;
+                case "vintage":
+                    whereValues2[0] = "1";
+                    whereValues2[1] = "0";
+                    sortOrder2 = ContentProviderContract.ContentProviderProductData
+                            .COLUMN_NAME_RELEASEDATE + " DESC";
+                    Toast.makeText(getContext(), "Filtering by " + sort_value + "...", Toast.LENGTH_SHORT)
+                            .show();
+                    break;
+                default:
+                    whereValues2[0] = "0";
+                    whereValues2[1] = "0";
+                    sortOrder2 = ContentProviderContract.ContentProviderProductData
+                            .COLUMN_NAME_POPULARITY + " DESC";
+                    Toast.makeText(getContext(), "Filtering by " + sort_value + "...", Toast.LENGTH_SHORT)
+                            .show();
+                    break;
+            }
+
+            Cursor onResumeCursor = getContext().getContentResolver().query(
+                    // The table to query
+                    ContentProviderContract.ContentProviderProductData.CONTENT_URI,
+                    // The columns to return
+                    null,
+                    // The columns for the WHERE clause
+                    whereColumns2,
+                    // The values for the WHERE clause
+                    whereValues2,
+                    // The sort order
+                    sortOrder2);
+            cursorLoaderAdapter.changeCursor(onResumeCursor);
+        }*/
     }
 }
+

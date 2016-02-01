@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
             CursorLoaderFragment lf = (CursorLoaderFragment)getSupportFragmentManager().findFragmentByTag(
                     LOADERFRAGMENT_TAG);
             if ( null != lf ) {
-                lf.onPreferenceChange();
+                lf.onPreferenceChange(currentPrefString);
             }
             initialPrefString = currentPrefString;
         }

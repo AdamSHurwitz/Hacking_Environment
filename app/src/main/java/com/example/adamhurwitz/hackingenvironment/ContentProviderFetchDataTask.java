@@ -224,7 +224,6 @@ public abstract class ContentProviderFetchDataTask extends AsyncTask<String, Voi
 
         cVVector.add(values);
 
-        // Queries the user dictionary and returns results
         Cursor cursor = context.getContentResolver().query(
                 // The content URI of the words table
                 ContentProviderContract.ContentProviderProductData.CONTENT_URI,
