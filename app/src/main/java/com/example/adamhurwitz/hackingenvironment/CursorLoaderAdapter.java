@@ -94,6 +94,7 @@ public class CursorLoaderAdapter extends android.widget.CursorAdapter {
             holder.favoriteGridBtn.setImageResource(R.drawable.star_pressed_18dp);
         }
 
+        //TODO: Figure out how to make Fav Btn functional onClick()
         // Create click listener
         holder.favoriteGridBtn.setOnClickListener(new View.OnClickListener() {
             @Override
