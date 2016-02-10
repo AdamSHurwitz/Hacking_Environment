@@ -38,8 +38,6 @@
         <item name="colorAccent">#B2DFDB</item>
         <!--background color of buttons-->
         <item name="colorButtonNormal">#2196F3</item>
-
-
     </style>
 
     <!-- color of popup menu-->
@@ -57,6 +55,17 @@
         <item name="android:paddingTop">24dp</item>
         <item name="android:paddingBottom">24dp</item>
         <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- main activity action bar styles -->
+    <style name="MainActivityTheme" parent="@style/AppTheme">
+        <item name="actionBarStyle">@style/LogoActionBar</item>
+    </style>
+
+    <!-- main activity action bar styles -->
+    <style name="LogoActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="displayOptions">useLogo|showHome</item>
+        <item name="logo">@mipmap/ic_launcher</item>
     </style>
 
 </resources>

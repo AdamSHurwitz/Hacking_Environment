@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
+            android:theme="@style/MainActivityTheme"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -71,6 +72,7 @@
         <provider
             android:authorities="com.example.adamhurwitz.hackingenvironment"
             android:name=".data.ProductProvider" />
+        <service android:name=".service.Service"/>
     </application>
 
 </manifest>
