@@ -1,5 +1,8 @@
 package com.example.adamhurwitz.hackingenvironment;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -151,8 +154,17 @@ public class ServiceFragment extends Fragment implements LoaderManager.LoaderCal
         // Make sure that the device is actually connected to the internet before trying to get data
         // about the Google doodles.
 
-        getActivity().startService(new Intent(getContext(), Service.class)
-                .putExtra("service_extra", "item_id.desc"));
+        Intent alarmIntent = new Intent(getActivity(), Service.AlarmReceiver.class)
+                .putExtra("service_extra", "item_id.desc");
+
+        //Wrap in a pending intent which only fires once.
+        PendingIntent pi = PendingIntent.getBroadcast(getActivity(), 0,alarmIntent,PendingIntent
+                .FLAG_ONE_SHOT);//getBroadcast(context, 0, i, 0);
+
+        AlarmManager am=(AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
+
+        //Set the AlarmManager to wake up the system.
+        am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 5000, pi);
     }
 
     @Override

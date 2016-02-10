@@ -73,6 +73,8 @@
             android:authorities="com.example.adamhurwitz.hackingenvironment"
             android:name=".data.ProductProvider" />
         <service android:name=".service.Service"/>
+        <receiver android:name=".service.Service$AlarmReceiver"
+            android:enabled="true"/>
     </application>
 
 </manifest>
