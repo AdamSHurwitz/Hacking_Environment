@@ -158,7 +158,8 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         TabsAdapter adapter = new TabsAdapter(getSupportFragmentManager());
         //adapter.addFragment(new PredefinedContentProviderFragment(), "Predefined ContentProvider");
-        adapter.addFragment(new ServiceFragment(), "Service Fragment w/ AlarmManager");
+        adapter.addFragment(new SyncAdapterFragment(), "SyncAdapter Fragment");
+        adapter.addFragment(new ServiceFragment(), "Service Fragment");
         adapter.addFragment(new CursorLoaderFragment(), "Loader Fragment");
         adapter.addFragment(new ContentProviderFragment(), "ContentProvider Fragment");
         adapter.addFragment(new LaunchNewActivityFragment(), "NewActivity");
@@ -173,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new AsyncCursorFragment2(), "Async w/ CursorAdapter (2/2)");
         adapter.addFragment(new NewTestFragment(), "New Test Fragment");
 
-        //adapter.addFragment(new ServiceFragment(), "Service Fragment");
+        //adapter.addFragment(new SyncAdapterFragment(), "Service Fragment");
         viewPager.setAdapter(adapter);
     }
     // ---------------------------------------------------------------------------------------------

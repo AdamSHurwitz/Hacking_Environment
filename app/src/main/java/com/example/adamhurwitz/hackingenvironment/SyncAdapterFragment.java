@@ -20,13 +20,13 @@ import android.widget.Toast;
 
 import com.example.adamhurwitz.hackingenvironment.data.ContentProviderContract;
 import com.example.adamhurwitz.hackingenvironment.data.CursorContract;
-import com.example.adamhurwitz.hackingenvironment.service.Service;
+import com.example.adamhurwitz.hackingenvironment.sync.SyncAdapter;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ServiceFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
-    private final String LOG_TAG = ServiceFragment.class.getSimpleName();
+public class SyncAdapterFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+    private final String LOG_TAG = SyncAdapterFragment.class.getSimpleName();
     private CursorLoaderAdapter cursorLoaderAdapter;
     public String showFilter = "";
     String doodleTitle = "";
@@ -45,7 +45,7 @@ public class ServiceFragment extends Fragment implements LoaderManager.LoaderCal
     /**
      * Empty constructor for the AsyncParcelableFragment1() class.
      */
-    public ServiceFragment() {
+    public SyncAdapterFragment() {
     }
 
     @Override
@@ -151,8 +151,22 @@ public class ServiceFragment extends Fragment implements LoaderManager.LoaderCal
         // Make sure that the device is actually connected to the internet before trying to get data
         // about the Google doodles.
 
-        getActivity().startService(new Intent(getContext(), Service.class)
-                .putExtra("service_extra", "item_id.desc"));
+
+        // Launch Service With Alarm
+
+        /*Intent alarmIntent = new Intent(getActivity(), Service.AlarmReceiver.class)
+                .putExtra("service_extra", "item_id.desc");
+
+        //Wrap in a pending intent which only fires once.
+        PendingIntent pi = PendingIntent.getBroadcast(getActivity(), 0,alarmIntent,PendingIntent
+                .FLAG_ONE_SHOT);//getBroadcast(context, 0, i, 0);
+
+        AlarmManager am=(AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
+
+        //Set the AlarmManager to wake up the system.
+        am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10000, pi);*/
+
+        SyncAdapter.syncImmediately(getActivity());
     }
 
     @Override
@@ -291,3 +305,4 @@ public class ServiceFragment extends Fragment implements LoaderManager.LoaderCal
         //}
     }
 }
+
