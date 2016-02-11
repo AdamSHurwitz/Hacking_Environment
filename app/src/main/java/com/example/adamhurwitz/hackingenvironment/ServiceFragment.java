@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.example.adamhurwitz.hackingenvironment.data.ContentProviderContract;
 import com.example.adamhurwitz.hackingenvironment.data.CursorContract;
-import com.example.adamhurwitz.hackingenvironment.sync.SunshineSyncAdapter;
+import com.example.adamhurwitz.hackingenvironment.sync.SyncAdapter;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -166,7 +166,7 @@ public class ServiceFragment extends Fragment implements LoaderManager.LoaderCal
         //Set the AlarmManager to wake up the system.
         am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10000, pi);*/
 
-        SunshineSyncAdapter.syncImmediately(getActivity());
+        SyncAdapter.syncImmediately(getActivity());
     }
 
     @Override

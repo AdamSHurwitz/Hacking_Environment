@@ -12,10 +12,10 @@ import android.util.Log;
 
 import com.example.adamhurwitz.hackingenvironment.R;
 
-public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
-    public final String LOG_TAG = SunshineSyncAdapter.class.getSimpleName();
+public class SyncAdapter extends AbstractThreadedSyncAdapter {
+    public final String LOG_TAG = SyncAdapter.class.getSimpleName();
 
-    public SunshineSyncAdapter(Context context, boolean autoInitialize) {
+    public SyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
     }
 
