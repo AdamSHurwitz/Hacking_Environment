@@ -103,5 +103,8 @@
         greatly, so that his place shall never be with those cold and timid souls who neither know
         victory nor defeat.</string>
 
+    <!-- SyncAdapter related -->
+    <string name="sync_account_type">hackingenvironment.example.com</string>
+    <string name="content_authority">com.example.adamhurwitz.hackingenvironment</string>
 
 </resources>

@@ -1,8 +1,5 @@
 package com.example.adamhurwitz.hackingenvironment;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -23,7 +20,7 @@ import android.widget.Toast;
 
 import com.example.adamhurwitz.hackingenvironment.data.ContentProviderContract;
 import com.example.adamhurwitz.hackingenvironment.data.CursorContract;
-import com.example.adamhurwitz.hackingenvironment.service.Service;
+import com.example.adamhurwitz.hackingenvironment.sync.SunshineSyncAdapter;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -154,7 +151,10 @@ public class ServiceFragment extends Fragment implements LoaderManager.LoaderCal
         // Make sure that the device is actually connected to the internet before trying to get data
         // about the Google doodles.
 
-        Intent alarmIntent = new Intent(getActivity(), Service.AlarmReceiver.class)
+
+        // Launch Service With Alarm
+
+        /*Intent alarmIntent = new Intent(getActivity(), Service.AlarmReceiver.class)
                 .putExtra("service_extra", "item_id.desc");
 
         //Wrap in a pending intent which only fires once.
@@ -164,7 +164,9 @@ public class ServiceFragment extends Fragment implements LoaderManager.LoaderCal
         AlarmManager am=(AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
 
         //Set the AlarmManager to wake up the system.
-        am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10000, pi);
+        am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10000, pi);*/
+
+        SunshineSyncAdapter.syncImmediately(getActivity());
     }
 
     @Override
