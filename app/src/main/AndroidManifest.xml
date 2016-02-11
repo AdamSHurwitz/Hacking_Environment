@@ -109,5 +109,4 @@
                 android:resource="@xml/syncadapter" />
         </service>
     </application>
-
 </manifest>
