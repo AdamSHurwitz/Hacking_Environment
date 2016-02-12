@@ -107,4 +107,7 @@
     <string name="sync_account_type">hackingenvironment.example.com</string>
     <string name="content_authority">com.example.adamhurwitz.hackingenvironment</string>
 
+    <!-- Strings related to Notification preference -->
+    <string name="pref_last_notification">last_notification</string>
+
 </resources>
