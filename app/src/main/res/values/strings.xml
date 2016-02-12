@@ -109,5 +109,9 @@
 
     <!-- Strings related to Notification preference -->
     <string name="pref_last_notification">last_notification</string>
+    <string name="notification_settings_key">notification_key</string>
+    <string name="notification_title">Notifications</string>
+    <string name="notification_summary">Choose whether to receive notifications</string>
+    <string name="notification_default">"true"</string>
 
 </resources>

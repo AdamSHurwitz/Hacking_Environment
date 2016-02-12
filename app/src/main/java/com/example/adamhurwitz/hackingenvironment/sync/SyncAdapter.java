@@ -271,10 +271,15 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
         //checking the last update and notify if it' the first of the day
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-
         String lastNotificationKey = context.getString(R.string.pref_last_notification);
         long lastSync = prefs.getLong(lastNotificationKey, 0);
+        String displayNotificationsKey = context.getString(R.string.notification_settings_key);
+        boolean notificationsPref = prefs.getBoolean(displayNotificationsKey,
+                Boolean.parseBoolean(context.getString(R.string.notification_default)));
+        Log.v(LOG_TAG, "Notification SharedPref: " + notificationsPref);
 
+        if (notificationsPref) {
+            Log.v(LOG_TAG, "Notification SharedPref: " + notificationsPref);
         /*if (System.currentTimeMillis() - lastSync >= DAY_IN_MILLIS) {*/
             // Last sync was more than 1 day ago, let's send a notification
 
@@ -330,7 +335,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putLong(lastNotificationKey, System.currentTimeMillis());
                 editor.commit();
-            //}
+                //}
+            }
         }
     }
 

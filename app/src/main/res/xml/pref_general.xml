@@ -13,6 +13,11 @@
         android:positiveButtonText="@null"
         android:summary="@string/loader_settings_summary"
         android:title="@string/loader_settings_title"></ListPreference>
+    <CheckBoxPreference
+        android:defaultValue="@string/notification_default"
+        android:key="@string/notification_settings_key"
+        android:summary="@string/notification_summary"
+        android:title="@string/notification_title" />
 
 
 </PreferenceScreen>
