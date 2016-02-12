@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.adamhurwitz.hackingenvironment.sync.SyncAdapter;
+
 public class MainActivity extends AppCompatActivity {
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -105,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Somethings Wrong",
                                         Toast.LENGTH_SHORT).show();
                                 return true;
-
                         }
                     }
                 });
@@ -151,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
         // ----------------------------------------------------------------------------------------
 
+        SyncAdapter.initializeSyncAdapter(this);
     }
 
 
