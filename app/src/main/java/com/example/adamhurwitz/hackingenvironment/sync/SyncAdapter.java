@@ -34,7 +34,7 @@ import java.util.Vector;
 public class SyncAdapter extends AbstractThreadedSyncAdapter {
     public final String LOG_TAG = SyncAdapter.class.getSimpleName();
     // Interval at which to sync with the data
-    public static final int SYNC_INTERVAL = 30;
+    public static final int SYNC_INTERVAL = 60 * 180;
     public static final int SYNC_FLEXTIME = SYNC_INTERVAL/3;
 
     public SyncAdapter(Context context, boolean autoInitialize) {
