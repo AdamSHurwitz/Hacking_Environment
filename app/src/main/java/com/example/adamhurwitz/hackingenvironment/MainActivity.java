@@ -1,5 +1,6 @@
 package com.example.adamhurwitz.hackingenvironment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,6 +18,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.adamhurwitz.hackingenvironment.sync.SyncAdapter;
+import com.facebook.stetho.DumperPluginsProvider;
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.dumpapp.DumperPlugin;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Initialize Stetho
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(new SampleDumperPluginsProvider(this))
+                        .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                        .build());
+
 
         // Get initial SharedPreference setting
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -214,15 +228,34 @@ public class MainActivity extends AppCompatActivity {
         String currentPrefString = currentPref.getString("loader_settings_key", "popular");
         // update the location in our second pane using the fragment manager
         if (currentPrefString != null && !currentPrefString.equals(initialPrefString)) {
-            CursorLoaderFragment lf = (CursorLoaderFragment)getSupportFragmentManager().findFragmentByTag(
+            CursorLoaderFragment lf = (CursorLoaderFragment) getSupportFragmentManager().findFragmentByTag(
                     LOADERFRAGMENT_TAG);
-            if ( null != lf ) {
+            if (null != lf) {
                 lf.onPreferenceChange(currentPrefString);
             }
             initialPrefString = currentPrefString;
         }
     }
+
+    // Create class for Stetho
+    private static class SampleDumperPluginsProvider implements DumperPluginsProvider {
+        private final Context mContext;
+
+        public SampleDumperPluginsProvider(Context context){mContext = context;}
+
+        @Override
+        public Iterable<DumperPlugin> get() {
+            ArrayList<DumperPlugin> plugins = new ArrayList<>();
+            for (DumperPlugin defaultPlugin : Stetho.defaultDumperPluginsProvider(mContext).get()) {
+                plugins.add(defaultPlugin);
+            }
+            //plugins.add(new SyncAdapterFragment());
+            return plugins;
+        }
+    }
 }
+
+
 
 
 

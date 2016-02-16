@@ -278,9 +278,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 Boolean.parseBoolean(context.getString(R.string.notification_default)));
         Log.v(LOG_TAG, "Notification SharedPref: " + notificationsPref);
 
-        if (notificationsPref) {
+        if (notificationsPref && System.currentTimeMillis() - lastSync >= DAY_IN_MILLIS) {
             Log.v(LOG_TAG, "Notification SharedPref: " + notificationsPref);
-        /*if (System.currentTimeMillis() - lastSync >= DAY_IN_MILLIS) {*/
             // Last sync was more than 1 day ago, let's send a notification
 
             Uri uri = ContentProviderContract.ContentProviderProductData.CONTENT_URI;
@@ -298,7 +297,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 String title = context.getString(R.string.app_name);
 
                 // Define the text of the forecast.
-                String contentText = "New Doodle Available " + product_title + " | $" + price;
+                String contentText = "New Doodle Available " + product_title + " | " + price;
 
                 // NotificationCompatBuilder is a very convenient way to build backward-compatible
                 // notifications.  Just throw in some data.
@@ -335,10 +334,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putLong(lastNotificationKey, System.currentTimeMillis());
                 editor.commit();
-                //}
             }
         }
     }
+
 
     /**
      * Helper method to schedule the sync adapter periodic execution
