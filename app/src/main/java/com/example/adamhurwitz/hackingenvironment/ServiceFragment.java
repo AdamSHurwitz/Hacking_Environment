@@ -1,8 +1,11 @@
 package com.example.adamhurwitz.hackingenvironment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -144,15 +147,14 @@ public class ServiceFragment extends Fragment implements LoaderManager.LoaderCal
     }
 
     private void getData() {
-        // Get SharedPref Value
-      /*  SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String result = pref.getString("loader_settings_key", "popular");*/
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                this.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
 
-        // Make sure that the device is actually connected to the internet before trying to get data
-        // about the Google doodles.
-
-        getActivity().startService(new Intent(getContext(), Service.class)
-                .putExtra("service_extra", "item_id.desc"));
+        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()){
+            getActivity().startService(new Intent(getContext(), Service.class)
+                    .putExtra("service_extra", "item_id.desc"));
+        }
     }
 
     @Override

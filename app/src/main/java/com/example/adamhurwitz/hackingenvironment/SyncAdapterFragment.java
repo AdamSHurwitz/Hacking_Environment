@@ -1,8 +1,11 @@
 package com.example.adamhurwitz.hackingenvironment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -144,29 +147,13 @@ public class SyncAdapterFragment extends Fragment implements LoaderManager.Loade
     }
 
     private void getData() {
-        // Get SharedPref Value
-      /*  SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String result = pref.getString("loader_settings_key", "popular");*/
-
-        // Make sure that the device is actually connected to the internet before trying to get data
-        // about the Google doodles.
-
-
-        // Launch Service With Alarm
-
-        /*Intent alarmIntent = new Intent(getActivity(), Service.AlarmReceiver.class)
-                .putExtra("service_extra", "item_id.desc");
-
-        //Wrap in a pending intent which only fires once.
-        PendingIntent pi = PendingIntent.getBroadcast(getActivity(), 0,alarmIntent,PendingIntent
-                .FLAG_ONE_SHOT);//getBroadcast(context, 0, i, 0);
-
-        AlarmManager am=(AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
-
-        //Set the AlarmManager to wake up the system.
-        am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10000, pi);*/
-
-        SyncAdapter.syncImmediately(getActivity());
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                this.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+;
+        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()){
+            SyncAdapter.syncImmediately(getActivity());
+        }
     }
 
     @Override

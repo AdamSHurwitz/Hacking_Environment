@@ -150,15 +150,9 @@ public class CursorLoaderFragment extends Fragment implements LoaderManager.Load
                 this.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
 
-        // Get SharedPref Value
-      /*  SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String result = pref.getString("loader_settings_key", "popular");*/
-
         // Make sure that the device is actually connected to the internet before trying to get data
         // about the Google doodles.
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-            /*ContentProviderFetchDataTask contentProviderTask = new ContentProviderTask(
-                    getContext(), asyncCursorAdapter) {*/
             LoaderFetchDataTask loaderTask = new LoaderFetchDataTask(
                     getContext(), cursorLoaderAdapter) {
             };
