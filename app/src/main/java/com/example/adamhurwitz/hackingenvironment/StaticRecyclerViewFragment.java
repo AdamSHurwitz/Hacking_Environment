@@ -33,26 +33,16 @@ public class StaticRecyclerViewFragment extends Fragment {
     public StaticRecyclerViewFragment() {
     }
 
-    // build RecyclerView and inflate parent layout view
+    // Build RecyclerView and inflate parent layout view
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         RecyclerView rv = (RecyclerView) inflater.inflate(
                 R.layout.staticrecycler_layout, container, false);
-        setupRecyclerView(rv);
-        return rv;
-    }
-
-    // helper method to create LayoutManager and Adapter
-    private void setupRecyclerView(RecyclerView recyclerView) {
-
         // set LinearLayoutManager
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // set GridLayoutManager
-        // recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-
-        recyclerView.setAdapter(new StaticRecyclerViewAdapter(
+        rv.setAdapter(new StaticRecyclerViewAdapter(
                 // Current context
                 getActivity(),
                 // ID of the view item layout, not needed since we get it in onCreateViewHolder
@@ -60,6 +50,7 @@ public class StaticRecyclerViewFragment extends Fragment {
                 // Data passing into ArrayAdapter
                 imageData,
                 stringData));
+        return rv;
     }
 
     // used for selection of items in menu bar

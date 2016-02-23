@@ -150,7 +150,7 @@ public class SyncAdapterFragment extends Fragment implements LoaderManager.Loade
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 this.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
-;
+
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()){
             SyncAdapter.syncImmediately(getActivity());
         }
@@ -215,6 +215,7 @@ public class SyncAdapterFragment extends Fragment implements LoaderManager.Loade
 
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
+
         cursorLoaderAdapter.swapCursor(null);
     }
 
