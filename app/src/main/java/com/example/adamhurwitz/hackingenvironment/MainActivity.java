@@ -174,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         TabsAdapter adapter = new TabsAdapter(getSupportFragmentManager());
         //adapter.addFragment(new PredefinedContentProviderFragment(), "Predefined ContentProvider");
+        adapter.addFragment(new CursorRecyclerViewFragment(), "RecyclerView With Cursor");
         adapter.addFragment(new SyncAdapterFragment(), "SyncAdapter Fragment");
         adapter.addFragment(new ServiceFragment(), "Service Fragment");
         adapter.addFragment(new CursorLoaderFragment(), "Loader Fragment");

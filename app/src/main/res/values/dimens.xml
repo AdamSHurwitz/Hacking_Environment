@@ -5,5 +5,7 @@
     <!--<dimen name="list_item_image_size">40dp</dimen>-->
     <dimen name="list_item_image_largesize">120dp</dimen>
     <dimen name="list_item_image_smallsize">40dp</dimen>
+    <dimen name="list_item_image_largeWidthsize">500dp</dimen>
+    <dimen name="list_item_image_largeHeightsize">100dp</dimen>
     <dimen name="card_margin">16dp</dimen>
 </resources>

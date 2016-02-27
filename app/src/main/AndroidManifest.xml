@@ -76,6 +76,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.adamhurwitz.hackingenvironment.MainActivity" />
         </activity>
+        <activity
+            android:name=".CursorRecyclerViewDetailActivity"
+            android:label="@string/detail_view"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.adamhurwitz.hackingenvironment.MainActivity" />
+        </activity>
         <service android:name=".service.Service"/>
         <provider
             android:authorities="com.example.adamhurwitz.hackingenvironment"
