@@ -174,24 +174,22 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         TabsAdapter adapter = new TabsAdapter(getSupportFragmentManager());
         //adapter.addFragment(new PredefinedContentProviderFragment(), "Predefined ContentProvider");
-        adapter.addFragment(new CursorRecyclerViewFragment(), "RecyclerView With Cursor");
-        adapter.addFragment(new SyncAdapterFragment(), "SyncAdapter Fragment");
-        adapter.addFragment(new ServiceFragment(), "Service Fragment");
-        adapter.addFragment(new CursorLoaderFragment(), "Loader Fragment");
-        adapter.addFragment(new ContentProviderFragment(), "ContentProvider Fragment");
         adapter.addFragment(new LaunchNewActivityFragment(), "NewActivity");
         adapter.addFragment(new SharedPrefTestFragment(), "SharedPref");
         adapter.addFragment(new SQLiteTestFragment(), "SQLite");
         adapter.addFragment(new AddedFragmentWithinTabFragment(), "Add Fragment");
         adapter.addFragment(new StaticArrayAdapterFragment(), "Static Array Adapter");
+        adapter.addFragment(new AsyncParcelableFragment1(), "Async with Parcelable (1/2)");
+        adapter.addFragment(new AsyncParcelableFragment2(), "Async with Parcelable (2/2)");
+        adapter.addFragment(new AsyncCursorFragment1(), "Async with CursorAdapter (1/2)");
+        adapter.addFragment(new AsyncCursorFragment2(), "Async with CursorAdapter (2/2)");
+        adapter.addFragment(new ContentProviderFragment(), "ContentProvider Fragment");
+        adapter.addFragment(new CursorLoaderFragment(), "Loader Fragment");
+        adapter.addFragment(new ServiceFragment(), "Service Fragment");
+        adapter.addFragment(new SyncAdapterFragment(), "SyncAdapter Fragment");
         adapter.addFragment(new StaticRecyclerViewFragment(), "Static RecyclerView");
-        adapter.addFragment(new AsyncParcelableFragment1(), "Async w/ Parcelable (1/2)");
-        adapter.addFragment(new AsyncParcelableFragment2(), "Async w/ Parcelable (2/2)");
-        adapter.addFragment(new AsyncCursorFragment1(), "Async w/ CursorAdapter (1/2)");
-        adapter.addFragment(new AsyncCursorFragment2(), "Async w/ CursorAdapter (2/2)");
+        adapter.addFragment(new CursorRecyclerViewFragment(), "RecyclerView with Cursor");
         adapter.addFragment(new NewTestFragment(), "New Test Fragment");
-
-        //adapter.addFragment(new SyncAdapterFragment(), "Service Fragment");
         viewPager.setAdapter(adapter);
     }
     // ---------------------------------------------------------------------------------------------
